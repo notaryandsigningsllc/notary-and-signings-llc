@@ -22,19 +22,19 @@ export default function ContactSection() {
       icon: Phone,
       title: t('contact.info.phone'),
       content: "(908) 514-8180",
-      description: "Call us for immediate assistance"
+      description: t('contact.info.phone.description')
     },
     {
       icon: Mail,
       title: t('contact.info.email'),
       content: "info@notaryandsignings.com",
-      description: "Send us your questions anytime"
+      description: t('contact.info.email.description')
     },
     {
       icon: MapPin,
       title: t('contact.info.location'),
       content: t('contact.info.location.address'),
-      description: "Mobile services within 25 miles"
+      description: t('contact.info.location.description')
     },
     {
       icon: Clock,
