@@ -55,7 +55,7 @@ export default function HeroSection() {
               </Button>
               <Button variant="outline" size="xl">
                 <Phone className="w-5 h-5 mr-2" />
-                (555) 123-4567
+                (908) 514-8180
               </Button>
             </div>
 
