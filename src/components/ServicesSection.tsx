@@ -139,7 +139,7 @@ export default function ServicesSection() {
                   variant="outline" 
                   className="absolute -top-3 right-4 bg-muted text-muted-foreground border-muted-foreground"
                 >
-                  {t('services.coming_soon')}
+                  Próximamente
                 </Badge>
               )}
               
@@ -180,7 +180,7 @@ export default function ServicesSection() {
                     size="sm"
                     disabled={service.comingSoon}
                   >
-                    {service.comingSoon ? t('services.coming_soon') : t('services.book_now')}
+                    {service.comingSoon ? 'Próximamente' : t('services.book_now')}
                   </Button>
                 </div>
               </CardContent>
