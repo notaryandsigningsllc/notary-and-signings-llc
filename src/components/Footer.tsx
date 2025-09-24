@@ -31,7 +31,7 @@ export default function Footer() {
     { name: t('services.loan.title'), href: "#services" },
     { name: t('services.ron.title'), href: "#services" },
     { name: t('services.apostille.title'), href: "#services" },
-    { name: t('services.fingerprint.title'), href: "#services" },
+    { name: "Fingerprinting Services (Coming Soon)", href: "#services" },
     { name: t('services.tax.individual.title'), href: "#services" }
   ];
 
