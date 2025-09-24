@@ -144,7 +144,7 @@ export default function Footer() {
                 <Shield className="w-5 h-5 text-accent" />
                 <div className="flex-1">
                   <div className="text-sm font-medium">{t('footer.bonded')}</div>
-                  <div className="text-xs text-primary-foreground/60">{t('footer.bonded_desc')}</div>
+                  <div className="text-xs text-primary-foreground/60">$50K Coverage</div>
                 </div>
               </div>
               
