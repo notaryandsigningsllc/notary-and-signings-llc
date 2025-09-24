@@ -139,6 +139,41 @@ const translations = {
     'testimonials.subtitle': 'Real experiences from satisfied clients who trust our professional notary services.',
     'testimonials.stats.professional': 'Professional Service',
     'testimonials.stats.satisfaction': 'Client Satisfaction',
+    'testimonials.stats.clients': 'Happy Clients',
+    'testimonials.stats.rating': 'Average Rating',
+    'testimonials.cta.title': 'Ready to Experience Professional Service?',
+    'testimonials.cta.description': 'Join hundreds of satisfied clients who trust us with their important documents.',
+    
+    // Individual Testimonials
+    'testimonials.client1.name': 'Sarah Johnson',
+    'testimonials.client1.role': 'Real Estate Agent',
+    'testimonials.client1.content': 'Notary and Signings LLC has been our go-to for all loan signings. Their professionalism and attention to detail is outstanding. They make the closing process smooth for our clients.',
+    'testimonials.client1.service': 'Loan Signing',
+    
+    'testimonials.client2.name': 'Michael Chen',
+    'testimonials.client2.role': 'Small Business Owner',
+    'testimonials.client2.content': 'The mobile notary service saved me so much time. They came to my office within 2 hours and handled all my business documents professionally. Highly recommend!',
+    'testimonials.client2.service': 'Mobile Notary',
+    
+    'testimonials.client3.name': 'Lisa Rodriguez',
+    'testimonials.client3.role': 'Working Professional',
+    'testimonials.client3.content': 'Remote online notarization was perfect for my situation. The video call was secure and professional, and I received my notarized documents immediately. Great service!',
+    'testimonials.client3.service': 'RON Service',
+    
+    'testimonials.client4.name': 'David Thompson',
+    'testimonials.client4.role': 'Retiree',
+    'testimonials.client4.content': 'Needed my tax return prepared and documents notarized. They handled everything with care and explained each step. Trustworthy and reliable service.',
+    'testimonials.client4.service': 'Tax Preparation',
+    
+    'testimonials.client5.name': 'Jennifer Park',
+    'testimonials.client5.role': 'Healthcare Worker',
+    'testimonials.client5.content': 'Fast fingerprinting service for my license renewal. Professional setup and quick turnaround. They made the process easy and stress-free.',
+    'testimonials.client5.service': 'Fingerprinting',
+    
+    'testimonials.client6.name': 'Robert Williams',
+    'testimonials.client6.role': 'International Student',
+    'testimonials.client6.content': 'Needed apostille services for my documents to be used abroad. They handled the entire process and kept me updated throughout. Excellent service!',
+    'testimonials.client6.service': 'Apostille',
     
     // Contact Section
     'contact.badge': 'Contact Us',
@@ -299,6 +334,41 @@ const translations = {
     'testimonials.subtitle': 'Experiencias reales de clientes satisfechos que confían en nuestros servicios notariales profesionales.',
     'testimonials.stats.professional': 'Servicio Profesional',
     'testimonials.stats.satisfaction': 'Satisfacción del Cliente',
+    'testimonials.stats.clients': 'Clientes Felices',
+    'testimonials.stats.rating': 'Calificación Promedio',
+    'testimonials.cta.title': '¿Listo para Experimentar el Servicio Profesional?',
+    'testimonials.cta.description': 'Únete a cientos de clientes satisfechos que confían en nosotros con sus documentos importantes.',
+    
+    // Individual Testimonials
+    'testimonials.client1.name': 'Sarah Johnson',
+    'testimonials.client1.role': 'Agente de Bienes Raíces',
+    'testimonials.client1.content': 'Notary and Signings LLC ha sido nuestra opción principal para todas las firmas de préstamos. Su profesionalismo y atención al detalle es excepcional. Hacen que el proceso de cierre sea fluido para nuestros clientes.',
+    'testimonials.client1.service': 'Firma de Préstamo',
+    
+    'testimonials.client2.name': 'Michael Chen',
+    'testimonials.client2.role': 'Propietario de Pequeña Empresa',
+    'testimonials.client2.content': 'El servicio de notario móvil me ahorró mucho tiempo. Vinieron a mi oficina en 2 horas y manejaron todos mis documentos comerciales profesionalmente. ¡Muy recomendado!',
+    'testimonials.client2.service': 'Notario Móvil',
+    
+    'testimonials.client3.name': 'Lisa Rodriguez',
+    'testimonials.client3.role': 'Profesional Trabajadora',
+    'testimonials.client3.content': 'La notarización remota en línea fue perfecta para mi situación. La videollamada fue segura y profesional, y recibí mis documentos notarizados inmediatamente. ¡Excelente servicio!',
+    'testimonials.client3.service': 'Servicio RON',
+    
+    'testimonials.client4.name': 'David Thompson',
+    'testimonials.client4.role': 'Jubilado',
+    'testimonials.client4.content': 'Necesitaba mi declaración de impuestos preparada y documentos notarizados. Manejaron todo con cuidado y explicaron cada paso. Servicio confiable y de confianza.',
+    'testimonials.client4.service': 'Preparación de Impuestos',
+    
+    'testimonials.client5.name': 'Jennifer Park',
+    'testimonials.client5.role': 'Trabajadora de la Salud',
+    'testimonials.client5.content': 'Servicio rápido de huellas dactilares para la renovación de mi licencia. Configuración profesional y respuesta rápida. Hicieron que el proceso fuera fácil y sin estrés.',
+    'testimonials.client5.service': 'Huellas Dactilares',
+    
+    'testimonials.client6.name': 'Robert Williams',
+    'testimonials.client6.role': 'Estudiante Internacional',
+    'testimonials.client6.content': 'Necesitaba servicios de apostilla para mis documentos para usar en el extranjero. Manejaron todo el proceso y me mantuvieron informado durante todo el proceso. ¡Excelente servicio!',
+    'testimonials.client6.service': 'Apostilla',
     
     // Contact Section
     'contact.badge': 'Contáctanos',

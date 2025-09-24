@@ -8,46 +8,46 @@ export default function TestimonialsSection() {
   
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Real Estate Agent",
-      content: "Notary and Signings LLC has been our go-to for all loan signings. Their professionalism and attention to detail is outstanding. They make the closing process smooth for our clients.",
+      name: t('testimonials.client1.name'),
+      role: t('testimonials.client1.role'),
+      content: t('testimonials.client1.content'),
       rating: 5,
-      service: "Loan Signing"
+      service: t('testimonials.client1.service')
     },
     {
-      name: "Michael Chen",
-      role: "Small Business Owner",
-      content: "The mobile notary service saved me so much time. They came to my office within 2 hours and handled all my business documents professionally. Highly recommend!",
+      name: t('testimonials.client2.name'),
+      role: t('testimonials.client2.role'),
+      content: t('testimonials.client2.content'),
       rating: 5,
-      service: "Mobile Notary"
+      service: t('testimonials.client2.service')
     },
     {
-      name: "Lisa Rodriguez",
-      role: "Working Professional",
-      content: "Remote online notarization was perfect for my situation. The video call was secure and professional, and I received my notarized documents immediately. Great service!",
+      name: t('testimonials.client3.name'),
+      role: t('testimonials.client3.role'),
+      content: t('testimonials.client3.content'),
       rating: 5,
-      service: "RON Service"
+      service: t('testimonials.client3.service')
     },
     {
-      name: "David Thompson",
-      role: "Retiree",
-      content: "Needed my tax return prepared and documents notarized. They handled everything with care and explained each step. Trustworthy and reliable service.",
+      name: t('testimonials.client4.name'),
+      role: t('testimonials.client4.role'),
+      content: t('testimonials.client4.content'),
       rating: 5,
-      service: "Tax Preparation"
+      service: t('testimonials.client4.service')
     },
     {
-      name: "Jennifer Park",
-      role: "Healthcare Worker",
-      content: "Fast fingerprinting service for my license renewal. Professional setup and quick turnaround. They made the process easy and stress-free.",
+      name: t('testimonials.client5.name'),
+      role: t('testimonials.client5.role'),
+      content: t('testimonials.client5.content'),
       rating: 5,
-      service: "Fingerprinting"
+      service: t('testimonials.client5.service')
     },
     {
-      name: "Robert Williams",
-      role: "International Student",
-      content: "Needed apostille services for my documents to be used abroad. They handled the entire process and kept me updated throughout. Excellent service!",
+      name: t('testimonials.client6.name'),
+      role: t('testimonials.client6.role'),
+      content: t('testimonials.client6.content'),
       rating: 5,
-      service: "Apostille"
+      service: t('testimonials.client6.service')
     }
   ];
 
@@ -112,11 +112,11 @@ export default function TestimonialsSection() {
             <div className="grid md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-2">500+</div>
-                <div className="text-sm text-muted-foreground">Happy Clients</div>
+                <div className="text-sm text-muted-foreground">{t('testimonials.stats.clients')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-2">5.0</div>
-                <div className="text-sm text-muted-foreground">Average Rating</div>
+                <div className="text-sm text-muted-foreground">{t('testimonials.stats.rating')}</div>
                 <div className="flex justify-center space-x-1 mt-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3 h-3 fill-accent text-accent" />
@@ -136,10 +136,10 @@ export default function TestimonialsSection() {
 
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-foreground">
-              Ready to Experience Professional Service?
+              {t('testimonials.cta.title')}
             </h3>
             <p className="text-muted-foreground">
-              Join hundreds of satisfied clients who trust us with their important documents.
+              {t('testimonials.cta.description')}
             </p>
           </div>
         </div>
