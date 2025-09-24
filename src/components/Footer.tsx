@@ -12,21 +12,24 @@ import {
   Shield,
   Award
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+  
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" }
+    { name: t('nav.home'), href: "#home" },
+    { name: t('nav.about'), href: "#about" },
+    { name: t('nav.services'), href: "#services" },
+    { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.contact'), href: "#contact" }
   ];
 
   const services = [
-    { name: "Mobile Notary", href: "#services" },
-    { name: "Loan Signings", href: "#services" },
-    { name: "Remote Notarization", href: "#services" },
-    { name: "Apostille Services", href: "#services" },
+    { name: t('services.mobile.title'), href: "#services" },
+    { name: t('services.loan.title'), href: "#services" },
+    { name: t('services.ron.title'), href: "#services" },
+    { name: t('services.apostille.title'), href: "#services" },
     { name: "Fingerprinting", href: "#services" },
     { name: "Tax Preparation", href: "#services" }
   ];
@@ -46,10 +49,9 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-bold mb-2">Notary & Signings LLC</h3>
+              <h3 className="text-2xl font-bold mb-2">{t('footer.company')}</h3>
               <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                Professional notary services you can trust. Licensed, bonded, and insured 
-                for your peace of mind. Serving the community with integrity and excellence.
+                {t('footer.description')}
               </p>
             </div>
 
@@ -94,7 +96,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-6">
-            <h4 className="text-lg font-semibold">Quick Links</h4>
+            <h4 className="text-lg font-semibold">{t('footer.quick_links')}</h4>
             <nav className="space-y-3">
               {quickLinks.map((link, index) => (
                 <a
@@ -110,7 +112,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="space-y-6">
-            <h4 className="text-lg font-semibold">Our Services</h4>
+            <h4 className="text-lg font-semibold">{t('footer.services')}</h4>
             <nav className="space-y-3">
               {services.map((service, index) => (
                 <a
@@ -126,42 +128,42 @@ export default function Footer() {
 
           {/* Professional Info & CTA */}
           <div className="space-y-6">
-            <h4 className="text-lg font-semibold">Professional Credentials</h4>
+            <h4 className="text-lg font-semibold">{t('footer.credentials')}</h4>
             
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Award className="w-5 h-5 text-accent" />
                 <div>
-                  <div className="text-sm font-medium">Licensed Notary</div>
-                  <div className="text-xs text-primary-foreground/60">State Certified</div>
+                  <div className="text-sm font-medium">{t('footer.licensed')}</div>
+                  <div className="text-xs text-primary-foreground/60">{t('footer.licensed_desc')}</div>
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
                 <Shield className="w-5 h-5 text-accent" />
                 <div>
-                  <div className="text-sm font-medium">Bonded & Insured</div>
-                  <div className="text-xs text-primary-foreground/60">$100K Coverage</div>
+                  <div className="text-sm font-medium">{t('footer.bonded')}</div>
+                  <div className="text-xs text-primary-foreground/60">{t('footer.bonded_desc')}</div>
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
                 <FileText className="w-5 h-5 text-accent" />
                 <div>
-                  <div className="text-sm font-medium">RON Certified</div>
-                  <div className="text-xs text-primary-foreground/60">Remote Notarization</div>
+                  <div className="text-sm font-medium">{t('footer.ron_certified')}</div>
+                  <div className="text-xs text-primary-foreground/60">{t('footer.ron_desc')}</div>
                 </div>
               </div>
             </div>
 
             {/* Professional Services */}
             <div className="bg-accent/10 border border-accent/20 rounded-lg p-4 space-y-3">
-              <h5 className="font-semibold text-accent">Professional Services</h5>
+              <h5 className="font-semibold text-accent">{t('footer.professional_services')}</h5>
               <p className="text-xs text-primary-foreground/80">
-                Licensed, bonded, and insured notary services with flexible scheduling.
+                {t('footer.professional_desc')}
               </p>
               <Button variant="accent" size="sm" className="w-full">
-                Schedule Appointment
+                {t('footer.schedule')}
               </Button>
             </div>
           </div>
@@ -173,18 +175,18 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-primary-foreground/60">
-              © 2024 Notary and Signings LLC. All rights reserved.
+              {t('footer.copyright')}
             </div>
             
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
-                Privacy Policy
+                {t('footer.privacy')}
               </a>
               <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
-                Terms of Service
+                {t('footer.terms')}
               </a>
               <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
-                Cookie Policy
+                {t('footer.cookies')}
               </a>
             </div>
           </div>

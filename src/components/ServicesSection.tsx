@@ -12,39 +12,42 @@ import {
   Shield,
   CheckCircle
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ServicesSection() {
+  const { t } = useLanguage();
+  
   const services = [
     {
       icon: FileText,
-      title: "Mobile Notary Services",
-      description: "We come to you! Professional notary services at your location for maximum convenience.",
-      features: ["Document Notarization", "Acknowledgments", "Jurats", "Copy Certifications"],
-      price: "Starting at $25",
+      title: t('services.mobile.title'),
+      description: t('services.mobile.description'),
+      features: [t('services.mobile.feature1'), t('services.mobile.feature2'), t('services.mobile.feature3'), t('services.mobile.feature4')],
+      price: t('services.mobile.price'),
       popular: false
     },
     {
       icon: Home,
-      title: "Loan Signing Services", 
-      description: "Experienced loan signing agent for real estate transactions and refinancing.",
-      features: ["Purchase Closings", "Refinance Documents", "HELOC Signings", "Reverse Mortgages"],
-      price: "Starting at $150",
+      title: t('services.loan.title'), 
+      description: t('services.loan.description'),
+      features: [t('services.loan.feature1'), t('services.loan.feature2'), t('services.loan.feature3'), t('services.loan.feature4')],
+      price: t('services.loan.price'),
       popular: true
     },
     {
       icon: Laptop,
-      title: "Remote Online Notarization",
-      description: "RON/iPEN certified for secure online notarizations from anywhere.",
-      features: ["Video Conference", "Digital Signatures", "Identity Verification", "Secure Platform"],
-      price: "Starting at $35",
+      title: t('services.ron.title'),
+      description: t('services.ron.description'),
+      features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
+      price: t('services.ron.price'),
       popular: false
     },
     {
       icon: Globe,
-      title: "Apostille Services",
-      description: "Document authentication for international use and foreign countries.",
-      features: ["State Apostilles", "Document Preparation", "Authentication", "International Shipping"],
-      price: "Starting at $75",
+      title: t('services.apostille.title'),
+      description: t('services.apostille.description'),
+      features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
+      price: t('services.apostille.price'),
       popular: false
     },
     {
@@ -72,14 +75,13 @@ export default function ServicesSection() {
         <div className="text-center space-y-4 mb-16">
           <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
             <Shield className="w-4 h-4 mr-2" />
-            Our Services
+            {t('services.badge')}
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Comprehensive Professional Services
+            {t('services.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From notarization to tax preparation, we provide trusted services 
-            with the highest standards of professionalism and security.
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -97,7 +99,7 @@ export default function ServicesSection() {
                   variant="outline" 
                   className="absolute -top-3 left-4 bg-accent text-accent-foreground border-accent"
                 >
-                  Most Popular
+                  {t('services.popular')}
                 </Badge>
               )}
               
@@ -134,7 +136,7 @@ export default function ServicesSection() {
                     variant={service.popular ? "accent" : "outline"} 
                     size="sm"
                   >
-                    Learn More
+                    {t('services.learn')}
                   </Button>
                 </div>
               </CardContent>
@@ -144,7 +146,7 @@ export default function ServicesSection() {
 
         {/* Service Areas */}
         <div className="mt-16 text-center space-y-6">
-          <h3 className="text-2xl font-semibold text-foreground">Service Areas</h3>
+          <h3 className="text-2xl font-semibold text-foreground">{t('services.areas.title')}</h3>
           <p className="text-muted-foreground">
             We proudly serve the following areas with mobile services available:
           </p>
@@ -158,7 +160,7 @@ export default function ServicesSection() {
           
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground mt-6">
             <Clock className="w-4 h-4" />
-            <span>Mobile services available within 25 miles from Edison, NJ • Same-day appointments</span>
+            <span>{t('services.areas.availability')} • {t('services.areas.same_day')}</span>
           </div>
         </div>
       </div>

@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Quote, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function TestimonialsSection() {
+  const { t } = useLanguage();
+  
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -55,14 +58,13 @@ export default function TestimonialsSection() {
         <div className="text-center space-y-4 mb-16">
           <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
             <User className="w-4 h-4 mr-2" />
-            Client Testimonials
+            {t('testimonials.badge')}
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            What Our Clients Say
+            {t('testimonials.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our valued clients have to say 
-            about their experience with our professional services.
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
@@ -123,11 +125,11 @@ export default function TestimonialsSection() {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                <div className="text-sm text-muted-foreground">Professional Service</div>
+                <div className="text-sm text-muted-foreground">{t('testimonials.stats.professional')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+                <div className="text-sm text-muted-foreground">{t('testimonials.stats.satisfaction')}</div>
               </div>
             </div>
           </div>

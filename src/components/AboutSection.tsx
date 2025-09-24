@@ -11,23 +11,26 @@ import {
   BookOpen,
   Building
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+  
   const credentials = [
     {
       icon: Award,
-      title: "Licensed Notary Public",
-      description: "State certified and commissioned notary with current credentials"
+      title: t('about.certification.title'),
+      description: t('about.certification.description')
     },
     {
       icon: Shield,
-      title: "Bonded & Insured",
-      description: "$100,000 professional liability insurance for your protection"
+      title: t('footer.bonded'),
+      description: t('footer.bonded_desc') + " professional liability insurance for your protection"
     },
     {
       icon: BookOpen,
-      title: "RON Certified",
-      description: "Remote Online Notarization certified through approved platforms"
+      title: t('footer.ron_certified'),
+      description: t('footer.ron_desc') + " certified through approved platforms"
     },
     {
       icon: Building,
@@ -37,10 +40,10 @@ export default function AboutSection() {
   ];
 
   const stats = [
-    { value: "5+", label: "Years Experience", icon: Clock },
-    { value: "500+", label: "Documents Notarized", icon: CheckCircle },
-    { value: "50+", label: "Loan Signings", icon: Building },
-    { value: "100%", label: "Client Satisfaction", icon: Star }
+    { value: "5+", label: t('about.stats.experience'), icon: Clock },
+    { value: "500+", label: t('about.stats.documents'), icon: CheckCircle },
+    { value: "50+", label: t('hero.stats.loans'), icon: Building },
+    { value: "100%", label: t('about.stats.satisfaction'), icon: Star }
   ];
 
   return (
@@ -52,27 +55,15 @@ export default function AboutSection() {
             <div className="space-y-4">
               <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                 <Users className="w-4 h-4 mr-2" />
-                About Us
+                {t('about.badge')}
               </Badge>
               
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Professional Excellence in{" "}
-                <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  Notary Services
-                </span>
+                {t('about.title')}
               </h2>
               
               <p className="text-lg text-muted-foreground leading-relaxed">
-                At Notary and Signings LLC, we bring over 5 years of dedicated experience 
-                in providing professional notary and document services. Our commitment to 
-                excellence, attention to detail, and client-focused approach has made us 
-                a trusted partner for individuals and businesses alike.
-              </p>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We understand that your time is valuable, which is why we offer flexible 
-                scheduling, mobile services, and remote online notarization to meet your 
-                needs wherever and whenever you need us.
+                {t('about.description')}
               </p>
             </div>
 

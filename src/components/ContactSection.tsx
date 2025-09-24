@@ -12,39 +12,42 @@ import {
   Send,
   MessageSquare
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+  
   const contactInfo = [
     {
       icon: Phone,
-      title: "Phone",
+      title: t('contact.info.phone'),
       content: "(908) 514-8180",
       description: "Call us for immediate assistance"
     },
     {
       icon: Mail,
-      title: "Email",
+      title: t('contact.info.email'),
       content: "info@notaryandsignings.com",
       description: "Send us your questions anytime"
     },
     {
       icon: MapPin,
-      title: "Service Area",
-      content: "Edison, NJ & Surrounding Areas",
+      title: t('contact.info.location'),
+      content: t('contact.info.location.address'),
       description: "Mobile services within 25 miles"
     },
     {
       icon: Clock,
-      title: "Business Hours",
-      content: "Mon-Sun: 8AM-8PM",
-      description: "Monday through Sunday availability"
+      title: t('contact.info.hours'),
+      content: t('contact.info.hours.schedule'),
+      description: t('contact.info.hours.description')
     }
   ];
 
   const businessHours = [
-    { day: "Monday - Friday", hours: "By appointment only" },
-    { day: "Saturday", hours: "By Appointment Only" },
-    { day: "Sunday", hours: "By Appointment Only" }
+    { day: t('contact.hours.monday'), hours: t('contact.hours.appointment') },
+    { day: t('contact.hours.saturday'), hours: t('contact.hours.appointment_only') },
+    { day: t('contact.hours.sunday'), hours: t('contact.hours.appointment_only') }
   ];
 
   return (
@@ -54,14 +57,13 @@ export default function ContactSection() {
         <div className="text-center space-y-4 mb-16">
           <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
             <MessageSquare className="w-4 h-4 mr-2" />
-            Contact Us
+            {t('contact.badge')}
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Get In Touch Today
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to schedule your appointment? Contact us today for professional notary 
-            services, tax preparation, or any questions about our offerings.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -72,43 +74,43 @@ export default function ContactSection() {
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-foreground flex items-center">
                   <Calendar className="w-6 h-6 mr-3 text-accent" />
-                  Schedule Your Appointment
+                  {t('contact.form.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">First Name</label>
-                    <Input placeholder="Enter your first name" />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.name')}</label>
+                    <Input placeholder={t('contact.form.name')} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Last Name</label>
-                    <Input placeholder="Enter your last name" />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.name')}</label>
+                    <Input placeholder={t('contact.form.name')} />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Email</label>
-                    <Input type="email" placeholder="your.email@example.com" />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.email')}</label>
+                    <Input type="email" placeholder={t('contact.form.email')} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Phone</label>
-                    <Input type="tel" placeholder="(555) 123-4567" />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.phone')}</label>
+                    <Input type="tel" placeholder="(908) 514-8180" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Service Needed</label>
+                  <label className="text-sm font-medium text-foreground">{t('contact.form.service')}</label>
                   <select className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm">
-                    <option value="">Select a service</option>
-                    <option value="mobile-notary">Mobile Notary</option>
-                    <option value="loan-signing">Loan Signing</option>
-                    <option value="ron">Remote Online Notarization</option>
-                    <option value="apostille">Apostille Services</option>
+                    <option value="">{t('contact.form.service')}</option>
+                    <option value="mobile-notary">{t('contact.form.service.mobile')}</option>
+                    <option value="loan-signing">{t('contact.form.service.loan')}</option>
+                    <option value="ron">{t('contact.form.service.ron')}</option>
+                    <option value="apostille">{t('contact.form.service.apostille')}</option>
                     <option value="fingerprinting">Fingerprinting</option>
                     <option value="tax-prep">Tax Preparation</option>
-                    <option value="other">Other</option>
+                    <option value="other">{t('contact.form.service.other')}</option>
                   </select>
                 </div>
 
@@ -118,19 +120,19 @@ export default function ContactSection() {
                     <Input type="date" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Preferred Time</label>
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.timing')}</label>
                     <select className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm">
-                      <option value="">Select time</option>
-                      <option value="morning">Morning (8AM-12PM)</option>
-                      <option value="afternoon">Afternoon (12PM-5PM)</option>
-                      <option value="evening">Evening (5PM-8PM)</option>
-                      <option value="flexible">Flexible Timing</option>
+                      <option value="">{t('contact.form.timing')}</option>
+                      <option value="morning">{t('contact.form.timing.morning')}</option>
+                      <option value="afternoon">{t('contact.form.timing.afternoon')}</option>
+                      <option value="evening">{t('contact.form.timing.evening')}</option>
+                      <option value="flexible">{t('contact.form.timing.flexible')}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Message</label>
+                  <label className="text-sm font-medium text-foreground">{t('contact.form.message')}</label>
                   <Textarea 
                     placeholder="Please provide details about your notary needs, number of documents, location preferences, or any special requirements..."
                     rows={4}
@@ -139,11 +141,11 @@ export default function ContactSection() {
 
                 <Button variant="hero" size="lg" className="w-full">
                   <Send className="w-5 h-5 mr-2" />
-                  Send Message & Schedule Appointment
+                  {t('contact.form.submit')}
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  We'll respond within 2 hours during business hours.
+                  {t('contact.form.response')}
                 </p>
               </CardContent>
             </Card>
@@ -174,7 +176,7 @@ export default function ContactSection() {
               <CardHeader>
                 <CardTitle className="text-lg font-semibold text-foreground flex items-center">
                   <Clock className="w-5 h-5 mr-2 text-accent" />
-                  Business Hours
+                  {t('contact.info.hours')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -202,10 +204,9 @@ export default function ContactSection() {
             {/* Professional Notice */}
             <Card className="bg-accent-muted border-accent">
               <CardContent className="p-6 text-center space-y-2">
-                <h4 className="font-semibold text-accent-foreground">Professional Services</h4>
+                <h4 className="font-semibold text-accent-foreground">{t('contact.emergency.title')}</h4>
                 <p className="text-sm text-accent-foreground">
-                  Licensed, bonded, and insured notary services with flexible 
-                  scheduling to meet your needs.
+                  {t('contact.emergency.description')}
                 </p>
               </CardContent>
             </Card>

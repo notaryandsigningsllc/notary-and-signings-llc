@@ -61,6 +61,7 @@ const translations = {
     'hero.stats.documents': 'Documents Notarized',
     'hero.stats.loans': 'Loan Signings',
     'hero.stats.satisfaction': 'Client Satisfaction',
+    'hero.image_alt': 'Professional notary services - official documents and seals',
     
     // Services Section
     'services.badge': 'Our Services',
@@ -203,6 +204,7 @@ const translations = {
     'hero.stats.documents': 'Documentos Notarizados',
     'hero.stats.loans': 'Firmas de Préstamos',
     'hero.stats.satisfaction': 'Satisfacción del Cliente',
+    'hero.image_alt': 'Servicios notariales profesionales - documentos oficiales y sellos',
     
     // Services Section
     'services.badge': 'Nuestros Servicios',
