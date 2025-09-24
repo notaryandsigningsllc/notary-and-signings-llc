@@ -84,8 +84,8 @@ export default function ContactSection() {
                     <Input placeholder={t('contact.form.name')} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.name')}</label>
-                    <Input placeholder={t('contact.form.name')} />
+                    <label className="text-sm font-medium text-foreground">Last Name</label>
+                    <Input placeholder="Last Name" />
                   </div>
                 </div>
 
