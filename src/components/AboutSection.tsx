@@ -69,17 +69,15 @@ export default function AboutSection() {
 
             {/* Mission Statement */}
             <div className="bg-card border border-border rounded-lg p-6 shadow-card">
-              <h3 className="text-xl font-semibold text-foreground mb-3">Our Mission</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-3">{t('about.mission.title')}</h3>
               <p className="text-muted-foreground">
-                To provide reliable, professional, and convenient notary services while 
-                maintaining the highest standards of integrity and confidentiality. We 
-                strive to make document notarization accessible and stress-free for every client.
+                {t('about.mission.description')}
               </p>
             </div>
 
             <Button variant="hero" size="lg">
               <Shield className="w-5 h-5 mr-2" />
-              View Our Credentials
+              {t('about.cta')}
             </Button>
           </div>
 
@@ -121,28 +119,28 @@ export default function AboutSection() {
         <div className="mt-20 text-center space-y-12">
           <div className="space-y-4">
             <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-              Why Choose Notary and Signings LLC?
+              {t('about.why_choose.title')}
             </h3>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Our dedication to professional excellence and client satisfaction sets us apart.
+              {t('about.why_choose.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Professional Excellence",
-                description: "Licensed, bonded, and insured with continuous education and training",
+                title: t('about.why_choose.excellence.title'),
+                description: t('about.why_choose.excellence.description'),
                 icon: Award
               },
               {
-                title: "Convenient Service",
-                description: "Mobile services, flexible scheduling, and remote notarization options",
+                title: t('about.why_choose.convenience.title'),
+                description: t('about.why_choose.convenience.description'),
                 icon: Clock
               },
               {
-                title: "Trusted Partnership",
-                description: "Confidential, reliable service with a focus on building long-term relationships",
+                title: t('about.why_choose.trust.title'),
+                description: t('about.why_choose.trust.description'),
                 icon: Shield
               }
             ].map((feature, index) => (

@@ -91,13 +91,13 @@ export default function HeroSection() {
             
             {/* Floating Service Cards */}
             <div className="absolute -top-4 -right-4 bg-card border border-border rounded-lg p-4 shadow-card animate-scale-in">
-              <div className="text-sm font-semibold text-primary">Licensed & Bonded</div>
-              <div className="text-xs text-muted-foreground">Professional Service</div>
+              <div className="text-sm font-semibold text-primary">{t('hero.badge.licensed')}</div>
+              <div className="text-xs text-muted-foreground">{t('hero.badge.licensed_desc')}</div>
             </div>
             
             <div className="absolute -bottom-4 -left-4 bg-card border border-border rounded-lg p-4 shadow-card animate-slide-in-right">
-              <div className="text-sm font-semibold text-accent">RON Certified</div>
-              <div className="text-xs text-muted-foreground">Remote Notarization</div>
+              <div className="text-sm font-semibold text-accent">{t('hero.badge.ron')}</div>
+              <div className="text-xs text-muted-foreground">{t('hero.badge.ron_desc')}</div>
             </div>
           </div>
         </div>

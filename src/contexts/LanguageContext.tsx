@@ -62,6 +62,23 @@ const translations = {
     'hero.stats.loans': 'Loan Signings',
     'hero.stats.satisfaction': 'Client Satisfaction',
     'hero.image_alt': 'Professional notary services - official documents and seals',
+    'hero.badge.licensed': 'Licensed & Bonded',
+    'hero.badge.licensed_desc': 'Professional Service',
+    'hero.badge.ron': 'RON Certified',
+    'hero.badge.ron_desc': 'Remote Notarization',
+    
+    // About Section - Mission and Why Choose Us
+    'about.mission.title': 'Our Mission',
+    'about.mission.description': 'To provide reliable, professional, and convenient notary services while maintaining the highest standards of integrity and confidentiality. We strive to make document notarization accessible and stress-free for every client.',
+    'about.cta': 'View Our Credentials',
+    'about.why_choose.title': 'Why Choose Notary and Signings LLC?',
+    'about.why_choose.subtitle': 'Our dedication to professional excellence and client satisfaction sets us apart.',
+    'about.why_choose.excellence.title': 'Professional Excellence',
+    'about.why_choose.excellence.description': 'Licensed, bonded, and insured with continuous education and training',
+    'about.why_choose.convenience.title': 'Convenient Service',
+    'about.why_choose.convenience.description': 'Mobile services, flexible scheduling, and remote notarization options',
+    'about.why_choose.trust.title': 'Trusted Partnership',
+    'about.why_choose.trust.description': 'Confidential, reliable service with a focus on building long-term relationships',
     
     // Services Section
     'services.badge': 'Our Services',
@@ -205,6 +222,23 @@ const translations = {
     'hero.stats.loans': 'Firmas de Préstamos',
     'hero.stats.satisfaction': 'Satisfacción del Cliente',
     'hero.image_alt': 'Servicios notariales profesionales - documentos oficiales y sellos',
+    'hero.badge.licensed': 'Licenciado y con Garantía',
+    'hero.badge.licensed_desc': 'Servicio Profesional',
+    'hero.badge.ron': 'Certificado RON',
+    'hero.badge.ron_desc': 'Notarización Remota',
+    
+    // About Section - Mission and Why Choose Us
+    'about.mission.title': 'Nuestra Misión',
+    'about.mission.description': 'Proporcionar servicios notariales confiables, profesionales y convenientes mientras mantenemos los más altos estándares de integridad y confidencialidad. Nos esforzamos por hacer que la notarización de documentos sea accesible y libre de estrés para cada cliente.',
+    'about.cta': 'Ver Nuestras Credenciales',
+    'about.why_choose.title': '¿Por Qué Elegir Notary and Signings LLC?',
+    'about.why_choose.subtitle': 'Nuestra dedicación a la excelencia profesional y la satisfacción del cliente nos distingue.',
+    'about.why_choose.excellence.title': 'Excelencia Profesional',
+    'about.why_choose.excellence.description': 'Licenciados, con garantía y asegurados con educación y entrenamiento continuo',
+    'about.why_choose.convenience.title': 'Servicio Conveniente',
+    'about.why_choose.convenience.description': 'Servicios móviles, horarios flexibles y opciones de notarización remota',
+    'about.why_choose.trust.title': 'Asociación de Confianza',
+    'about.why_choose.trust.description': 'Servicio confidencial y confiable con enfoque en construir relaciones a largo plazo',
     
     // Services Section
     'services.badge': 'Nuestros Servicios',
