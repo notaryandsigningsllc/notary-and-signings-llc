@@ -60,7 +60,7 @@ export default function ServicesSection() {
       description: t('services.fingerprint.description'),
       features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
       price: "Próximamente",
-      duration: "TBD",
+      duration: "Pendiente",
       popular: false,
       comingSoon: true
     },
