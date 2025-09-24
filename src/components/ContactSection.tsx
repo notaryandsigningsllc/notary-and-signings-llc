@@ -134,7 +134,7 @@ export default function ContactSection() {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">{t('contact.form.message')}</label>
                   <Textarea 
-                    placeholder="Please provide details about your notary needs, number of documents, location preferences, or any special requirements..."
+                    placeholder={t('contact.form.message_placeholder')}
                     rows={4}
                   />
                 </div>
