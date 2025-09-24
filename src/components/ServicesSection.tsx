@@ -72,15 +72,6 @@ export default function ServicesSection() {
       price: "$75",
       duration: "1 hr",
       popular: false
-    },
-    {
-      icon: Laptop,
-      title: t('services.ipen.title'),
-      description: t('services.ipen.description'),
-      features: [t('services.ipen.feature1'), t('services.ipen.feature2'), t('services.ipen.feature3'), t('services.ipen.feature4')],
-      price: "$40",
-      duration: "30 min",
-      popular: false
     }
   ];
 
@@ -251,6 +242,27 @@ export default function ServicesSection() {
                 {area}
               </Badge>
             ))}
+          </div>
+          
+          {/* iPEN Add-on Service */}
+          <div className="mt-8 bg-card border border-border rounded-lg p-6 shadow-card">
+            <div className="text-center space-y-4">
+              <div className="flex items-center justify-center space-x-3">
+                <div className="w-10 h-10 bg-accent text-accent-foreground rounded-lg flex items-center justify-center">
+                  <Laptop className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-foreground">{t('services.ipen.title')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('services.ipen.description')}</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-center space-x-4">
+                <span className="text-lg font-semibold text-primary">+$40 Add-on</span>
+                <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
+                  Available with any service
+                </Badge>
+              </div>
+            </div>
           </div>
           
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground mt-6">
