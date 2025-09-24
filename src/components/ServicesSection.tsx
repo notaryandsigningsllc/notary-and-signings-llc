@@ -72,6 +72,15 @@ export default function ServicesSection() {
       price: "$75",
       duration: "1 hr",
       popular: false
+    },
+    {
+      icon: Laptop,
+      title: t('services.ipen.title'),
+      description: t('services.ipen.description'),
+      features: [t('services.ipen.feature1'), t('services.ipen.feature2'), t('services.ipen.feature3'), t('services.ipen.feature4')],
+      price: "$40",
+      duration: "30 min",
+      popular: false
     }
   ];
 
