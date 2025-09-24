@@ -158,7 +158,7 @@ export default function ServicesSection() {
           
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground mt-6">
             <Clock className="w-4 h-4" />
-            <span>Mobile services available within 25 miles • Same-day appointments</span>
+            <span>Mobile services available within 25 miles from Edison, NJ • Same-day appointments</span>
           </div>
         </div>
       </div>
