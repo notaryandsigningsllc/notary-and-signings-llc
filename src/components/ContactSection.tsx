@@ -96,7 +96,7 @@ export default function ContactSection() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">{t('contact.form.phone')}</label>
-                    <Input type="tel" placeholder="(908) 514-8180" />
+                    <Input type="tel" placeholder="Phone Number" />
                   </div>
                 </div>
 
