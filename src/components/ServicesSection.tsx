@@ -23,7 +23,8 @@ export default function ServicesSection() {
       title: t('services.mobile.title'),
       description: t('services.mobile.description'),
       features: [t('services.mobile.feature1'), t('services.mobile.feature2'), t('services.mobile.feature3'), t('services.mobile.feature4')],
-      price: t('services.mobile.price'),
+      price: "$75",
+      duration: "1 hr",
       popular: false
     },
     {
@@ -31,7 +32,8 @@ export default function ServicesSection() {
       title: t('services.loan.title'), 
       description: t('services.loan.description'),
       features: [t('services.loan.feature1'), t('services.loan.feature2'), t('services.loan.feature3'), t('services.loan.feature4')],
-      price: t('services.loan.price'),
+      price: "$100",
+      duration: "1 hr",
       popular: true
     },
     {
@@ -39,7 +41,8 @@ export default function ServicesSection() {
       title: t('services.ron.title'),
       description: t('services.ron.description'),
       features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
-      price: t('services.ron.price'),
+      price: "$50",
+      duration: "1 hr",
       popular: false
     },
     {
@@ -48,6 +51,7 @@ export default function ServicesSection() {
       description: t('services.apostille.description'),
       features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
       price: t('services.apostille.price'),
+      duration: "Varies",
       popular: false
     },
     {
@@ -56,15 +60,41 @@ export default function ServicesSection() {
       description: t('services.fingerprint.description'),
       features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
       price: t('services.fingerprint.price'),
+      duration: "30 min",
       popular: false
     },
     {
       icon: DollarSign,
-      title: t('services.tax.title'),
-      description: t('services.tax.description'),
-      features: [t('services.tax.feature1'), t('services.tax.feature2'), t('services.tax.feature3'), t('services.tax.feature4')],
-      price: t('services.tax.price'),
+      title: t('services.tax.individual.title'),
+      description: t('services.tax.individual.description'),
+      features: [t('services.tax.individual.feature1'), t('services.tax.individual.feature2'), t('services.tax.individual.feature3'), t('services.tax.individual.feature4')],
+      price: "$75",
+      duration: "1 hr",
       popular: false
+    }
+  ];
+
+  const additionalTaxServices = [
+    {
+      icon: DollarSign,
+      title: t('services.tax.business.title'),
+      description: t('services.tax.business.description'),
+      price: "$100",
+      duration: "1 hr"
+    },
+    {
+      icon: DollarSign,
+      title: t('services.tax.corporate.title'),
+      description: t('services.tax.corporate.description'),
+      price: "$150",
+      duration: "1 hr 30 min"
+    },
+    {
+      icon: DollarSign,
+      title: t('services.tax.review.title'),
+      description: t('services.tax.review.description'),
+      price: "$75",
+      duration: "1 hr"
     }
   ];
 
@@ -131,17 +161,62 @@ export default function ServicesSection() {
 
                 {/* Pricing */}
                 <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <span className="text-lg font-semibold text-primary">{service.price}</span>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-semibold text-primary">{service.price}</span>
+                    <span className="text-sm text-muted-foreground">{service.duration}</span>
+                  </div>
                   <Button 
                     variant={service.popular ? "accent" : "outline"} 
                     size="sm"
                   >
-                    {t('services.learn')}
+                    {t('services.book_now')}
                   </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Additional Tax Services */}
+        <div className="mt-16">
+          <div className="text-center space-y-4 mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+              {t('services.tax.additional.title')}
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              {t('services.tax.additional.subtitle')}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {additionalTaxServices.map((service, index) => (
+              <Card key={index} className="transition-all duration-300 hover:shadow-elegant hover:-translate-y-1">
+                <CardHeader className="space-y-4">
+                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
+                    <service.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground mt-2">
+                      {service.description}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
+                    <div className="flex flex-col">
+                      <span className="text-lg font-semibold text-primary">{service.price}</span>
+                      <span className="text-sm text-muted-foreground">{service.duration}</span>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      {t('services.book_now')}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Service Areas */}
