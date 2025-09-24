@@ -13,6 +13,7 @@ export default function Navigation() {
     { name: t('nav.about'), href: "#about" },
     { name: t('nav.services'), href: "#services" },
     { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.faqs'), href: "/faqs" },
     { name: t('nav.contact'), href: "#contact" },
   ];
 

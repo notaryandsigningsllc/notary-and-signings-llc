@@ -43,6 +43,7 @@ const translations = {
     'nav.about': 'About',
     'nav.services': 'Services',
     'nav.testimonials': 'Testimonials',
+    'nav.faqs': 'FAQs',
     'nav.contact': 'Contact',
     'nav.book': 'Book Appointment',
     
@@ -204,6 +205,56 @@ const translations = {
     'testimonials.client6.content': 'Needed apostille services for my documents to be used abroad. They handled the entire process and kept me updated throughout. Excellent service!',
     'testimonials.client6.service': 'Apostille',
     
+    // FAQ Page
+    'faqs.badge': 'Frequently Asked Questions',
+    'faqs.title': 'How Can We Help You?',
+    'faqs.subtitle': 'Find answers to the most common questions about our notary services, pricing, and processes.',
+    'faqs.contact.title': 'Still Have Questions?',
+    'faqs.contact.description': 'If you can\'t find the answer you\'re looking for, don\'t hesitate to reach out to us directly. We\'re here to help!',
+    
+    // FAQ Categories
+    'faqs.general.title': 'General Questions',
+    'faqs.general.q1.question': 'What is a notary public and what do they do?',
+    'faqs.general.q1.answer': 'A notary public is a state-appointed official who serves as an impartial witness to the signing of important documents. We verify the identity of signers, ensure they understand what they\'re signing, and confirm they\'re signing willingly without coercion.',
+    'faqs.general.q2.question': 'What documents do I need to bring for notarization?',
+    'faqs.general.q2.answer': 'You\'ll need:\n• A valid government-issued photo ID (driver\'s license, passport, or state ID)\n• The unsigned document(s) to be notarized\n• Any additional documentation specified by the document requirements',
+    'faqs.general.q3.question': 'Are you licensed and insured?',
+    'faqs.general.q3.answer': 'Yes, we are fully licensed notaries public in the state of New Jersey, bonded, and carry $100,000 in professional liability insurance for your protection and peace of mind.',
+    'faqs.general.q4.question': 'What are your business hours?',
+    'faqs.general.q4.answer': 'We operate Monday through Sunday, 8AM to 8PM, by appointment only. We offer flexible scheduling to accommodate your busy schedule, including evening and weekend appointments.',
+    
+    'faqs.mobile.title': 'Mobile Notary Services',
+    'faqs.mobile.q1.question': 'Do you travel to my location?',
+    'faqs.mobile.q1.answer': 'Yes! We provide mobile notary services within 25 miles of Edison, NJ. We\'ll come to your home, office, hospital, or any convenient location for an additional travel fee.',
+    'faqs.mobile.q2.question': 'How much does mobile service cost?',
+    'faqs.mobile.q2.answer': 'Mobile notary service is $75 for 1 hour, which includes travel time and notarization of your documents. Additional time is billed in 15-minute increments.',
+    'faqs.mobile.q3.question': 'How quickly can you come to me?',
+    'faqs.mobile.q3.answer': 'We typically can schedule same-day appointments with 2-4 hours notice. For urgent requests, please call us directly at (908) 514-8180.',
+    
+    'faqs.ron.title': 'Remote Online Notarization (RON)',
+    'faqs.ron.q1.question': 'What is Remote Online Notarization?',
+    'faqs.ron.q1.answer': 'RON allows you to get documents notarized online through a secure video conference. You can be anywhere in the world while we verify your identity digitally and witness your electronic signature.',
+    'faqs.ron.q2.question': 'What do I need for RON?',
+    'faqs.ron.q2.answer': 'You\'ll need:\n• A computer, tablet, or smartphone with camera and microphone\n• Stable internet connection\n• Valid government-issued photo ID\n• The document in PDF format (we can help convert if needed)',
+    'faqs.ron.q3.question': 'Is RON legally valid?',
+    'faqs.ron.q3.answer': 'Yes, RON is legally valid and recognized in New Jersey and many other states. The electronically notarized document has the same legal weight as a traditional paper notarization.',
+    
+    'faqs.loan.title': 'Loan Signing Services',
+    'faqs.loan.q1.question': 'What is a loan signing agent?',
+    'faqs.loan.q1.answer': 'A loan signing agent is a specially trained notary who handles the signing of real estate loan documents. We ensure all documents are signed correctly and returned to the title company or lender promptly.',
+    'faqs.loan.q2.question': 'How long does a loan signing take?',
+    'faqs.loan.q2.answer': 'Most loan signings take 1 hour to complete. We allow sufficient time to review documents, answer questions, and ensure everything is signed properly.',
+    'faqs.loan.q3.question': 'Do you work with all title companies and lenders?',
+    'faqs.loan.q3.answer': 'Yes, we work with title companies, lenders, and signing services throughout New Jersey. We\'re approved by major title companies and maintain the highest standards of professionalism.',
+    
+    'faqs.pricing.title': 'Pricing & Payment',
+    'faqs.pricing.q1.question': 'What forms of payment do you accept?',
+    'faqs.pricing.q1.answer': 'We accept cash, check, Venmo, Zelle, and all major credit cards. Payment is due at the time of service.',
+    'faqs.pricing.q2.question': 'Are there any additional fees?',
+    'faqs.pricing.q2.answer': 'Our pricing is transparent. Mobile service includes travel within 25 miles. For locations beyond 25 miles, there\'s an additional mileage fee. Rush service (less than 2 hours notice) may include an additional fee.',
+    'faqs.pricing.q3.question': 'Do you offer discounts for multiple documents?',
+    'faqs.pricing.q3.answer': 'Yes, we offer competitive pricing for multiple documents during the same appointment. Contact us for a custom quote for large document packages.',
+    
     // Contact Section
     'contact.badge': 'Contact Us',
     'contact.title': 'Ready to Get Started?',
@@ -267,6 +318,7 @@ const translations = {
     'nav.about': 'Acerca de',
     'nav.services': 'Servicios',
     'nav.testimonials': 'Testimonios',
+    'nav.faqs': 'Preguntas Frecuentes',
     'nav.contact': 'Contacto',
     'nav.book': 'Reservar Cita',
     
@@ -427,6 +479,56 @@ const translations = {
     'testimonials.client6.role': 'Estudiante Internacional',
     'testimonials.client6.content': 'Necesitaba servicios de apostilla para mis documentos para usar en el extranjero. Manejaron todo el proceso y me mantuvieron informado durante todo el proceso. ¡Excelente servicio!',
     'testimonials.client6.service': 'Apostilla',
+    
+    // FAQ Page
+    'faqs.badge': 'Preguntas Frecuentes',
+    'faqs.title': '¿Cómo Podemos Ayudarte?',
+    'faqs.subtitle': 'Encuentra respuestas a las preguntas más comunes sobre nuestros servicios notariales, precios y procesos.',
+    'faqs.contact.title': '¿Aún Tienes Preguntas?',
+    'faqs.contact.description': 'Si no puedes encontrar la respuesta que buscas, no dudes en contactarnos directamente. ¡Estamos aquí para ayudar!',
+    
+    // FAQ Categories
+    'faqs.general.title': 'Preguntas Generales',
+    'faqs.general.q1.question': '¿Qué es un notario público y qué hace?',
+    'faqs.general.q1.answer': 'Un notario público es un funcionario nombrado por el estado que sirve como testigo imparcial de la firma de documentos importantes. Verificamos la identidad de los firmantes, nos aseguramos de que entiendan lo que están firmando y confirmamos que firmen voluntariamente sin coerción.',
+    'faqs.general.q2.question': '¿Qué documentos necesito traer para la notarización?',
+    'faqs.general.q2.answer': 'Necesitarás:\n• Una identificación con foto válida emitida por el gobierno (licencia de conducir, pasaporte o identificación estatal)\n• El/los documento(s) sin firmar para notarizar\n• Cualquier documentación adicional especificada por los requisitos del documento',
+    'faqs.general.q3.question': '¿Están licenciados y asegurados?',
+    'faqs.general.q3.answer': 'Sí, somos notarios públicos completamente licenciados en el estado de Nueva Jersey, con garantía y portamos $100,000 en seguro de responsabilidad profesional para su protección y tranquilidad.',
+    'faqs.general.q4.question': '¿Cuáles son sus horarios comerciales?',
+    'faqs.general.q4.answer': 'Operamos de lunes a domingo, de 8AM a 8PM, solo con cita previa. Ofrecemos horarios flexibles para acomodar su agenda ocupada, incluyendo citas nocturnas y de fin de semana.',
+    
+    'faqs.mobile.title': 'Servicios de Notario Móvil',
+    'faqs.mobile.q1.question': '¿Viajan a mi ubicación?',
+    'faqs.mobile.q1.answer': '¡Sí! Proporcionamos servicios de notario móvil dentro de 25 millas de Edison, NJ. Iremos a su hogar, oficina, hospital o cualquier ubicación conveniente por una tarifa de viaje adicional.',
+    'faqs.mobile.q2.question': '¿Cuánto cuesta el servicio móvil?',
+    'faqs.mobile.q2.answer': 'El servicio de notario móvil es $75 por 1 hora, que incluye tiempo de viaje y notarización de sus documentos. El tiempo adicional se factura en incrementos de 15 minutos.',
+    'faqs.mobile.q3.question': '¿Qué tan rápido pueden venir a verme?',
+    'faqs.mobile.q3.answer': 'Típicamente podemos programar citas el mismo día con 2-4 horas de aviso. Para solicitudes urgentes, por favor llámenos directamente al (908) 514-8180.',
+    
+    'faqs.ron.title': 'Notarización Remota en Línea (RON)',
+    'faqs.ron.q1.question': '¿Qué es la Notarización Remota en Línea?',
+    'faqs.ron.q1.answer': 'RON le permite obtener documentos notarizados en línea a través de una videoconferencia segura. Puede estar en cualquier lugar del mundo mientras verificamos su identidad digitalmente y presenciamos su firma electrónica.',
+    'faqs.ron.q2.question': '¿Qué necesito para RON?',
+    'faqs.ron.q2.answer': 'Necesitará:\n• Una computadora, tableta o teléfono inteligente con cámara y micrófono\n• Conexión estable a internet\n• Identificación con foto válida emitida por el gobierno\n• El documento en formato PDF (podemos ayudar a convertir si es necesario)',
+    'faqs.ron.q3.question': '¿Es RON legalmente válido?',
+    'faqs.ron.q3.answer': 'Sí, RON es legalmente válido y reconocido en Nueva Jersey y muchos otros estados. El documento notarizado electrónicamente tiene el mismo peso legal que una notarización tradicional en papel.',
+    
+    'faqs.loan.title': 'Servicios de Firma de Préstamos',
+    'faqs.loan.q1.question': '¿Qué es un agente de firma de préstamos?',
+    'faqs.loan.q1.answer': 'Un agente de firma de préstamos es un notario especialmente entrenado que maneja la firma de documentos de préstamos inmobiliarios. Nos aseguramos de que todos los documentos se firmen correctamente y se devuelvan a la compañía de títulos o prestamista prontamente.',
+    'faqs.loan.q2.question': '¿Cuánto tiempo toma una firma de préstamo?',
+    'faqs.loan.q2.answer': 'La mayoría de las firmas de préstamos toman 1 hora para completarse. Permitimos tiempo suficiente para revisar documentos, responder preguntas y asegurar que todo se firme correctamente.',
+    'faqs.loan.q3.question': '¿Trabajan con todas las compañías de títulos y prestamistas?',
+    'faqs.loan.q3.answer': 'Sí, trabajamos con compañías de títulos, prestamistas y servicios de firma en todo Nueva Jersey. Estamos aprobados por las principales compañías de títulos y mantenemos los más altos estándares de profesionalismo.',
+    
+    'faqs.pricing.title': 'Precios y Pago',
+    'faqs.pricing.q1.question': '¿Qué formas de pago aceptan?',
+    'faqs.pricing.q1.answer': 'Aceptamos efectivo, cheque, Venmo, Zelle y todas las principales tarjetas de crédito. El pago vence al momento del servicio.',
+    'faqs.pricing.q2.question': '¿Hay tarifas adicionales?',
+    'faqs.pricing.q2.answer': 'Nuestros precios son transparentes. El servicio móvil incluye viaje dentro de 25 millas. Para ubicaciones más allá de 25 millas, hay una tarifa adicional por milla. El servicio urgente (menos de 2 horas de aviso) puede incluir una tarifa adicional.',
+    'faqs.pricing.q3.question': '¿Ofrecen descuentos para múltiples documentos?',
+    'faqs.pricing.q3.answer': 'Sí, ofrecemos precios competitivos para múltiples documentos durante la misma cita. Contáctenos para una cotización personalizada para paquetes grandes de documentos.',
     
     // Contact Section
     'contact.badge': 'Contáctanos',

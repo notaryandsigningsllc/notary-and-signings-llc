@@ -18,11 +18,12 @@ export default function Footer() {
   const { t } = useLanguage();
   
   const quickLinks = [
-    { name: t('nav.home'), href: "#home" },
-    { name: t('nav.about'), href: "#about" },
-    { name: t('nav.services'), href: "#services" },
-    { name: t('nav.testimonials'), href: "#testimonials" },
-    { name: t('nav.contact'), href: "#contact" }
+    { name: t('nav.home'), href: "/" },
+    { name: t('nav.about'), href: "/#about" },
+    { name: t('nav.services'), href: "/#services" },
+    { name: t('nav.testimonials'), href: "/#testimonials" },
+    { name: t('nav.faqs'), href: "/faqs" },
+    { name: t('nav.contact'), href: "/#contact" }
   ];
 
   const services = [
