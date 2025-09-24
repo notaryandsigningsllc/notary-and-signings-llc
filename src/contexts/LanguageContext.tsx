@@ -221,7 +221,7 @@ const translations = {
     'faqs.general.q2.question': 'What documents do I need to bring for notarization?',
     'faqs.general.q2.answer': 'You\'ll need:\n• A valid government-issued photo ID (driver\'s license, passport, or state ID)\n• The unsigned document(s) to be notarized\n• Any additional documentation specified by the document requirements',
     'faqs.general.q3.question': 'Are you licensed and insured?',
-    'faqs.general.q3.answer': 'Yes, we are fully licensed notaries public in the state of New Jersey, bonded, and carry $100,000 in professional liability insurance for your protection and peace of mind.',
+    'faqs.general.q3.answer': 'Yes, we are fully licensed notaries public in the state of New Jersey, bonded, and carry $50,000 in professional liability insurance for your protection and peace of mind.',
     'faqs.general.q4.question': 'What are your business hours?',
     'faqs.general.q4.answer': 'We operate Monday through Sunday, 8AM to 8PM, by appointment only. We offer flexible scheduling to accommodate your busy schedule, including evening and weekend appointments.',
     
