@@ -43,7 +43,7 @@ export default function Navigation() {
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4" />
-              <span>(555) 123-4567</span>
+              <span>(908) 514-8180</span>
             </div>
             <Button variant="hero" size="sm">
               Book Appointment
