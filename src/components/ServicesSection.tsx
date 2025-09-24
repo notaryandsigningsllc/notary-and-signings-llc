@@ -52,18 +52,18 @@ export default function ServicesSection() {
     },
     {
       icon: Fingerprint,
-      title: "Fingerprinting Services",
-      description: "Professional fingerprinting for background checks and licensing.",
-      features: ["Live Scan", "INK Cards", "Background Checks", "License Applications"],
-      price: "Starting at $20",
+      title: t('services.fingerprint.title'),
+      description: t('services.fingerprint.description'),
+      features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
+      price: t('services.fingerprint.price'),
       popular: false
     },
     {
       icon: DollarSign,
-      title: "Tax Preparation",
-      description: "Professional tax preparation services for individuals and small businesses.",
-      features: ["Individual Returns", "Business Taxes", "E-Filing", "Tax Planning"],
-      price: "Starting at $50",
+      title: t('services.tax.title'),
+      description: t('services.tax.description'),
+      features: [t('services.tax.feature1'), t('services.tax.feature2'), t('services.tax.feature3'), t('services.tax.feature4')],
+      price: t('services.tax.price'),
       popular: false
     }
   ];
@@ -148,10 +148,10 @@ export default function ServicesSection() {
         <div className="mt-16 text-center space-y-6">
           <h3 className="text-2xl font-semibold text-foreground">{t('services.areas.title')}</h3>
           <p className="text-muted-foreground">
-            We proudly serve the following areas with mobile services available:
+            {t('services.areas.description')}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            {["Scotch Plains", "Perth Amboy", "New Brunswick", "Piscataway", "Plainfield", "South Amboy"].map((area, index) => (
+            {[t('services.areas.scotch_plains'), t('services.areas.perth_amboy'), t('services.areas.new_brunswick'), t('services.areas.piscataway'), t('services.areas.plainfield'), t('services.areas.south_amboy')].map((area, index) => (
               <Badge key={index} variant="secondary" className="px-4 py-2">
                 {area}
               </Badge>

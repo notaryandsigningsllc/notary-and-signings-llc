@@ -30,8 +30,8 @@ export default function Footer() {
     { name: t('services.loan.title'), href: "#services" },
     { name: t('services.ron.title'), href: "#services" },
     { name: t('services.apostille.title'), href: "#services" },
-    { name: "Fingerprinting", href: "#services" },
-    { name: "Tax Preparation", href: "#services" }
+    { name: t('services.fingerprint.title'), href: "#services" },
+    { name: t('services.tax.title'), href: "#services" }
   ];
 
   const socialLinks = [
