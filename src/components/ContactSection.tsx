@@ -36,7 +36,7 @@ export default function ContactSection() {
     {
       icon: Clock,
       title: "Business Hours",
-      content: "Mon-Fri: 8AM-8PM",
+      content: "Mon-Sun: 8AM-8PM",
       description: "Emergency services available 24/7"
     }
   ];
