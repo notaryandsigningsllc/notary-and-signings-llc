@@ -8,32 +8,46 @@ export default function TestimonialsSection() {
   
   const testimonials = [
     {
-      name: "Maria Johnson",
-      role: "Homeowner",
-      content: "Professional and efficient service!",
+      name: t('testimonials.client1.name'),
+      role: t('testimonials.client1.role'),
+      content: t('testimonials.client1.content'),
       rating: 5,
-      service: "Mobile Notary"
+      service: t('testimonials.client1.service')
     },
     {
-      name: "David Smith",
-      role: "Real Estate Professional",
-      content: "They made it so easy for me.",
+      name: t('testimonials.client2.name'),
+      role: t('testimonials.client2.role'),
+      content: t('testimonials.client2.content'),
       rating: 5,
-      service: "Loan Signing"
+      service: t('testimonials.client2.service')
     },
     {
-      name: "Emily Zhang",
-      role: "Small Business Owner",
-      content: "Truly reliable and helpful team.",
+      name: t('testimonials.client3.name'),
+      role: t('testimonials.client3.role'),
+      content: t('testimonials.client3.content'),
       rating: 5,
-      service: "Tax Preparation"
+      service: t('testimonials.client3.service')
     },
     {
-      name: "Robert Rose",
-      role: "Property Manager",
-      content: "They have made notary easier for me.",
+      name: t('testimonials.client4.name'),
+      role: t('testimonials.client4.role'),
+      content: t('testimonials.client4.content'),
       rating: 5,
-      service: "Remote Notarization"
+      service: t('testimonials.client4.service')
+    },
+    {
+      name: t('testimonials.client5.name'),
+      role: t('testimonials.client5.role'),
+      content: t('testimonials.client5.content'),
+      rating: 5,
+      service: t('testimonials.client5.service')
+    },
+    {
+      name: t('testimonials.client6.name'),
+      role: t('testimonials.client6.role'),
+      content: t('testimonials.client6.content'),
+      rating: 5,
+      service: t('testimonials.client6.service')
     }
   ];
 

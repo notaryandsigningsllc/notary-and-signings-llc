@@ -168,11 +168,8 @@ export default function ServicesSection() {
                   <Button 
                     variant={service.popular ? "accent" : "outline"} 
                     size="sm"
-                    asChild
                   >
-                    <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
-                      Book Now
-                    </a>
+                    {t('services.book_now')}
                   </Button>
                 </div>
               </CardContent>
@@ -212,10 +209,8 @@ export default function ServicesSection() {
                       <span className="text-lg font-semibold text-primary">{service.price}</span>
                       <span className="text-sm text-muted-foreground">{service.duration}</span>
                     </div>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
-                        Book Now
-                      </a>
+                    <Button variant="outline" size="sm">
+                      {t('services.book_now')}
                     </Button>
                   </div>
                 </CardContent>

@@ -183,10 +183,8 @@ export default function Footer() {
               <p className="text-xs text-primary-foreground/80">
                 {t('footer.professional_desc')}
               </p>
-              <Button variant="accent" size="sm" className="w-full" asChild>
-                <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
-                  {t('footer.schedule')}
-                </a>
+              <Button variant="accent" size="sm" className="w-full">
+                {t('footer.schedule')}
               </Button>
             </div>
           </div>

@@ -9,12 +9,12 @@ export default function Navigation() {
   const { t } = useLanguage();
 
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Blog", href: "/blog" },
-    { name: "FAQs", href: "/faqs" },
-    { name: "Contact Form", href: "#contact" },
+    { name: t('nav.home'), href: "#home" },
+    { name: t('nav.about'), href: "#about" },
+    { name: t('nav.services'), href: "#services" },
+    { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.faqs'), href: "/faqs" },
+    { name: t('nav.contact'), href: "#contact" },
   ];
 
   return (
@@ -50,10 +50,8 @@ export default function Navigation() {
               <span>(908) 514-8180</span>
             </div>
             <LanguageToggle />
-            <Button variant="hero" size="sm" asChild>
-              <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
-                Book Now
-              </a>
+            <Button variant="hero" size="sm">
+              {t('nav.book')}
             </Button>
           </div>
 
@@ -91,10 +89,8 @@ export default function Navigation() {
               </div>
               <div className="px-3 py-2 space-y-2">
                 <LanguageToggle />
-                <Button variant="hero" size="sm" className="w-full" asChild>
-                  <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
-                    Book Now
-                  </a>
+                <Button variant="hero" size="sm" className="w-full">
+                  {t('nav.book')}
                 </Button>
               </div>
             </div>
