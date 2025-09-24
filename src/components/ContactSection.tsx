@@ -42,7 +42,7 @@ export default function ContactSection() {
   ];
 
   const businessHours = [
-    { day: "Monday - Friday", hours: "8:00 AM - 8:00 PM" },
+    { day: "Monday - Friday", hours: "By appointment only" },
     { day: "Saturday", hours: "By Appointment Only" },
     { day: "Sunday", hours: "By Appointment Only" },
     { day: "Emergency Services", hours: "Available 24/7" }
