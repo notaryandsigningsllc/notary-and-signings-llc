@@ -57,7 +57,7 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-accent" />
-                <span className="text-sm">(555) 123-4567</span>
+                <span className="text-sm">(908) 514-8180</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-accent" />
@@ -65,7 +65,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-4 h-4 text-accent" />
-                <span className="text-sm">Metropolitan Service Area</span>
+                <span className="text-sm">180 Talmadge Road, Unit 1380</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="w-4 h-4 text-accent" />
+                <span className="text-sm">Edison, NJ 08817</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Clock className="w-4 h-4 text-accent" />

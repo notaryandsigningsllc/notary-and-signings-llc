@@ -18,7 +18,7 @@ export default function ContactSection() {
     {
       icon: Phone,
       title: "Phone",
-      content: "(555) 123-4567",
+      content: "(908) 514-8180",
       description: "Call us for immediate assistance"
     },
     {
@@ -30,7 +30,7 @@ export default function ContactSection() {
     {
       icon: MapPin,
       title: "Service Area",
-      content: "Metropolitan Area",
+      content: "Edison, NJ & Surrounding Areas",
       description: "Mobile services within 25 miles"
     },
     {
@@ -192,7 +192,7 @@ export default function ContactSection() {
             <div className="space-y-4">
               <Button variant="outline" size="lg" className="w-full">
                 <Phone className="w-5 h-5 mr-2" />
-                Call Now: (555) 123-4567
+                Call Now: (908) 514-8180
               </Button>
               <Button variant="accent" size="lg" className="w-full">
                 <Mail className="w-5 h-5 mr-2" />
