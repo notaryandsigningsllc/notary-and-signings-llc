@@ -122,8 +122,8 @@ export default function TestimonialsSection() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                <div className="text-sm text-muted-foreground">Emergency Service</div>
+                <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                <div className="text-sm text-muted-foreground">Professional Service</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary mb-2">100%</div>

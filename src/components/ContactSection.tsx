@@ -37,15 +37,14 @@ export default function ContactSection() {
       icon: Clock,
       title: "Business Hours",
       content: "Mon-Sun: 8AM-8PM",
-      description: "Emergency services available 24/7"
+      description: "Monday through Sunday availability"
     }
   ];
 
   const businessHours = [
     { day: "Monday - Friday", hours: "By appointment only" },
     { day: "Saturday", hours: "By Appointment Only" },
-    { day: "Sunday", hours: "By Appointment Only" },
-    { day: "Emergency Services", hours: "Available 24/7" }
+    { day: "Sunday", hours: "By Appointment Only" }
   ];
 
   return (
@@ -125,7 +124,7 @@ export default function ContactSection() {
                       <option value="morning">Morning (8AM-12PM)</option>
                       <option value="afternoon">Afternoon (12PM-5PM)</option>
                       <option value="evening">Evening (5PM-8PM)</option>
-                      <option value="emergency">Emergency/After Hours</option>
+                      <option value="flexible">Flexible Timing</option>
                     </select>
                   </div>
                 </div>
@@ -144,7 +143,7 @@ export default function ContactSection() {
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  We'll respond within 2 hours during business hours. Emergency services available 24/7.
+                  We'll respond within 2 hours during business hours.
                 </p>
               </CardContent>
             </Card>
@@ -200,13 +199,13 @@ export default function ContactSection() {
               </Button>
             </div>
 
-            {/* Emergency Notice */}
+            {/* Professional Notice */}
             <Card className="bg-accent-muted border-accent">
               <CardContent className="p-6 text-center space-y-2">
-                <h4 className="font-semibold text-accent-foreground">Emergency Services</h4>
+                <h4 className="font-semibold text-accent-foreground">Professional Services</h4>
                 <p className="text-sm text-accent-foreground">
-                  Need urgent notary services? We offer 24/7 emergency appointments 
-                  for time-sensitive documents.
+                  Licensed, bonded, and insured notary services with flexible 
+                  scheduling to meet your needs.
                 </p>
               </CardContent>
             </Card>

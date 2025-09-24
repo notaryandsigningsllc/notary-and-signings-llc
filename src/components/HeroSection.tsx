@@ -89,8 +89,8 @@ export default function HeroSection() {
             
             {/* Floating Service Cards */}
             <div className="absolute -top-4 -right-4 bg-card border border-border rounded-lg p-4 shadow-card animate-scale-in">
-              <div className="text-sm font-semibold text-primary">Available 24/7</div>
-              <div className="text-xs text-muted-foreground">Emergency Services</div>
+              <div className="text-sm font-semibold text-primary">Licensed & Bonded</div>
+              <div className="text-xs text-muted-foreground">Professional Service</div>
             </div>
             
             <div className="absolute -bottom-4 -left-4 bg-card border border-border rounded-lg p-4 shadow-card animate-slide-in-right">

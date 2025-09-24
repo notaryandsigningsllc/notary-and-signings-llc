@@ -154,14 +154,14 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Emergency CTA */}
+            {/* Professional Services */}
             <div className="bg-accent/10 border border-accent/20 rounded-lg p-4 space-y-3">
-              <h5 className="font-semibold text-accent">Emergency Services</h5>
+              <h5 className="font-semibold text-accent">Professional Services</h5>
               <p className="text-xs text-primary-foreground/80">
-                Need urgent notary services? Available 24/7 for time-sensitive documents.
+                Licensed, bonded, and insured notary services with flexible scheduling.
               </p>
               <Button variant="accent" size="sm" className="w-full">
-                Emergency Contact
+                Schedule Appointment
               </Button>
             </div>
           </div>
