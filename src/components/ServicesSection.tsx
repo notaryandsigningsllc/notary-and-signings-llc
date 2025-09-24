@@ -59,7 +59,7 @@ export default function ServicesSection() {
       title: t('services.fingerprint.title'),
       description: t('services.fingerprint.description'),
       features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-      price: "Coming Soon",
+      price: "Próximamente",
       duration: "TBD",
       popular: false,
       comingSoon: true
