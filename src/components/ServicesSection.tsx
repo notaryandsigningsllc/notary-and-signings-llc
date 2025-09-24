@@ -59,9 +59,10 @@ export default function ServicesSection() {
       title: t('services.fingerprint.title'),
       description: t('services.fingerprint.description'),
       features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-      price: t('services.fingerprint.price'),
-      duration: "30 min",
-      popular: false
+      price: "Coming Soon",
+      duration: "TBD",
+      popular: false,
+      comingSoon: true
     },
     {
       icon: DollarSign,
@@ -122,7 +123,7 @@ export default function ServicesSection() {
               key={index} 
               className={`relative transition-all duration-300 hover:shadow-elegant hover:-translate-y-1 ${
                 service.popular ? 'border-accent shadow-card' : ''
-              }`}
+              } ${service.comingSoon ? 'opacity-75' : ''}`}
             >
               {service.popular && (
                 <Badge 
@@ -130,6 +131,15 @@ export default function ServicesSection() {
                   className="absolute -top-3 left-4 bg-accent text-accent-foreground border-accent"
                 >
                   {t('services.popular')}
+                </Badge>
+              )}
+              
+              {service.comingSoon && (
+                <Badge 
+                  variant="outline" 
+                  className="absolute -top-3 right-4 bg-muted text-muted-foreground border-muted-foreground"
+                >
+                  Coming Soon
                 </Badge>
               )}
               
@@ -168,8 +178,9 @@ export default function ServicesSection() {
                   <Button 
                     variant={service.popular ? "accent" : "outline"} 
                     size="sm"
+                    disabled={service.comingSoon}
                   >
-                    {t('services.book_now')}
+                    {service.comingSoon ? 'Coming Soon' : t('services.book_now')}
                   </Button>
                 </div>
               </CardContent>
