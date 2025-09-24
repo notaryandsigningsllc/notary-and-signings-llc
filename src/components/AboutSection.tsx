@@ -83,10 +83,23 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <Button variant="hero" size="lg">
-              <Shield className="w-5 h-5 mr-2" />
-              {t('about.cta')}
-            </Button>
+            <div className="space-y-4">
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+                <h4 className="text-lg font-semibold text-primary mb-2">Arlenny Abreu</h4>
+                <p className="text-sm text-muted-foreground">
+                  Certified Public Notary, Signing Agent, and Tax Preparer. Hablo Español.
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Committed to accuracy, trust, and sustainability—one notarization at a time.
+                </p>
+              </div>
+              <Button variant="hero" size="lg" asChild>
+                <a href="https://www.notaryandsignings.com/book-online" target="_blank" rel="noopener noreferrer">
+                  <Shield className="w-5 h-5 mr-2" />
+                  {t('about.cta')}
+                </a>
+              </Button>
+            </div>
           </div>
 
           {/* Credentials & Stats */}
