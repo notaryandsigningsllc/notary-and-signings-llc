@@ -27,21 +27,21 @@ export default function AboutSection() {
     {
       icon: Shield,
       title: t('footer.bonded'),
-      description: t('footer.bonded_desc') + " professional liability insurance for your protection",
+      description: t('about.insurance.description'),
       link: null,
       linkText: null
     },
     {
       icon: BookOpen,
       title: t('footer.ron_certified'),
-      description: t('footer.ron_desc') + " certified through approved platforms",
+      description: t('about.ron.description'),
       link: null,
       linkText: null
     },
     {
       icon: Building,
-      title: "Loan Signing Agent",
-      description: "NNA certified loan signing agent with extensive real estate experience",
+      title: t('about.loan_signing.title'),
+      description: t('about.loan_signing.description'),
       link: "https://www.signingagent.com/profile/161942176",
       linkText: t('about.verify_signing_agent')
     }
