@@ -80,12 +80,12 @@ export default function ContactSection() {
               <CardContent className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.name')}</label>
-                    <Input placeholder={t('contact.form.name')} />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.first_name')}</label>
+                    <Input placeholder={t('contact.form.first_name')} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Last Name</label>
-                    <Input placeholder="Last Name" />
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.last_name')}</label>
+                    <Input placeholder={t('contact.form.last_name')} />
                   </div>
                 </div>
 
@@ -96,7 +96,7 @@ export default function ContactSection() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">{t('contact.form.phone')}</label>
-                    <Input type="tel" placeholder="Phone Number" />
+                    <Input type="tel" placeholder={t('contact.form.phone')} />
                   </div>
                 </div>
 
@@ -108,15 +108,15 @@ export default function ContactSection() {
                     <option value="loan-signing">{t('contact.form.service.loan')}</option>
                     <option value="ron">{t('contact.form.service.ron')}</option>
                     <option value="apostille">{t('contact.form.service.apostille')}</option>
-                    <option value="fingerprinting">Fingerprinting</option>
-                    <option value="tax-prep">Tax Preparation</option>
+                    <option value="fingerprinting">{t('services.fingerprint.title')}</option>
+                    <option value="tax-prep">{t('services.tax.individual.title')}</option>
                     <option value="other">{t('contact.form.service.other')}</option>
                   </select>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Preferred Date</label>
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.preferred_date')}</label>
                     <Input type="date" />
                   </div>
                   <div className="space-y-2">
