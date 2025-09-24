@@ -149,11 +149,9 @@ export default function ServicesSection() {
             We proudly serve the following areas with mobile services available:
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            {["Downtown", "Midtown", "Northside", "Southside", "East District", "West End"].map((area, index) => (
-              <Badge key={index} variant="secondary" className="px-4 py-2">
-                {area}
-              </Badge>
-            ))}
+            <Badge variant="secondary" className="px-4 py-2">
+              Edison, NJ and 25 miles of surrounding areas
+            </Badge>
           </div>
           
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground mt-6">
