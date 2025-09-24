@@ -48,7 +48,7 @@ export default function AboutSection() {
   ];
 
   const stats = [
-    { value: "5+", label: t('about.stats.experience'), icon: Clock },
+    { value: "1+", label: t('about.stats.experience'), icon: Clock },
     { value: "500+", label: t('about.stats.documents'), icon: CheckCircle },
     { value: "50+", label: t('hero.stats.loans'), icon: Building },
     { value: "100%", label: t('about.stats.satisfaction'), icon: Star }
