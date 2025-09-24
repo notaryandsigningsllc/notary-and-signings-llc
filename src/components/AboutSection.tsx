@@ -20,22 +20,30 @@ export default function AboutSection() {
     {
       icon: Award,
       title: t('about.certification.title'),
-      description: t('about.certification.description')
+      description: t('about.certification.description'),
+      link: "https://www.findanotary.com/profile/161942176",
+      linkText: t('about.verify_credentials')
     },
     {
       icon: Shield,
       title: t('footer.bonded'),
-      description: t('footer.bonded_desc') + " professional liability insurance for your protection"
+      description: t('footer.bonded_desc') + " professional liability insurance for your protection",
+      link: null,
+      linkText: null
     },
     {
       icon: BookOpen,
       title: t('footer.ron_certified'),
-      description: t('footer.ron_desc') + " certified through approved platforms"
+      description: t('footer.ron_desc') + " certified through approved platforms",
+      link: null,
+      linkText: null
     },
     {
       icon: Building,
       title: "Loan Signing Agent",
-      description: "NNA certified loan signing agent with extensive real estate experience"
+      description: "NNA certified loan signing agent with extensive real estate experience",
+      link: "https://www.signingagent.com/profile/161942176",
+      linkText: t('about.verify_signing_agent')
     }
   ];
 
@@ -91,9 +99,20 @@ export default function AboutSection() {
                     <div className="bg-primary text-primary-foreground rounded-lg p-3 flex-shrink-0">
                       <credential.icon className="w-6 h-6" />
                     </div>
-                    <div className="space-y-1">
+                    <div className="space-y-2 flex-1">
                       <h4 className="font-semibold text-foreground">{credential.title}</h4>
                       <p className="text-sm text-muted-foreground">{credential.description}</p>
+                      {credential.link && (
+                        <a 
+                          href={credential.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm text-accent hover:text-accent-foreground transition-colors"
+                        >
+                          {credential.linkText}
+                          <span className="ml-1">→</span>
+                        </a>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

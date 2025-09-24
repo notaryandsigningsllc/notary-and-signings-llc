@@ -134,7 +134,7 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Award className="w-5 h-5 text-accent" />
-                <div>
+                <div className="flex-1">
                   <div className="text-sm font-medium">{t('footer.licensed')}</div>
                   <div className="text-xs text-primary-foreground/60">{t('footer.licensed_desc')}</div>
                 </div>
@@ -142,7 +142,7 @@ export default function Footer() {
               
               <div className="flex items-center space-x-3">
                 <Shield className="w-5 h-5 text-accent" />
-                <div>
+                <div className="flex-1">
                   <div className="text-sm font-medium">{t('footer.bonded')}</div>
                   <div className="text-xs text-primary-foreground/60">{t('footer.bonded_desc')}</div>
                 </div>
@@ -150,10 +150,30 @@ export default function Footer() {
               
               <div className="flex items-center space-x-3">
                 <FileText className="w-5 h-5 text-accent" />
-                <div>
+                <div className="flex-1">
                   <div className="text-sm font-medium">{t('footer.ron_certified')}</div>
                   <div className="text-xs text-primary-foreground/60">{t('footer.ron_desc')}</div>
                 </div>
+              </div>
+
+              {/* Credential Verification Links */}
+              <div className="pt-2 space-y-2 border-t border-primary-foreground/10">
+                <a 
+                  href="https://www.findanotary.com/profile/161942176"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-xs text-accent hover:text-accent-foreground transition-colors"
+                >
+                  {t('footer.verify_notary')} →
+                </a>
+                <a 
+                  href="https://www.signingagent.com/profile/161942176"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-xs text-accent hover:text-accent-foreground transition-colors"
+                >
+                  {t('footer.verify_signing')} →
+                </a>
               </div>
             </div>
 

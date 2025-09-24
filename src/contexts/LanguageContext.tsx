@@ -80,6 +80,8 @@ const translations = {
     'about.why_choose.convenience.description': 'Mobile services, flexible scheduling, and remote notarization options',
     'about.why_choose.trust.title': 'Trusted Partnership',
     'about.why_choose.trust.description': 'Confidential, reliable service with a focus on building long-term relationships',
+    'about.verify_credentials': 'Verify Notary Credentials',
+    'about.verify_signing_agent': 'Verify Signing Agent Credentials',
     
     // Services Section
     'services.badge': 'Our Services',
@@ -304,6 +306,8 @@ const translations = {
     'footer.bonded_desc': '$100K Coverage',
     'footer.ron_certified': 'RON Certified',
     'footer.ron_desc': 'Remote Notarization',
+    'footer.verify_notary': 'Verify Notary Credentials',
+    'footer.verify_signing': 'Verify Signing Agent Credentials',
     'footer.professional_services': 'Professional Services',
     'footer.professional_desc': 'Licensed, bonded, and insured notary services with flexible scheduling.',
     'footer.schedule': 'Schedule Appointment',
@@ -355,6 +359,8 @@ const translations = {
     'about.why_choose.convenience.description': 'Servicios móviles, horarios flexibles y opciones de notarización remota',
     'about.why_choose.trust.title': 'Asociación de Confianza',
     'about.why_choose.trust.description': 'Servicio confidencial y confiable con enfoque en construir relaciones a largo plazo',
+    'about.verify_credentials': 'Verificar Credenciales de Notario',
+    'about.verify_signing_agent': 'Verificar Credenciales de Agente de Firma',
     
     // Services Section
     'services.badge': 'Nuestros Servicios',
@@ -579,6 +585,8 @@ const translations = {
     'footer.bonded_desc': 'Cobertura de $100K',
     'footer.ron_certified': 'Certificado RON',
     'footer.ron_desc': 'Notarización Remota',
+    'footer.verify_notary': 'Verificar Credenciales de Notario',
+    'footer.verify_signing': 'Verificar Credenciales de Agente de Firma',
     'footer.professional_services': 'Servicios Profesionales',
     'footer.professional_desc': 'Servicios notariales licenciados, con garantía y asegurados con programación flexible.',
     'footer.schedule': 'Programar Cita',
