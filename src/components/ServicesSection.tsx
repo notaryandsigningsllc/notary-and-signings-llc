@@ -59,8 +59,8 @@ export default function ServicesSection() {
       title: t('services.fingerprint.title'),
       description: t('services.fingerprint.description'),
       features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-      price: "Próximamente",
-      duration: "Pendiente",
+      price: t('services.coming_soon'),
+      duration: t('services.coming_soon'),
       popular: false,
       comingSoon: true
     },
@@ -139,7 +139,7 @@ export default function ServicesSection() {
                   variant="outline" 
                   className="absolute -top-3 right-4 bg-muted text-muted-foreground border-muted-foreground"
                 >
-                  Próximamente
+                  {t('services.coming_soon')}
                 </Badge>
               )}
               
@@ -180,7 +180,7 @@ export default function ServicesSection() {
                     size="sm"
                     disabled={service.comingSoon}
                   >
-                    {service.comingSoon ? 'Próximamente' : t('services.book_now')}
+                    {service.comingSoon ? t('services.coming_soon') : t('services.book_now')}
                   </Button>
                 </div>
               </CardContent>
@@ -242,12 +242,12 @@ export default function ServicesSection() {
                 <p className="text-sm text-muted-foreground">{t('services.ipen.description')}</p>
               </div>
             </div>
-            <div className="flex items-center justify-center space-x-4">
-              <span className="text-lg font-semibold text-primary">+$40 Add-on</span>
-              <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
-                Available with any service
-              </Badge>
-            </div>
+              <div className="flex items-center justify-center space-x-4">
+                <span className="text-lg font-semibold text-primary">+$40 Add-on</span>
+                <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
+                  {t('services.ipen.addon')}
+                </Badge>
+              </div>
           </div>
         </div>
 
