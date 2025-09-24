@@ -36,13 +36,6 @@ export default function TestimonialsSection() {
       service: t('testimonials.client4.service')
     },
     {
-      name: t('testimonials.client5.name'),
-      role: t('testimonials.client5.role'),
-      content: t('testimonials.client5.content'),
-      rating: 5,
-      service: t('testimonials.client5.service')
-    },
-    {
       name: t('testimonials.client6.name'),
       role: t('testimonials.client6.role'),
       content: t('testimonials.client6.content'),
