@@ -2,13 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Phone, Calendar, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-notary.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+  
   const features = [
-    "Licensed & Insured Notary",
-    "Mobile Services Available", 
-    "Remote Online Notarization",
-    "Same-Day Appointments"
+    t('hero.feature1'),
+    t('hero.feature2'), 
+    t('hero.feature3'),
+    t('hero.feature4')
   ];
 
   return (
@@ -20,20 +23,19 @@ export default function HeroSection() {
             <div className="space-y-4">
               <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                 <Shield className="w-4 h-4 mr-2" />
-                Trusted Professional Services
+                {t('hero.badge')}
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Professional{" "}
+                {t('hero.title')}{" "}
                 <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  Notary Services
+                  {t('hero.title.highlight')}
                 </span>{" "}
-                You Can Trust
+                {t('hero.title.end')}
               </h1>
               
               <p className="text-xl text-muted-foreground max-w-2xl">
-                From mobile notary and loan signings to remote online notarization and tax preparation, 
-                we provide comprehensive professional services with integrity and convenience.
+                {t('hero.description')}
               </p>
             </div>
 
@@ -51,11 +53,11 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="hero" size="xl" className="group">
                 <Calendar className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                Book Your Appointment
+                {t('hero.cta.book')}
               </Button>
               <Button variant="outline" size="xl">
                 <Phone className="w-5 h-5 mr-2" />
-                (908) 514-8180
+                {t('hero.cta.phone')}
               </Button>
             </div>
 
@@ -63,15 +65,15 @@ export default function HeroSection() {
             <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-border">
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">500+</div>
-                <div className="text-sm text-muted-foreground">Documents Notarized</div>
+                <div className="text-sm text-muted-foreground">{t('hero.stats.documents')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">50+</div>
-                <div className="text-sm text-muted-foreground">Loan Signings</div>
+                <div className="text-sm text-muted-foreground">{t('hero.stats.loans')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">100%</div>
-                <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                <div className="text-sm text-muted-foreground">{t('hero.stats.satisfaction')}</div>
               </div>
             </div>
           </div>

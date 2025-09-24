@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
+    { name: t('nav.home'), href: "#home" },
+    { name: t('nav.about'), href: "#about" },
+    { name: t('nav.services'), href: "#services" },
+    { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.contact'), href: "#contact" },
   ];
 
   return (
@@ -45,8 +48,9 @@ export default function Navigation() {
               <Phone className="h-4 w-4" />
               <span>(908) 514-8180</span>
             </div>
+            <LanguageToggle />
             <Button variant="hero" size="sm">
-              Book Appointment
+              {t('nav.book')}
             </Button>
           </div>
 
@@ -80,11 +84,12 @@ export default function Navigation() {
             <div className="pt-4 border-t border-border mt-4">
               <div className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>(555) 123-4567</span>
+                <span>(908) 514-8180</span>
               </div>
-              <div className="px-3 py-2">
+              <div className="px-3 py-2 space-y-2">
+                <LanguageToggle />
                 <Button variant="hero" size="sm" className="w-full">
-                  Book Appointment
+                  {t('nav.book')}
                 </Button>
               </div>
             </div>
