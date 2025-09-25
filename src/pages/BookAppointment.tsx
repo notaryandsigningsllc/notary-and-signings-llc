@@ -82,7 +82,7 @@ const BookAppointment = () => {
     const loadData = async () => {
       try {
         const [servicesResult, hoursResult, blockedResult] = await Promise.all([
-          supabase.from('services').select('*').eq('is_active', true),
+          supabase.rpc('get_public_services'),
           supabase.from('business_hours').select('*').eq('is_available', true),
           supabase.from('blocked_dates').select('blocked_date')
         ]);

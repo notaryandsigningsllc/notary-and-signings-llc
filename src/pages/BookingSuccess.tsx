@@ -59,12 +59,11 @@ const BookingSuccess = () => {
             .rpc('get_booking_by_token', { p_token: token });
           
           if (data && data.length > 0) {
-            // Get service details for the booking
-            const { data: serviceData, error: serviceError } = await supabase
-              .from('services')
-              .select('name, description, price_cents, duration_minutes')
-              .eq('id', data[0].service_id)
-              .single();
+            // Get service details for the booking using the secure function
+            const { data: allServices, error: serviceError } = await supabase
+              .rpc('get_public_services');
+            
+            const serviceData = allServices?.find(service => service.id === data[0].service_id);
             
             if (serviceData && !serviceError) {
               bookingData = { ...data[0], services: serviceData };
