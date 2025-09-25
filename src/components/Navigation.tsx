@@ -34,7 +34,7 @@ export default function Navigation() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
-              <img src={notaryLogo} alt="Notary and Signings" className="h-8 w-auto" />
+              <img src={notaryLogo} alt="Notary and Signings" className="h-12 w-auto" />
             </Link>
           </div>
 
