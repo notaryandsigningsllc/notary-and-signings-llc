@@ -435,7 +435,7 @@ const translations = {
      'services.fingerprint.price': 'Desde $20',
      'services.ipen.title': 'Notarización Electrónica en Persona (iPEN)',
      'services.ipen.description': 'Notarización electrónica realizada en persona utilizando tecnología digital segura y firmas electrónicas.',
-     'services.ipen.price': '+$40 Complemento',
+     'services.ipen.price': '+$40 Complemento Disponible',
      'services.ipen.addon': 'Disponible con cualquier servicio',
      'services.coming_soon': 'Próximamente',
     'services.tax.individual.title': 'Preparación de Impuestos (Individual)',
