@@ -19,12 +19,12 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { name: t('nav.home'), href: "#home" },
-    { name: t('nav.about'), href: "#about" },
-    { name: t('nav.services'), href: "#services" },
-    { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.home'), href: "/" },
+    { name: t('nav.about'), href: "/about" },
+    { name: t('nav.services'), href: "/services" },
+    { name: t('nav.testimonials'), href: "/testimonials" },
     { name: t('nav.faqs'), href: "/faqs" },
-    { name: t('nav.contact'), href: "#contact" },
+    { name: t('nav.contact'), href: "/contact" },
   ];
 
   return (
@@ -42,13 +42,13 @@ export default function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -96,14 +96,14 @@ export default function Navigation() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="text-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
             <div className="pt-4 border-t border-border mt-4">
               <div className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground">
