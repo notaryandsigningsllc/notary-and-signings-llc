@@ -243,7 +243,7 @@ export default function ServicesSection() {
               </div>
             </div>
               <div className="flex items-center justify-center space-x-4">
-                <span className="text-lg font-semibold text-primary">+$40 Add-on</span>
+                <span className="text-lg font-semibold text-primary">{t('services.ipen.price')}</span>
                 <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                   {t('services.ipen.addon')}
                 </Badge>
