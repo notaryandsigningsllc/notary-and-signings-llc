@@ -16,7 +16,8 @@ import Dashboard from "./pages/Dashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
-
+import BookAppointment from "./pages/BookAppointment";
+import BookingSuccess from "./pages/BookingSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Index />} />
+            <Route path="/book-appointment" element={<BookAppointment />} />
+            <Route path="/booking-success" element={<BookingSuccess />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/testimonials" element={<Testimonials />} />

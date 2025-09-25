@@ -1,0 +1,73 @@
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import Stripe from "https://esm.sh/stripe@18.5.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
+serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  const supabaseClient = createClient(
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+  );
+
+  try {
+    const { sessionId, bookingId } = await req.json();
+    
+    if (!sessionId || !bookingId) {
+      throw new Error("Session ID and booking ID are required");
+    }
+
+    console.log('Verifying payment for session:', sessionId, 'booking:', bookingId);
+
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
+      apiVersion: "2025-08-27.basil",
+    });
+
+    // Retrieve the checkout session
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    console.log('Session payment status:', session.payment_status);
+
+    // Update booking based on payment status
+    let updateData: any = {
+      stripe_session_id: sessionId,
+    };
+
+    if (session.payment_status === 'paid') {
+      updateData.payment_status = 'paid';
+      updateData.stripe_payment_intent_id = session.payment_intent;
+    } else {
+      updateData.payment_status = 'failed';
+    }
+
+    const { error: updateError } = await supabaseClient
+      .from('bookings')
+      .update(updateData)
+      .eq('id', bookingId);
+
+    if (updateError) {
+      throw new Error(`Failed to update booking: ${updateError.message}`);
+    }
+
+    return new Response(JSON.stringify({ 
+      success: true, 
+      paymentStatus: session.payment_status,
+      bookingId: bookingId
+    }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
+    });
+  } catch (error: any) {
+    console.error('Error verifying payment:', error);
+    return new Response(JSON.stringify({ error: error?.message || 'Unknown error' }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500,
+    });
+  }
+});

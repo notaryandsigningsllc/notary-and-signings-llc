@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Phone, Calendar, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-notary.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 export default function HeroSection() {
   const {
     t
@@ -42,14 +43,18 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="group">
-                <Calendar className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                {t('hero.cta.book')}
-              </Button>
-              <Button variant="outline" size="xl">
-                <Phone className="w-5 h-5 mr-2" />
-                {t('hero.cta.phone')}
-              </Button>
+              <Link to="/book-appointment">
+                <Button variant="hero" size="xl" className="group">
+                  <Calendar className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                  {t('hero.cta.book')}
+                </Button>
+              </Link>
+              <Link to="tel:+19085148180">
+                <Button variant="outline" size="xl">
+                  <Phone className="w-5 h-5 mr-2" />
+                  {t('hero.cta.phone')}
+                </Button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
