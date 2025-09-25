@@ -2,50 +2,42 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Quote, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
 export default function TestimonialsSection() {
-  const { t } = useLanguage();
-  
-  const testimonials = [
-    {
-      name: t('testimonials.client1.name'),
-      role: t('testimonials.client1.role'),
-      content: t('testimonials.client1.content'),
-      rating: 5,
-      service: t('testimonials.client1.service')
-    },
-    {
-      name: t('testimonials.client2.name'),
-      role: t('testimonials.client2.role'),
-      content: t('testimonials.client2.content'),
-      rating: 5,
-      service: t('testimonials.client2.service')
-    },
-    {
-      name: t('testimonials.client3.name'),
-      role: t('testimonials.client3.role'),
-      content: t('testimonials.client3.content'),
-      rating: 5,
-      service: t('testimonials.client3.service')
-    },
-    {
-      name: t('testimonials.client4.name'),
-      role: t('testimonials.client4.role'),
-      content: t('testimonials.client4.content'),
-      rating: 5,
-      service: t('testimonials.client4.service')
-    },
-    {
-      name: t('testimonials.client6.name'),
-      role: t('testimonials.client6.role'),
-      content: t('testimonials.client6.content'),
-      rating: 5,
-      service: t('testimonials.client6.service')
-    }
-  ];
-
-  return (
-    <section id="testimonials" className="py-20 bg-background">
+  const {
+    t
+  } = useLanguage();
+  const testimonials = [{
+    name: t('testimonials.client1.name'),
+    role: t('testimonials.client1.role'),
+    content: t('testimonials.client1.content'),
+    rating: 5,
+    service: t('testimonials.client1.service')
+  }, {
+    name: t('testimonials.client2.name'),
+    role: t('testimonials.client2.role'),
+    content: t('testimonials.client2.content'),
+    rating: 5,
+    service: t('testimonials.client2.service')
+  }, {
+    name: t('testimonials.client3.name'),
+    role: t('testimonials.client3.role'),
+    content: t('testimonials.client3.content'),
+    rating: 5,
+    service: t('testimonials.client3.service')
+  }, {
+    name: t('testimonials.client4.name'),
+    role: t('testimonials.client4.role'),
+    content: t('testimonials.client4.content'),
+    rating: 5,
+    service: t('testimonials.client4.service')
+  }, {
+    name: t('testimonials.client6.name'),
+    role: t('testimonials.client6.role'),
+    content: t('testimonials.client6.content'),
+    rating: 5,
+    service: t('testimonials.client6.service')
+  }];
+  return <section id="testimonials" className="bg-background py-[40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
@@ -63,11 +55,7 @@ export default function TestimonialsSection() {
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card 
-              key={index} 
-              className="relative transition-all duration-300 hover:shadow-elegant hover:-translate-y-1"
-            >
+          {testimonials.map((testimonial, index) => <Card key={index} className="relative transition-all duration-300 hover:shadow-elegant hover:-translate-y-1">
               <CardContent className="p-6 space-y-4">
                 {/* Quote Icon */}
                 <div className="flex justify-between items-start">
@@ -79,9 +67,7 @@ export default function TestimonialsSection() {
 
                 {/* Rating */}
                 <div className="flex space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                  ))}
+                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-accent text-accent" />)}
                 </div>
 
                 {/* Content */}
@@ -95,8 +81,7 @@ export default function TestimonialsSection() {
                   <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* Trust Indicators */}
@@ -111,9 +96,7 @@ export default function TestimonialsSection() {
                 <div className="text-3xl font-bold text-primary mb-2">5.0</div>
                 <div className="text-sm text-muted-foreground">{t('testimonials.stats.rating')}</div>
                 <div className="flex justify-center space-x-1 mt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-accent text-accent" />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-accent text-accent" />)}
                 </div>
               </div>
               <div className="text-center">
@@ -137,6 +120,5 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
