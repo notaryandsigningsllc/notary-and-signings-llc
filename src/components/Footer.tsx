@@ -100,22 +100,16 @@ export default function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="flex space-x-4">
+            <div className="relative z-50 flex space-x-4">
               {socialLinks.map((social, index) => (
-                <a 
-                  key={index} 
-                  href={social.href} 
-                  className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer" 
+                <a
+                  key={index}
+                  href={social.href}
+                  className="relative z-50 pointer-events-auto w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors"
                   aria-label={social.label}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    // Fallback for blocked popups
-                    if (!window.open(social.href, '_blank', 'noopener,noreferrer')) {
-                      window.location.href = social.href;
-                    }
-                    e.preventDefault();
-                  }}
+                  rel="external noopener noreferrer"
+                  title={social.label}
                 >
                   {social.icon === TikTokIcon ? (
                     <TikTokIcon className="w-4 h-4" />
