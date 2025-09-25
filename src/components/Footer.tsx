@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram, FileText, Shield, Award } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram, MessageCircle, Video, FileText, Shield, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 export default function Footer() {
@@ -46,20 +46,20 @@ export default function Footer() {
   }];
   const socialLinks = [{
     icon: Facebook,
-    href: "#",
+    href: "https://facebook.com/notaryandsignings",
     label: "Facebook"
   }, {
-    icon: Twitter,
-    href: "#",
-    label: "Twitter"
-  }, {
-    icon: Linkedin,
-    href: "#",
-    label: "LinkedIn"
-  }, {
     icon: Instagram,
-    href: "#",
+    href: "https://instagram.com/notaryandsignings",
     label: "Instagram"
+  }, {
+    icon: Video,
+    href: "https://tiktok.com/@notaryandsignings",
+    label: "TikTok"
+  }, {
+    icon: MessageCircle,
+    href: "https://wa.me/19085148180",
+    label: "WhatsApp"
   }];
   return <footer className="bg-primary text-primary-foreground">
       {/* Main Footer */}
