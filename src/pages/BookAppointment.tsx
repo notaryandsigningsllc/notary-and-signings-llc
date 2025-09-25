@@ -196,12 +196,11 @@ const BookAppointment = () => {
         return;
       }
 
-      // Get existing bookings for the selected date
+      // Get existing bookings for the selected date (using secure RPC)
       const { data: existingBookings } = await supabase
-        .from('bookings')
-        .select('appointment_time, appointment_end_time')
-        .eq('appointment_date', format(date, 'yyyy-MM-dd'))
-        .eq('status', 'confirmed');
+        .rpc('get_booked_times', {
+          p_date: format(date, 'yyyy-MM-dd')
+        });
 
       const slots: string[] = [];
       const startTime = parseTimeString(businessHour.start_time);
@@ -310,8 +309,8 @@ const BookAppointment = () => {
         // Redirect to Stripe checkout
         window.location.href = paymentData.url;
       } else {
-        // Redirect to success page for "pay at appointment"
-        navigate(`/booking-success?booking_id=${booking.id}`);
+        // Redirect to success page for "pay at appointment" using secure token
+        navigate(`/booking-success?token=${booking.booking_token}`);
       }
     } catch (error: any) {
       console.error('Booking error:', error);

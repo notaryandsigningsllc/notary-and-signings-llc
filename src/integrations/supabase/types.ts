@@ -40,6 +40,7 @@ export type Database = {
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
+          booking_token: string
           created_at: string
           email: string
           full_name: string
@@ -59,6 +60,7 @@ export type Database = {
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
+          booking_token?: string
           created_at?: string
           email: string
           full_name: string
@@ -78,6 +80,7 @@ export type Database = {
           appointment_date?: string
           appointment_end_time?: string
           appointment_time?: string
+          booking_token?: string
           created_at?: string
           email?: string
           full_name?: string
@@ -182,6 +185,36 @@ export type Database = {
           p_duration_minutes: number
         }
         Returns: boolean
+      }
+      get_booked_times: {
+        Args: { p_date: string }
+        Returns: {
+          appointment_end_time: string
+          appointment_time: string
+        }[]
+      }
+      get_booking_by_token: {
+        Args: { p_token: string }
+        Returns: {
+          appointment_date: string
+          appointment_end_time: string
+          appointment_time: string
+          booking_token: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          notes: string | null
+          payment_method: string
+          payment_status: string
+          phone: string
+          service_id: string
+          status: string
+          stripe_payment_intent_id: string | null
+          stripe_session_id: string | null
+          updated_at: string
+          user_id: string | null
+        }[]
       }
     }
     Enums: {

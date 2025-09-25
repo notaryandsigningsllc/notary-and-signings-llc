@@ -84,7 +84,7 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
+      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&token=${booking.booking_token}`,
       cancel_url: `${req.headers.get("origin")}/book-appointment?booking_id=${bookingId}`,
       metadata: {
         booking_id: bookingId,

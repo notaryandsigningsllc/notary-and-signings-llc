@@ -35,28 +35,60 @@ const BookingSuccess = () => {
 
   const sessionId = searchParams.get('session_id');
   const bookingId = searchParams.get('booking_id');
+  const token = searchParams.get('token');
 
   useEffect(() => {
     const loadBookingAndVerifyPayment = async () => {
-      if (!bookingId) {
+      if (!bookingId && !token) {
         setLoading(false);
         return;
       }
 
       try {
-        // Load booking details
-        const { data: bookingData, error: bookingError } = await supabase
-          .from('bookings')
-          .select(`
-            *,
-            services (
-              name,
-              price_cents,
-              duration_minutes
-            )
-          `)
-          .eq('id', bookingId)
-          .single();
+        let bookingData = null;
+        let bookingError = null;
+
+        // Load booking details using secure token or booking ID
+        if (token) {
+          // Use secure token-based access
+          const { data, error } = await supabase
+            .rpc('get_booking_by_token', { p_token: token });
+          
+          if (data && data.length > 0) {
+            // Get service details for the booking
+            const { data: serviceData, error: serviceError } = await supabase
+              .from('services')
+              .select('name, description, price_cents, duration_minutes')
+              .eq('id', data[0].service_id)
+              .single();
+            
+            if (serviceData && !serviceError) {
+              bookingData = { ...data[0], services: serviceData };
+            } else {
+              bookingError = serviceError;
+            }
+          } else {
+            bookingError = error || { message: 'Booking not found' };
+          }
+        } else if (bookingId) {
+          // Fallback to booking ID (for authenticated users)
+          const { data, error } = await supabase
+            .from('bookings')
+            .select(`
+              *,
+              services (
+                name,
+                description,
+                price_cents,
+                duration_minutes
+              )
+            `)
+            .eq('id', bookingId)
+            .single();
+          
+          bookingData = data;
+          bookingError = error;
+        }
 
         if (bookingError) {
           console.error('Error loading booking:', bookingError);
@@ -71,7 +103,7 @@ const BookingSuccess = () => {
           console.log('Verifying payment for session:', sessionId);
           
           const { data: verificationData, error: verificationError } = await supabase.functions.invoke('verify-payment', {
-            body: { sessionId, bookingId }
+            body: { sessionId, bookingId: bookingData.id }
           });
 
           if (verificationError) {
@@ -94,7 +126,7 @@ const BookingSuccess = () => {
     };
 
     loadBookingAndVerifyPayment();
-  }, [bookingId, sessionId, verificationComplete]);
+  }, [bookingId, token, sessionId, verificationComplete]);
 
   const formatTime = (timeStr: string) => {
     const [hours, minutes] = timeStr.split(':').map(Number);
