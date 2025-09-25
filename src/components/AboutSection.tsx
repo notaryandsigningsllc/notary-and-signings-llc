@@ -69,10 +69,6 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <Button variant="hero" size="lg">
-              <Shield className="w-5 h-5 mr-2" />
-              {t('about.cta')}
-            </Button>
           </div>
 
           {/* Credentials & Stats */}
