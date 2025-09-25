@@ -25,20 +25,6 @@ export default function AboutSection() {
       linkText: t('about.verify_credentials')
     },
     {
-      icon: Shield,
-      title: t('footer.bonded'),
-      description: t('about.insurance.description'),
-      link: null,
-      linkText: null
-    },
-    {
-      icon: BookOpen,
-      title: t('footer.ron_certified'),
-      description: t('about.ron.description'),
-      link: null,
-      linkText: null
-    },
-    {
       icon: Building,
       title: t('about.loan_signing.title'),
       description: t('about.loan_signing.description'),
