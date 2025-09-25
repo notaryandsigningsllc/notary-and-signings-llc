@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, MessageCircle, Video, FileText, Shield, Award } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram, MessageCircle, FileText, Shield, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import TikTokIcon from "@/components/icons/TikTokIcon";
 export default function Footer() {
   const {
     t
@@ -53,7 +54,7 @@ export default function Footer() {
     href: "https://instagram.com/notaryandsignings",
     label: "Instagram"
   }, {
-    icon: Video,
+    icon: TikTokIcon,
     href: "https://tiktok.com/@notaryandsignings",
     label: "TikTok"
   }, {
@@ -100,9 +101,22 @@ export default function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => <a key={index} href={social.href} className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors" aria-label={social.label}>
-                  <social.icon className="w-4 h-4" />
-                </a>)}
+              {socialLinks.map((social, index) => (
+                <a 
+                  key={index} 
+                  href={social.href} 
+                  className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors" 
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.icon === TikTokIcon ? (
+                    <TikTokIcon className="w-4 h-4" />
+                  ) : (
+                    <social.icon className="w-4 h-4" />
+                  )}
+                </a>
+              ))}
             </div>
           </div>
 
