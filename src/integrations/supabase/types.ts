@@ -174,7 +174,44 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      bookings_safe: {
+        Row: {
+          appointment_date: string | null
+          appointment_time: string | null
+          created_at: string | null
+          id: string | null
+          service_id: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          appointment_date?: string | null
+          appointment_time?: string | null
+          created_at?: string | null
+          id?: string | null
+          service_id?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          appointment_date?: string | null
+          appointment_time?: string | null
+          created_at?: string | null
+          id?: string | null
+          service_id?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       check_booking_conflict: {
