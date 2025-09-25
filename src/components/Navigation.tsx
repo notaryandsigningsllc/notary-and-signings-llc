@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -6,11 +6,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import LanguageToggle from "@/components/LanguageToggle";
 import notaryLogo from "@/assets/notary-logo.png";
-import { LogoProcessor } from "@/components/LogoProcessor";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [processedLogoUrl, setProcessedLogoUrl] = useState<string>(notaryLogo);
   const { t } = useLanguage();
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
@@ -30,17 +28,15 @@ export default function Navigation() {
   ];
 
   return (
-    <>
-      <LogoProcessor onProcessed={setProcessedLogoUrl} />
-      <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-2">
-                <img src={processedLogoUrl} alt="Notary and Signings" className="h-12 w-auto" />
-              </Link>
-            </div>
+    <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center space-x-2">
+              <img src={notaryLogo} alt="Notary and Signings" className="h-12 w-auto" />
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
@@ -137,7 +133,6 @@ export default function Navigation() {
           </div>
         </div>
       )}
-      </nav>
-    </>
+    </nav>
   );
 }
