@@ -1,16 +1,18 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PrivacyPolicy = () => {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold text-foreground">Privacy Policy</h1>
-            <p className="text-muted-foreground">Last updated: {new Date().toLocaleDateString()}</p>
+            <h1 className="text-4xl font-bold text-foreground">{t('legal.privacy_policy') || 'Privacy Policy'}</h1>
+            <p className="text-muted-foreground">{t('legal.last_updated') || 'Last updated'}: {new Date().toLocaleDateString()}</p>
           </div>
 
           <Card>
