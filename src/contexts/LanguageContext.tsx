@@ -143,6 +143,15 @@ const translations = {
     'services.tax.corporate.description': 'Advanced tax preparation for partnerships and corporations.',
     'services.tax.review.title': 'Tax Review and/or Amendment',
     'services.tax.review.description': 'Professional review and amendment of existing tax returns.',
+    
+    'services.tax.amendment.title': 'Tax Amendment Filing',
+    'services.tax.amendment.description': 'File amendments to correct or update previously filed tax returns',
+    
+    'services.tax.quarterly.title': 'Quarterly Tax Estimates',
+    'services.tax.quarterly.description': 'Calculate and file quarterly estimated tax payments for self-employed individuals',
+    
+    'services.tax.prior_year.title': 'Prior Year Tax Returns',
+    'services.tax.prior_year.description': 'Prepare and file tax returns for previous years',
     'services.tax.additional.title': 'Additional Tax Services',
     'services.tax.additional.subtitle': 'Specialized tax preparation services for businesses and complex returns.',
     'services.book_now': 'Book Now',
@@ -777,6 +786,15 @@ const translations = {
     'services.tax.corporate.description': 'Preparación avanzada de impuestos para sociedades y corporaciones.',
     'services.tax.review.title': 'Revisión y/o Enmienda de Impuestos',
     'services.tax.review.description': 'Revisión profesional y enmienda de declaraciones de impuestos existentes.',
+    
+    'services.tax.amendment.title': 'Presentación de Enmienda Fiscal',
+    'services.tax.amendment.description': 'Presentar enmiendas para corregir o actualizar declaraciones de impuestos previamente presentadas',
+    
+    'services.tax.quarterly.title': 'Estimaciones Trimestrales de Impuestos',
+    'services.tax.quarterly.description': 'Calcular y presentar pagos trimestrales estimados de impuestos para trabajadores independientes',
+    
+    'services.tax.prior_year.title': 'Declaraciones de Años Anteriores',
+    'services.tax.prior_year.description': 'Preparar y presentar declaraciones de impuestos de años anteriores',
     'services.tax.additional.title': 'Servicios Fiscales Adicionales',
     'services.tax.additional.subtitle': 'Servicios especializados de preparación de impuestos para empresas y declaraciones complejas.',
     'services.book_now': 'Reservar Ahora',

@@ -87,7 +87,68 @@ const BookAppointment = () => {
           supabase.from('blocked_dates').select('blocked_date')
         ]);
 
-        if (servicesResult.data) setServices(servicesResult.data);
+        // Add hardcoded tax preparation services to the database services
+        const hardcodedTaxServices = [
+          {
+            id: 'tax-individual',
+            name: t('services.tax.individual.title'),
+            description: t('services.tax.individual.description'),
+            price_cents: 7500,
+            duration_minutes: 60,
+            is_active: true
+          },
+          {
+            id: 'tax-business',
+            name: t('services.tax.business.title'),
+            description: t('services.tax.business.description'),
+            price_cents: 10000,
+            duration_minutes: 60,
+            is_active: true
+          },
+          {
+            id: 'tax-corporate',
+            name: t('services.tax.corporate.title'),
+            description: t('services.tax.corporate.description'),
+            price_cents: 15000,
+            duration_minutes: 90,
+            is_active: true
+          },
+          {
+            id: 'tax-review',
+            name: t('services.tax.review.title'),
+            description: t('services.tax.review.description'),
+            price_cents: 7500,
+            duration_minutes: 60,
+            is_active: true
+          },
+          {
+            id: 'tax-amendment',
+            name: t('services.tax.amendment.title'),
+            description: t('services.tax.amendment.description'),
+            price_cents: 5000,
+            duration_minutes: 45,
+            is_active: true
+          },
+          {
+            id: 'tax-quarterly',
+            name: t('services.tax.quarterly.title'),
+            description: t('services.tax.quarterly.description'),
+            price_cents: 12500,
+            duration_minutes: 75,
+            is_active: true
+          },
+          {
+            id: 'tax-prior-year',
+            name: t('services.tax.prior_year.title'),
+            description: t('services.tax.prior_year.description'),
+            price_cents: 8500,
+            duration_minutes: 60,
+            is_active: true
+          }
+        ];
+
+        const allServices = [...(servicesResult.data || []), ...hardcodedTaxServices];
+        setServices(allServices);
         if (hoursResult.data) setBusinessHours(hoursResult.data);
         if (blockedResult.data) {
           setBlockedDates(blockedResult.data.map(d => parseISO(d.blocked_date)));
@@ -103,7 +164,7 @@ const BookAppointment = () => {
     };
 
     loadData();
-  }, [toast]);
+  }, [toast, t]);
 
   // Update selected service when service ID changes
   useEffect(() => {
