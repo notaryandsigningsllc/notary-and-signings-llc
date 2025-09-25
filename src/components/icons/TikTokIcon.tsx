@@ -1,4 +1,4 @@
-import tiktokLogo from "@/assets/tiktok-logo-transparent.png";
+import tiktokLogo from "@/assets/tiktok-logo-outline.png";
 
 interface TikTokIconProps {
   className?: string;
