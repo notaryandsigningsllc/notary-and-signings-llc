@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram, FileText, Shield, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 export default function Footer() {
   const {
@@ -188,15 +189,15 @@ export default function Footer() {
             </div>
             
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link to="/privacy-policy" className="text-primary-foreground/60 hover:text-accent transition-colors">
                 {t('footer.privacy')}
-              </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
+              </Link>
+              <Link to="/terms-of-service" className="text-primary-foreground/60 hover:text-accent transition-colors">
                 {t('footer.terms')}
-              </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-accent transition-colors">
+              </Link>
+              <Link to="/cookie-policy" className="text-primary-foreground/60 hover:text-accent transition-colors">
                 {t('footer.cookies')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

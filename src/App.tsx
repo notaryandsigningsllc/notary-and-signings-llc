@@ -13,6 +13,9 @@ import Contact from "./pages/Contact";
 import FAQs from "./pages/FAQs";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import CookiePolicy from "./pages/CookiePolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +34,9 @@ const App = () => (
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faqs" element={<FAQs />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={
               <ProtectedRoute>
