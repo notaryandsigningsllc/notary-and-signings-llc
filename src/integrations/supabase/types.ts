@@ -127,13 +127,6 @@ export type Database = {
             referencedRelation: "bookings"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "bookings_pii_booking_id_fkey"
-            columns: ["booking_id"]
-            isOneToOne: true
-            referencedRelation: "bookings_safe"
-            referencedColumns: ["id"]
-          },
         ]
       }
       business_hours: {
@@ -204,56 +197,7 @@ export type Database = {
       }
     }
     Views: {
-      bookings_safe: {
-        Row: {
-          appointment_date: string | null
-          appointment_end_time: string | null
-          appointment_time: string | null
-          created_at: string | null
-          id: string | null
-          payment_method: string | null
-          payment_status: string | null
-          service_id: string | null
-          status: string | null
-          updated_at: string | null
-          user_id: string | null
-        }
-        Insert: {
-          appointment_date?: string | null
-          appointment_end_time?: string | null
-          appointment_time?: string | null
-          created_at?: string | null
-          id?: string | null
-          payment_method?: string | null
-          payment_status?: string | null
-          service_id?: string | null
-          status?: string | null
-          updated_at?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          appointment_date?: string | null
-          appointment_end_time?: string | null
-          appointment_time?: string | null
-          created_at?: string | null
-          id?: string | null
-          payment_method?: string | null
-          payment_status?: string | null
-          service_id?: string | null
-          status?: string | null
-          updated_at?: string | null
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "bookings_service_id_fkey"
-            columns: ["service_id"]
-            isOneToOne: false
-            referencedRelation: "services"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
       check_booking_conflict: {

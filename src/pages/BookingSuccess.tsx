@@ -88,7 +88,7 @@ const BookingSuccess = () => {
         } else if (bookingId) {
           // Fallback to booking ID (for authenticated users)
           const { data, error } = await supabase
-            .from('bookings_safe')
+            .from('bookings')
             .select(`
               *,
               services (
