@@ -62,16 +62,16 @@ export default function Navigation() {
             {user ? (
               <div className="flex items-center space-x-2">
                 <Link to="/dashboard">
-                  <Button variant="outline" size="sm">Dashboard</Button>
+                  <Button variant="outline" size="sm">{t('auth.dashboard')}</Button>
                 </Link>
                 <Button onClick={handleSignOut} variant="ghost" size="sm">
-                  Sign Out
+                  {t('auth.sign_out')}
                 </Button>
               </div>
             ) : (
               <Link to="/auth">
                 <Button variant="hero" size="sm">
-                  Sign In
+                  {t('auth.signin')}
                 </Button>
               </Link>
             )}
@@ -114,16 +114,16 @@ export default function Navigation() {
                 {user ? (
                   <div className="space-y-2">
                     <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="outline" size="sm" className="w-full">Dashboard</Button>
+                      <Button variant="outline" size="sm" className="w-full">{t('auth.dashboard')}</Button>
                     </Link>
                     <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }} variant="ghost" size="sm" className="w-full">
-                      Sign Out
+                      {t('auth.sign_out')}
                     </Button>
                   </div>
                 ) : (
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                     <Button variant="hero" size="sm" className="w-full">
-                      Sign In
+                      {t('auth.signin')}
                     </Button>
                   </Link>
                 )}

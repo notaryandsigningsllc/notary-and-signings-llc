@@ -347,6 +347,39 @@ const translations = {
     // 404 Page
     'notfound.message': 'Oops! Page not found',
     'notfound.return_home': 'Return to Home',
+    
+    // Authentication
+    'auth.title': 'Notary & Signings LLC',
+    'auth.subtitle': 'Access your account',
+    'auth.signin': 'Sign In',
+    'auth.signup': 'Sign Up',
+    'auth.email': 'Email',
+    'auth.password': 'Password',
+    'auth.email_placeholder': 'Enter your email',
+    'auth.password_placeholder': 'Enter your password',
+    'auth.password_create_placeholder': 'Create a password (min. 6 characters)',
+    'auth.signin_button': 'Sign In',
+    'auth.signup_button': 'Sign Up',
+    'auth.signing_in': 'Signing in...',
+    'auth.creating_account': 'Creating account...',
+    'auth.dashboard': 'Dashboard',
+    'auth.sign_out': 'Sign Out',
+    
+    // Dashboard
+    'dashboard.welcome': 'Welcome to Your Dashboard',
+    'dashboard.subtitle': 'Manage your appointments and services',
+    'dashboard.account_info': 'Account Info',
+    'dashboard.account_description': 'Your account details',
+    'dashboard.email': 'Email',
+    'dashboard.joined': 'Joined',
+    'dashboard.appointments': 'Appointments',
+    'dashboard.appointments_description': 'Book and manage appointments',
+    'dashboard.appointments_text': 'Schedule your notary services',
+    'dashboard.book_appointment': 'Book Appointment',
+    'dashboard.documents': 'Documents',
+    'dashboard.documents_description': 'Manage your documents',
+    'dashboard.documents_text': 'Upload and track documents',
+    'dashboard.view_documents': 'View Documents',
   },
   es: {
     // Navigation
@@ -654,5 +687,38 @@ const translations = {
     // 404 Page
     'notfound.message': '¡Oops! Página no encontrada',
     'notfound.return_home': 'Volver al Inicio',
+    
+    // Authentication
+    'auth.title': 'Notary & Signings LLC',
+    'auth.subtitle': 'Accede a tu cuenta',
+    'auth.signin': 'Iniciar Sesión',
+    'auth.signup': 'Registrarse',
+    'auth.email': 'Correo Electrónico',
+    'auth.password': 'Contraseña',
+    'auth.email_placeholder': 'Ingresa tu correo electrónico',
+    'auth.password_placeholder': 'Ingresa tu contraseña',
+    'auth.password_create_placeholder': 'Crea una contraseña (mín. 6 caracteres)',
+    'auth.signin_button': 'Iniciar Sesión',
+    'auth.signup_button': 'Registrarse',
+    'auth.signing_in': 'Iniciando sesión...',
+    'auth.creating_account': 'Creando cuenta...',
+    'auth.dashboard': 'Panel de Control',
+    'auth.sign_out': 'Cerrar Sesión',
+    
+    // Dashboard
+    'dashboard.welcome': 'Bienvenido a tu Panel de Control',
+    'dashboard.subtitle': 'Gestiona tus citas y servicios',
+    'dashboard.account_info': 'Información de la Cuenta',
+    'dashboard.account_description': 'Detalles de tu cuenta',
+    'dashboard.email': 'Correo Electrónico',
+    'dashboard.joined': 'Registrado',
+    'dashboard.appointments': 'Citas',
+    'dashboard.appointments_description': 'Reserva y gestiona citas',
+    'dashboard.appointments_text': 'Programa tus servicios notariales',
+    'dashboard.book_appointment': 'Reservar Cita',
+    'dashboard.documents': 'Documentos',
+    'dashboard.documents_description': 'Gestiona tus documentos',
+    'dashboard.documents_text': 'Sube y rastrea documentos',
+    'dashboard.view_documents': 'Ver Documentos',
   }
 };
