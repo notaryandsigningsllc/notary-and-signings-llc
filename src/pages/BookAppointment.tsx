@@ -87,7 +87,7 @@ const BookAppointment = () => {
           supabase.from('blocked_dates').select('blocked_date')
         ]);
 
-        // Add hardcoded tax preparation services to the database services
+        // Add hardcoded tax preparation services to the database services (exclude fingerprinting)
         const hardcodedTaxServices = [
           {
             id: 'tax-individual',
@@ -147,7 +147,12 @@ const BookAppointment = () => {
           }
         ];
 
-        const allServices = [...(servicesResult.data || []), ...hardcodedTaxServices];
+        // Filter out fingerprinting services from database results
+        const filteredDbServices = servicesResult.data?.filter(service => 
+          !service.name.toLowerCase().includes('fingerprint')
+        ) || [];
+
+        const allServices = [...filteredDbServices, ...hardcodedTaxServices];
         setServices(allServices);
         if (hoursResult.data) setBusinessHours(hoursResult.data);
         if (blockedResult.data) {
