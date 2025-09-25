@@ -334,9 +334,18 @@ const translations = {
     'footer.schedule': 'Schedule Appointment',
     'footer.copyright': '© 2025 Notary and Signings. All rights reserved.',
     'footer.business_hours': 'Mon–Sun: 8AM-8PM',
+    'footer.phone': '(908) 514-8180',
+    'footer.email': 'info@notaryandsignings.com',
+    'footer.address1': '180 Talmadge Road, Unit 1380',
+    'footer.address2': 'Edison, NJ 08817',
+    'footer.bonded_coverage': '$50K Coverage',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'footer.cookies': 'Cookie Policy',
+    
+    // 404 Page
+    'notfound.message': 'Oops! Page not found',
+    'notfound.return_home': 'Return to Home',
   },
   es: {
     // Navigation
@@ -631,8 +640,17 @@ const translations = {
     'footer.schedule': 'Programar Cita',
     'footer.copyright': '© 2025 Notary and Signings. Todos los derechos reservados.',
     'footer.business_hours': 'Lun–Dom: 8AM-8PM',
+    'footer.phone': '(908) 514-8180',
+    'footer.email': 'info@notaryandsignings.com',
+    'footer.address1': '180 Talmadge Road, Unit 1380',
+    'footer.address2': 'Edison, NJ 08817',
+    'footer.bonded_coverage': 'Cobertura de $50K',
     'footer.privacy': 'Política de Privacidad',
     'footer.terms': 'Términos de Servicio',
     'footer.cookies': 'Política de Cookies',
+    
+    // 404 Page
+    'notfound.message': '¡Oops! Página no encontrada',
+    'notfound.return_home': 'Volver al Inicio',
   }
 };
