@@ -105,10 +105,17 @@ export default function Footer() {
                 <a 
                   key={index} 
                   href={social.href} 
-                  className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors" 
+                  className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer" 
                   aria-label={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => {
+                    // Fallback for blocked popups
+                    if (!window.open(social.href, '_blank', 'noopener,noreferrer')) {
+                      window.location.href = social.href;
+                    }
+                    e.preventDefault();
+                  }}
                 >
                   {social.icon === TikTokIcon ? (
                     <TikTokIcon className="w-4 h-4" />
