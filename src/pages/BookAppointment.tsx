@@ -607,7 +607,7 @@ const BookAppointment = () => {
                                 <div>
                                   <div className="font-medium">Pay at Appointment</div>
                                   <div className="text-sm text-muted-foreground">
-                                    Cash, check, or card accepted
+                                    Card, Zelle, Apple Pay, or Cash
                                   </div>
                                 </div>
                               </Label>
