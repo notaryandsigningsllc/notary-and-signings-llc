@@ -19,7 +19,7 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { name: t('nav.home'), href: "/" },
+    { name: t('nav.home'), href: "/home" },
     { name: t('nav.about'), href: "/about" },
     { name: t('nav.services'), href: "/services" },
     { name: t('nav.testimonials'), href: "/testimonials" },
