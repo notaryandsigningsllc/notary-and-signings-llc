@@ -2,11 +2,20 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   const navItems = [
     { name: t('nav.home'), href: "#home" },
@@ -23,9 +32,9 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <Link to="/" className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               Notary & Signings LLC
-            </h1>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -50,9 +59,22 @@ export default function Navigation() {
               <span>(908) 514-8180</span>
             </div>
             <LanguageToggle />
-            <Button variant="hero" size="sm">
-              {t('nav.book')}
-            </Button>
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <Link to="/dashboard">
+                  <Button variant="outline" size="sm">Dashboard</Button>
+                </Link>
+                <Button onClick={handleSignOut} variant="ghost" size="sm">
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button variant="hero" size="sm">
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -89,9 +111,22 @@ export default function Navigation() {
               </div>
               <div className="px-3 py-2 space-y-2">
                 <LanguageToggle />
-                <Button variant="hero" size="sm" className="w-full">
-                  {t('nav.book')}
-                </Button>
+                {user ? (
+                  <div className="space-y-2">
+                    <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="outline" size="sm" className="w-full">Dashboard</Button>
+                    </Link>
+                    <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }} variant="ghost" size="sm" className="w-full">
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="hero" size="sm" className="w-full">
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
