@@ -1,51 +1,68 @@
 import { Button } from "@/components/ui/button";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  FileText,
-  Shield,
-  Award
-} from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram, FileText, Shield, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
 export default function Footer() {
-  const { t } = useLanguage();
-  
-  const quickLinks = [
-    { name: t('nav.home'), href: "/" },
-    { name: t('nav.about'), href: "/#about" },
-    { name: t('nav.services'), href: "/#services" },
-    { name: t('nav.testimonials'), href: "/#testimonials" },
-    { name: t('nav.faqs'), href: "/faqs" },
-    { name: t('nav.contact'), href: "/#contact" }
-  ];
-
-  const services = [
-    { name: t('services.mobile.title'), href: "#services" },
-    { name: t('services.loan.title'), href: "#services" },
-    { name: t('services.ron.title'), href: "#services" },
-    { name: t('services.apostille.title'), href: "#services" },
-    { name: t('footer.services.fingerprinting'), href: "#services" },
-    { name: t('footer.services.tax_preparation'), href: "#services" }
-  ];
-
-  const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" }
-  ];
-
-  return (
-    <footer className="bg-primary text-primary-foreground">
+  const {
+    t
+  } = useLanguage();
+  const quickLinks = [{
+    name: t('nav.home'),
+    href: "/"
+  }, {
+    name: t('nav.about'),
+    href: "/#about"
+  }, {
+    name: t('nav.services'),
+    href: "/#services"
+  }, {
+    name: t('nav.testimonials'),
+    href: "/#testimonials"
+  }, {
+    name: t('nav.faqs'),
+    href: "/faqs"
+  }, {
+    name: t('nav.contact'),
+    href: "/#contact"
+  }];
+  const services = [{
+    name: t('services.mobile.title'),
+    href: "#services"
+  }, {
+    name: t('services.loan.title'),
+    href: "#services"
+  }, {
+    name: t('services.ron.title'),
+    href: "#services"
+  }, {
+    name: t('services.apostille.title'),
+    href: "#services"
+  }, {
+    name: t('footer.services.fingerprinting'),
+    href: "#services"
+  }, {
+    name: t('footer.services.tax_preparation'),
+    href: "#services"
+  }];
+  const socialLinks = [{
+    icon: Facebook,
+    href: "#",
+    label: "Facebook"
+  }, {
+    icon: Twitter,
+    href: "#",
+    label: "Twitter"
+  }, {
+    icon: Linkedin,
+    href: "#",
+    label: "LinkedIn"
+  }, {
+    icon: Instagram,
+    href: "#",
+    label: "Instagram"
+  }];
+  return <footer className="bg-primary text-primary-foreground">
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[40px]">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
@@ -82,16 +99,9 @@ export default function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors"
-                  aria-label={social.label}
-                >
+              {socialLinks.map((social, index) => <a key={index} href={social.href} className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors" aria-label={social.label}>
                   <social.icon className="w-4 h-4" />
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
 
@@ -99,15 +109,9 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">{t('footer.quick_links')}</h4>
             <nav className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors"
-                >
+              {quickLinks.map((link, index) => <a key={index} href={link.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
                   {link.name}
-                </a>
-              ))}
+                </a>)}
             </nav>
           </div>
 
@@ -115,15 +119,9 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">{t('footer.services')}</h4>
             <nav className="space-y-3">
-              {services.map((service, index) => (
-                <a
-                  key={index}
-                  href={service.href}
-                  className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors"
-                >
+              {services.map((service, index) => <a key={index} href={service.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
                   {service.name}
-                </a>
-              ))}
+                </a>)}
             </nav>
           </div>
 
@@ -158,20 +156,10 @@ export default function Footer() {
 
               {/* Credential Verification Links */}
               <div className="pt-2 space-y-2 border-t border-primary-foreground/10">
-                <a 
-                  href="https://www.findanotary.com/profile/161942176"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-xs text-accent hover:text-accent-foreground transition-colors"
-                >
+                <a href="https://www.findanotary.com/profile/161942176" target="_blank" rel="noopener noreferrer" className="block text-xs text-accent hover:text-accent-foreground transition-colors">
                   {t('footer.verify_notary')} →
                 </a>
-                <a 
-                  href="https://www.signingagent.com/profile/161942176"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-xs text-accent hover:text-accent-foreground transition-colors"
-                >
+                <a href="https://www.signingagent.com/profile/161942176" target="_blank" rel="noopener noreferrer" className="block text-xs text-accent hover:text-accent-foreground transition-colors">
                   {t('footer.verify_signing')} →
                 </a>
               </div>
@@ -213,6 +201,5 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 }
