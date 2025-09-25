@@ -46,7 +46,16 @@ serve(async (req) => {
       throw new Error('Booking not found');
     }
 
-    console.log('Found booking:', booking);
+    // Get PII data separately using security definer function
+    const { data: piiData, error: piiError } = await supabaseClient
+      .rpc('get_booking_pii', { p_booking_id: bookingId });
+
+    if (piiError || !piiData || piiData.length === 0) {
+      throw new Error('Booking information not found');
+    }
+
+    const pii = piiData[0];
+    console.log('Found booking and PII data');
 
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
@@ -55,7 +64,7 @@ serve(async (req) => {
 
     // Check if a Stripe customer record exists for this email
     const customers = await stripe.customers.list({ 
-      email: booking.email, 
+      email: pii.email, 
       limit: 1 
     });
     
@@ -66,9 +75,9 @@ serve(async (req) => {
     } else {
       // Create new customer
       const customer = await stripe.customers.create({
-        email: booking.email,
-        name: booking.full_name,
-        phone: booking.phone,
+        email: pii.email,
+        name: pii.full_name,
+        phone: pii.phone,
       });
       customerId = customer.id;
       console.log('Created new customer:', customerId);

@@ -273,16 +273,12 @@ const BookAppointment = () => {
         return;
       }
 
-      // Create booking (appointment_end_time is calculated by trigger)
+      // Create booking first (appointment_end_time is calculated by trigger)
       const bookingData: any = {
         service_id: data.serviceId,
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phone,
         appointment_date: format(data.appointmentDate, 'yyyy-MM-dd'),
         appointment_time: convertTo24Hour(data.appointmentTime),
         payment_method: data.paymentMethod,
-        notes: data.notes || null,
         payment_status: data.paymentMethod === 'online' ? 'pending' : 'pending'
       };
 
@@ -294,6 +290,25 @@ const BookAppointment = () => {
 
       if (bookingError) {
         throw new Error(bookingError.message);
+      }
+
+      // Insert PII data separately
+      const piiData = {
+        booking_id: booking.id,
+        full_name: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        notes: data.notes || ''
+      };
+
+      const { error: piiError } = await supabase
+        .from('bookings_pii')
+        .insert(piiData);
+
+      if (piiError) {
+        // Clean up the booking if PII insertion fails
+        await supabase.from('bookings').delete().eq('id', booking.id);
+        throw new Error('Failed to save booking information');
       }
 
       // If online payment, redirect to Stripe

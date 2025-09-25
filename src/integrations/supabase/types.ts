@@ -42,13 +42,9 @@ export type Database = {
           appointment_time: string
           booking_token: string
           created_at: string
-          email: string
-          full_name: string
           id: string
-          notes: string | null
           payment_method: string
           payment_status: string
-          phone: string
           service_id: string
           status: string
           stripe_payment_intent_id: string | null
@@ -62,13 +58,9 @@ export type Database = {
           appointment_time: string
           booking_token?: string
           created_at?: string
-          email: string
-          full_name: string
           id?: string
-          notes?: string | null
           payment_method: string
           payment_status?: string
-          phone: string
           service_id: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -82,13 +74,9 @@ export type Database = {
           appointment_time?: string
           booking_token?: string
           created_at?: string
-          email?: string
-          full_name?: string
           id?: string
-          notes?: string | null
           payment_method?: string
           payment_status?: string
-          phone?: string
           service_id?: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -102,6 +90,48 @@ export type Database = {
             columns: ["service_id"]
             isOneToOne: false
             referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bookings_pii: {
+        Row: {
+          booking_id: string
+          created_at: string
+          email: string
+          full_name: string
+          notes: string | null
+          phone: string
+        }
+        Insert: {
+          booking_id: string
+          created_at?: string
+          email: string
+          full_name: string
+          notes?: string | null
+          phone: string
+        }
+        Update: {
+          booking_id?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          notes?: string | null
+          phone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_pii_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_pii_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings_safe"
             referencedColumns: ["id"]
           },
         ]
@@ -177,29 +207,41 @@ export type Database = {
       bookings_safe: {
         Row: {
           appointment_date: string | null
+          appointment_end_time: string | null
           appointment_time: string | null
           created_at: string | null
           id: string | null
+          payment_method: string | null
+          payment_status: string | null
           service_id: string | null
           status: string | null
+          updated_at: string | null
           user_id: string | null
         }
         Insert: {
           appointment_date?: string | null
+          appointment_end_time?: string | null
           appointment_time?: string | null
           created_at?: string | null
           id?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
           service_id?: string | null
           status?: string | null
+          updated_at?: string | null
           user_id?: string | null
         }
         Update: {
           appointment_date?: string | null
+          appointment_end_time?: string | null
           appointment_time?: string | null
           created_at?: string | null
           id?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
           service_id?: string | null
           status?: string | null
+          updated_at?: string | null
           user_id?: string | null
         }
         Relationships: [
@@ -238,19 +280,24 @@ export type Database = {
           appointment_time: string
           booking_token: string
           created_at: string
-          email: string
-          full_name: string
           id: string
-          notes: string | null
           payment_method: string
           payment_status: string
-          phone: string
           service_id: string
           status: string
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
           updated_at: string
           user_id: string | null
+        }[]
+      }
+      get_booking_pii: {
+        Args: { p_booking_id: string; p_token?: string }
+        Returns: {
+          email: string
+          full_name: string
+          notes: string
+          phone: string
         }[]
       }
     }

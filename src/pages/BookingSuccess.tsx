@@ -11,14 +11,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Booking {
   id: string;
-  full_name: string;
-  email: string;
-  phone: string;
   appointment_date: string;
   appointment_time: string;
   payment_method: string;
   payment_status: string;
-  notes: string;
   services: {
     name: string;
     price_cents: number;
@@ -26,10 +22,18 @@ interface Booking {
   };
 }
 
+interface BookingPII {
+  full_name: string;
+  email: string;
+  phone: string;
+  notes: string;
+}
+
 const BookingSuccess = () => {
   const [searchParams] = useSearchParams();
   const { t } = useLanguage();
   const [booking, setBooking] = useState<Booking | null>(null);
+  const [bookingPII, setBookingPII] = useState<BookingPII | null>(null);
   const [loading, setLoading] = useState(true);
   const [verificationComplete, setVerificationComplete] = useState(false);
 
@@ -64,6 +68,17 @@ const BookingSuccess = () => {
             
             if (serviceData && !serviceError) {
               bookingData = { ...data[0], services: serviceData };
+              
+              // Get PII data separately using the secure function
+              const { data: piiData, error: piiError } = await supabase
+                .rpc('get_booking_pii', { 
+                  p_booking_id: data[0].id, 
+                  p_token: token 
+                });
+              
+              if (piiData && piiData.length > 0) {
+                setBookingPII(piiData[0]);
+              }
             } else {
               bookingError = serviceError;
             }
@@ -73,7 +88,7 @@ const BookingSuccess = () => {
         } else if (bookingId) {
           // Fallback to booking ID (for authenticated users)
           const { data, error } = await supabase
-            .from('bookings')
+            .from('bookings_safe')
             .select(`
               *,
               services (
@@ -86,8 +101,21 @@ const BookingSuccess = () => {
             .eq('id', bookingId)
             .single();
           
-          bookingData = data;
-          bookingError = error;
+          if (data && !error) {
+            bookingData = data;
+            
+            // Get PII data separately for authenticated users
+            const { data: piiData, error: piiError } = await supabase
+              .rpc('get_booking_pii', { 
+                p_booking_id: bookingId 
+              });
+            
+            if (piiData && piiData.length > 0) {
+              setBookingPII(piiData[0]);
+            }
+          } else {
+            bookingError = error;
+          }
         }
 
         if (bookingError) {
@@ -226,15 +254,15 @@ const BookingSuccess = () => {
                 <div className="grid gap-2 text-sm">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4 text-muted-foreground" />
-                    <span>{booking.full_name}</span>
+                    <span>{bookingPII?.full_name || 'N/A'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-muted-foreground" />
-                    <span>{booking.email}</span>
+                    <span>{bookingPII?.email || 'N/A'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="h-4 w-4 text-muted-foreground" />
-                    <span>{booking.phone}</span>
+                    <span>{bookingPII?.phone || 'N/A'}</span>
                   </div>
                 </div>
               </CardContent>
@@ -269,13 +297,13 @@ const BookingSuccess = () => {
           </Card>
 
           {/* Notes */}
-          {booking.notes && (
+          {bookingPII?.notes && (
             <Card>
               <CardHeader>
                 <CardTitle>{t('success.notes')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm">{booking.notes}</p>
+                <p className="text-sm">{bookingPII.notes}</p>
               </CardContent>
             </Card>
           )}
