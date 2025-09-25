@@ -3,55 +3,44 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  Calendar,
-  Send,
-  MessageSquare
-} from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Calendar, Send, MessageSquare } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
 export default function ContactSection() {
-  const { t } = useLanguage();
-  
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: t('contact.info.phone'),
-      content: "(908) 514-8180",
-      description: t('contact.info.phone.description')
-    },
-    {
-      icon: Mail,
-      title: t('contact.info.email'),
-      content: "info@notaryandsignings.com",
-      description: t('contact.info.email.description')
-    },
-    {
-      icon: MapPin,
-      title: t('contact.info.location'),
-      content: t('contact.info.location.address'),
-      description: t('contact.info.location.description')
-    },
-    {
-      icon: Clock,
-      title: t('contact.info.hours'),
-      content: t('contact.info.hours.schedule'),
-      description: t('contact.info.hours.description')
-    }
-  ];
-
-  const businessHours = [
-    { day: t('contact.hours.monday'), hours: t('contact.hours.appointment') },
-    { day: t('contact.hours.saturday'), hours: t('contact.hours.appointment_only') },
-    { day: t('contact.hours.sunday'), hours: t('contact.hours.appointment_only') }
-  ];
-
-  return (
-    <section id="contact" className="py-20 bg-gradient-subtle">
+  const {
+    t
+  } = useLanguage();
+  const contactInfo = [{
+    icon: Phone,
+    title: t('contact.info.phone'),
+    content: "(908) 514-8180",
+    description: t('contact.info.phone.description')
+  }, {
+    icon: Mail,
+    title: t('contact.info.email'),
+    content: "info@notaryandsignings.com",
+    description: t('contact.info.email.description')
+  }, {
+    icon: MapPin,
+    title: t('contact.info.location'),
+    content: t('contact.info.location.address'),
+    description: t('contact.info.location.description')
+  }, {
+    icon: Clock,
+    title: t('contact.info.hours'),
+    content: t('contact.info.hours.schedule'),
+    description: t('contact.info.hours.description')
+  }];
+  const businessHours = [{
+    day: t('contact.hours.monday'),
+    hours: t('contact.hours.appointment')
+  }, {
+    day: t('contact.hours.saturday'),
+    hours: t('contact.hours.appointment_only')
+  }, {
+    day: t('contact.hours.sunday'),
+    hours: t('contact.hours.appointment_only')
+  }];
+  return <section id="contact" className="bg-gradient-subtle py-[40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
@@ -133,10 +122,7 @@ export default function ContactSection() {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">{t('contact.form.message')}</label>
-                  <Textarea 
-                    placeholder={t('contact.form.message_placeholder')}
-                    rows={4}
-                  />
+                  <Textarea placeholder={t('contact.form.message_placeholder')} rows={4} />
                 </div>
 
                 <Button variant="hero" size="lg" className="w-full">
@@ -155,8 +141,7 @@ export default function ContactSection() {
           <div className="space-y-8">
             {/* Contact Cards */}
             <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <Card key={index} className="transition-all duration-300 hover:shadow-card">
+              {contactInfo.map((info, index) => <Card key={index} className="transition-all duration-300 hover:shadow-card">
                   <CardContent className="flex items-start space-x-4 p-6">
                     <div className="bg-primary text-primary-foreground rounded-lg p-3 flex-shrink-0">
                       <info.icon className="w-5 h-5" />
@@ -167,8 +152,7 @@ export default function ContactSection() {
                       <p className="text-sm text-muted-foreground">{info.description}</p>
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
 
             {/* Business Hours */}
@@ -180,12 +164,10 @@ export default function ContactSection() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {businessHours.map((schedule, index) => (
-                  <div key={index} className="flex justify-between items-center py-2 border-b border-border last:border-0">
+                {businessHours.map((schedule, index) => <div key={index} className="flex justify-between items-center py-2 border-b border-border last:border-0">
                     <span className="text-sm font-medium text-foreground">{schedule.day}</span>
                     <span className="text-sm text-muted-foreground">{schedule.hours}</span>
-                  </div>
-                ))}
+                  </div>)}
               </CardContent>
             </Card>
 
@@ -213,6 +195,5 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
