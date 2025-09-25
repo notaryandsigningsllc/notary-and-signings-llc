@@ -255,66 +255,35 @@ const BookAppointment = () => {
     
     setIsLoading(true);
     try {
-      // Check for booking conflicts
-      const { data: conflictCheck } = await supabase
-        .rpc('check_booking_conflict', {
-          p_appointment_date: format(data.appointmentDate, 'yyyy-MM-dd'),
-          p_appointment_time: convertTo24Hour(data.appointmentTime),
-          p_duration_minutes: selectedService.duration_minutes
+      // Use secure edge function for booking creation
+      const { data: bookingResult, error: bookingError } = await supabase.functions
+        .invoke('create-booking', {
+          body: {
+            serviceId: data.serviceId,
+            appointmentDate: format(data.appointmentDate, 'yyyy-MM-dd'),
+            appointmentTime: convertTo24Hour(data.appointmentTime),
+            paymentMethod: data.paymentMethod,
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            notes: data.notes || null
+          }
         });
-
-      if (conflictCheck) {
-        toast({
-          title: "Time Conflict",
-          description: t('booking.error.conflict'),
-          variant: "destructive"
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      // Create booking first (appointment_end_time is calculated by trigger)
-      const bookingData: any = {
-        service_id: data.serviceId,
-        appointment_date: format(data.appointmentDate, 'yyyy-MM-dd'),
-        appointment_time: convertTo24Hour(data.appointmentTime),
-        payment_method: data.paymentMethod,
-        payment_status: data.paymentMethod === 'online' ? 'pending' : 'pending'
-      };
-
-      const { data: booking, error: bookingError } = await supabase
-        .from('bookings')
-        .insert(bookingData)
-        .select()
-        .single();
 
       if (bookingError) {
-        throw new Error(bookingError.message);
+        throw new Error(bookingError.message || 'Failed to create booking');
       }
 
-      // Insert PII data separately
-      const piiData = {
-        booking_id: booking.id,
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phone,
-        notes: data.notes || ''
-      };
-
-      const { error: piiError } = await supabase
-        .from('bookings_pii')
-        .insert(piiData);
-
-      if (piiError) {
-        // Clean up the booking if PII insertion fails
-        await supabase.from('bookings').delete().eq('id', booking.id);
-        throw new Error('Failed to save booking information');
+      if (!bookingResult?.success) {
+        throw new Error(bookingResult?.error || 'Failed to create booking');
       }
+
+      const { bookingId, bookingToken } = bookingResult;
 
       // If online payment, redirect to Stripe
       if (data.paymentMethod === 'online') {
         const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
-          body: { bookingId: booking.id }
+          body: { bookingId }
         });
 
         if (paymentError || !paymentData?.url) {
@@ -325,7 +294,7 @@ const BookAppointment = () => {
         window.location.href = paymentData.url;
       } else {
         // Redirect to success page for "pay at appointment" using secure token
-        navigate(`/booking-success?token=${booking.booking_token}`);
+        navigate(`/booking-success?token=${bookingToken}`);
       }
     } catch (error: any) {
       console.error('Booking error:', error);
