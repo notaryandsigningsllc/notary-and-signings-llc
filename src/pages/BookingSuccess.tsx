@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { format, parseISO } from "date-fns";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Booking {
   id: string;
@@ -27,6 +28,7 @@ interface Booking {
 
 const BookingSuccess = () => {
   const [searchParams] = useSearchParams();
+  const { t } = useLanguage();
   const [booking, setBooking] = useState<Booking | null>(null);
   const [loading, setLoading] = useState(true);
   const [verificationComplete, setVerificationComplete] = useState(false);
@@ -107,7 +109,7 @@ const BookingSuccess = () => {
         <Navigation />
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <div className="animate-pulse">Loading...</div>
+            <div className="animate-pulse">{t('success.loading')}</div>
           </div>
         </main>
         <Footer />
@@ -121,10 +123,10 @@ const BookingSuccess = () => {
         <Navigation />
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center space-y-4">
-            <h1 className="text-2xl font-bold text-foreground">Booking Not Found</h1>
-            <p className="text-muted-foreground">We couldn't find your booking. Please check your confirmation email or contact us.</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('success.not_found')}</h1>
+            <p className="text-muted-foreground">{t('success.not_found_desc')}</p>
             <Link to="/book-appointment">
-              <Button>Book New Appointment</Button>
+              <Button>{t('success.book_new')}</Button>
             </Link>
           </div>
         </main>
@@ -143,9 +145,9 @@ const BookingSuccess = () => {
             <div className="flex justify-center">
               <CheckCircle className="h-16 w-16 text-green-500" />
             </div>
-            <h1 className="text-4xl font-bold text-foreground">Booking Confirmed!</h1>
+            <h1 className="text-4xl font-bold text-foreground">{t('success.title')}</h1>
             <p className="text-xl text-muted-foreground">
-              Your appointment has been successfully scheduled
+              {t('success.subtitle')}
             </p>
           </div>
 
@@ -156,7 +158,7 @@ const BookingSuccess = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calendar className="h-5 w-5" />
-                  Appointment Details
+                  {t('success.appointment_details')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -185,7 +187,7 @@ const BookingSuccess = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
-                  Contact Information
+                  {t('success.contact_info')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -210,7 +212,7 @@ const BookingSuccess = () => {
           {/* Payment Status */}
           <Card>
             <CardHeader>
-              <CardTitle>Payment Status</CardTitle>
+              <CardTitle>{t('success.payment_status')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
@@ -220,15 +222,15 @@ const BookingSuccess = () => {
                   ? 'bg-yellow-100 text-yellow-800'
                   : 'bg-red-100 text-red-800'
               }`}>
-                {booking.payment_status === 'paid' && 'Payment Completed'}
-                {booking.payment_status === 'pending' && booking.payment_method === 'online' && 'Payment Processing'}
-                {booking.payment_status === 'pending' && booking.payment_method === 'at_appointment' && 'Payment Due at Appointment'}
-                {booking.payment_status === 'failed' && 'Payment Failed'}
+                {booking.payment_status === 'paid' && t('success.payment.completed')}
+                {booking.payment_status === 'pending' && booking.payment_method === 'online' && t('success.payment.processing')}
+                {booking.payment_status === 'pending' && booking.payment_method === 'at_appointment' && t('success.payment.due_appointment')}
+                {booking.payment_status === 'failed' && t('success.payment.failed')}
               </div>
               
               {booking.payment_method === 'at_appointment' && (
                 <p className="text-sm text-muted-foreground mt-2">
-                  Payment will be collected at the time of your appointment. We accept cash, check, and card payments.
+                  {t('success.payment.note')}
                 </p>
               )}
             </CardContent>
@@ -238,7 +240,7 @@ const BookingSuccess = () => {
           {booking.notes && (
             <Card>
               <CardHeader>
-                <CardTitle>Additional Notes</CardTitle>
+                <CardTitle>{t('success.notes')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm">{booking.notes}</p>
@@ -249,35 +251,35 @@ const BookingSuccess = () => {
           {/* Next Steps */}
           <Card>
             <CardHeader>
-              <CardTitle>What's Next?</CardTitle>
+              <CardTitle>{t('success.next_steps')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <h4 className="font-semibold">Before Your Appointment:</h4>
+                <h4 className="font-semibold">{t('success.before_appointment')}</h4>
                 <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                  <li>Prepare all documents that need to be notarized</li>
-                  <li>Bring a valid government-issued photo ID</li>
-                  <li>Do not sign the documents before the appointment</li>
+                  <li>{t('success.prepare_docs')}</li>
+                  <li>{t('success.bring_id')}</li>
+                  <li>{t('success.no_sign')}</li>
                   {booking.payment_method === 'at_appointment' && (
-                    <li>Prepare payment for the service</li>
+                    <li>{t('success.prepare_payment')}</li>
                   )}
                 </ul>
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-semibold">Need to Make Changes?</h4>
+                <h4 className="font-semibold">{t('success.changes')}</h4>
                 <p className="text-sm text-muted-foreground">
-                  If you need to reschedule or cancel your appointment, please contact us at least 2 hours in advance.
+                  {t('success.changes_note')}
                 </p>
               </div>
 
               <div className="pt-4">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link to="/contact">
-                    <Button variant="outline">Contact Us</Button>
+                    <Button variant="outline">{t('success.contact_us')}</Button>
                   </Link>
                   <Link to="/book-appointment">
-                    <Button>Book Another Appointment</Button>
+                    <Button>{t('success.book_another')}</Button>
                   </Link>
                 </div>
               </div>
@@ -287,7 +289,7 @@ const BookingSuccess = () => {
           {/* Confirmation Number */}
           <div className="text-center">
             <p className="text-sm text-muted-foreground">
-              Confirmation Number: <span className="font-mono font-semibold">{booking.id.slice(-8).toUpperCase()}</span>
+              {t('success.confirmation')} <span className="font-mono font-semibold">{booking.id.slice(-8).toUpperCase()}</span>
             </p>
           </div>
         </div>

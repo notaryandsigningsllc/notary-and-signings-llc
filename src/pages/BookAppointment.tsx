@@ -19,22 +19,23 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 
-const bookingSchema = z.object({
-  serviceId: z.string().min(1, "Service is required"),
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+const createBookingSchema = (t: (key: string) => string) => z.object({
+  serviceId: z.string().min(1, t('validation.service_required')),
+  fullName: z.string().min(2, t('validation.name_min')),
+  email: z.string().email(t('validation.email_invalid')),
+  phone: z.string().min(10, t('validation.phone_min')),
   appointmentDate: z.date({
-    required_error: "Appointment date is required",
+    required_error: t('validation.date_required'),
   }),
-  appointmentTime: z.string().min(1, "Appointment time is required"),
+  appointmentTime: z.string().min(1, t('validation.time_required')),
   paymentMethod: z.enum(["online", "at_appointment"]),
   notes: z.string().optional(),
 });
 
-type BookingFormData = z.infer<typeof bookingSchema>;
+type BookingFormData = z.infer<ReturnType<typeof createBookingSchema>>;
 
 interface Service {
   id: string;
@@ -54,6 +55,7 @@ const BookAppointment = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
   const [businessHours, setBusinessHours] = useState<BusinessHours[]>([]);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
@@ -62,7 +64,7 @@ const BookAppointment = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<BookingFormData>({
-    resolver: zodResolver(bookingSchema),
+    resolver: zodResolver(createBookingSchema(t)),
     defaultValues: {
       fullName: "",
       email: "",
@@ -94,7 +96,7 @@ const BookAppointment = () => {
         console.error('Error loading data:', error);
         toast({
           title: "Error",
-          description: "Failed to load booking data",
+          description: t('booking.error.failed'),
           variant: "destructive"
         });
       }
@@ -199,7 +201,7 @@ const BookAppointment = () => {
       if (conflictCheck) {
         toast({
           title: "Time Conflict",
-          description: "This time slot is no longer available. Please select another time.",
+          description: t('booking.error.conflict'),
           variant: "destructive"
         });
         setIsLoading(false);
@@ -236,7 +238,7 @@ const BookAppointment = () => {
         });
 
         if (paymentError || !paymentData?.url) {
-          throw new Error('Failed to create payment session');
+          throw new Error(t('booking.error.payment'));
         }
 
         // Redirect to Stripe checkout
@@ -249,7 +251,7 @@ const BookAppointment = () => {
       console.error('Booking error:', error);
       toast({
         title: "Booking Failed",
-        description: error.message || "Failed to create booking",
+        description: error.message || t('booking.error.failed'),
         variant: "destructive"
       });
     } finally {
@@ -285,9 +287,9 @@ const BookAppointment = () => {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold text-foreground">Book Your Appointment</h1>
+            <h1 className="text-4xl font-bold text-foreground">{t('booking.title')}</h1>
             <p className="text-muted-foreground">
-              Schedule your professional notary service with convenient online booking
+              {t('booking.subtitle')}
             </p>
           </div>
 
@@ -299,7 +301,7 @@ const BookAppointment = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <FileText className="h-5 w-5" />
-                      Select Service
+                      {t('booking.service_selection')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -307,12 +309,12 @@ const BookAppointment = () => {
                       control={form.control}
                       name="serviceId"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Service</FormLabel>
+                          <FormItem>
+                            <FormLabel>{t('booking.service_label')}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Choose a service" />
+                                <SelectValue placeholder={t('booking.service_placeholder')} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -357,7 +359,7 @@ const BookAppointment = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <User className="h-5 w-5" />
-                      Contact Information
+                      {t('booking.contact_info')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -365,10 +367,10 @@ const BookAppointment = () => {
                       control={form.control}
                       name="fullName"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full Name</FormLabel>
+                          <FormItem>
+                            <FormLabel>{t('booking.full_name')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your full name" {...field} />
+                            <Input placeholder={t('booking.full_name_placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -379,10 +381,10 @@ const BookAppointment = () => {
                       control={form.control}
                       name="email"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormItem>
+                            <FormLabel>{t('booking.email')}</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="Enter your email" {...field} />
+                            <Input type="email" placeholder={t('booking.email_placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -393,10 +395,10 @@ const BookAppointment = () => {
                       control={form.control}
                       name="phone"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
+                          <FormItem>
+                            <FormLabel>{t('booking.phone')}</FormLabel>
                           <FormControl>
-                            <Input type="tel" placeholder="Enter your phone number" {...field} />
+                            <Input type="tel" placeholder={t('booking.phone_placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -411,7 +413,7 @@ const BookAppointment = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CalendarIcon className="h-5 w-5" />
-                    Select Date & Time
+                    {t('booking.date_time')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -422,7 +424,7 @@ const BookAppointment = () => {
                       name="appointmentDate"
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
-                          <FormLabel>Appointment Date</FormLabel>
+                          <FormLabel>{t('booking.appointment_date')}</FormLabel>
                           <Popover>
                             <PopoverTrigger asChild>
                               <FormControl>
@@ -436,7 +438,7 @@ const BookAppointment = () => {
                                   {field.value ? (
                                     format(field.value, "PPP")
                                   ) : (
-                                    <span>Pick a date</span>
+                                    <span>{t('booking.pick_date')}</span>
                                   )}
                                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                 </Button>
@@ -464,7 +466,7 @@ const BookAppointment = () => {
                       name="appointmentTime"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Appointment Time</FormLabel>
+                          <FormLabel>{t('booking.appointment_time')}</FormLabel>
                           <Select 
                             onValueChange={field.onChange} 
                             defaultValue={field.value}
@@ -508,7 +510,7 @@ const BookAppointment = () => {
               {/* Payment Method */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Payment Method</CardTitle>
+                <CardTitle>{t('booking.payment_method')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <FormField
@@ -586,7 +588,7 @@ const BookAppointment = () => {
                   disabled={isLoading}
                   className="w-full md:w-auto"
                 >
-                  {isLoading ? "Processing..." : "Book Appointment"}
+                  {isLoading ? t('booking.loading') : t('booking.book_now')}
                 </Button>
               </div>
             </form>
