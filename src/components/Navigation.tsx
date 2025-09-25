@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import LanguageToggle from "@/components/LanguageToggle";
+import notaryLogo from "@/assets/notary-logo.png";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,8 +33,8 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Notary & Signings LLC
+            <Link to="/" className="flex items-center space-x-2">
+              <img src={notaryLogo} alt="Notary and Signings" className="h-8 w-auto" />
             </Link>
           </div>
 
