@@ -77,10 +77,11 @@ serve(async (req) => {
       }
     }
 
-    // Validate appointment is not in the past
+    // Validate appointment is not in the past (with 5 minute grace period for timezone differences)
     const appointmentDateTime = new Date(`${bookingData.appointmentDate}T${bookingData.appointmentTime}`);
     const now = new Date();
-    if (appointmentDateTime <= now) {
+    const gracePeriod = 5 * 60 * 1000; // 5 minutes in milliseconds
+    if (appointmentDateTime.getTime() < (now.getTime() - gracePeriod)) {
       throw new Error('Cannot book appointments in the past');
     }
 
