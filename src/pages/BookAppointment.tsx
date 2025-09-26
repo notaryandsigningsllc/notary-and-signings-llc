@@ -280,6 +280,31 @@ const BookAppointment = () => {
 
       const { bookingId, bookingToken } = bookingResult;
 
+      // Send confirmation email
+      try {
+        await supabase.functions.invoke('send-booking-confirmation', {
+          body: {
+            bookingId,
+            customerEmail: data.email,
+            customerName: data.fullName,
+            serviceName: selectedService.name,
+            appointmentDate: format(data.appointmentDate, 'yyyy-MM-dd'),
+            appointmentTime: convertTo24Hour(data.appointmentTime),
+            servicePrice: selectedService.price_cents,
+            paymentMethod: data.paymentMethod
+          }
+        });
+        console.log('Confirmation email sent successfully');
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Don't fail the booking if email fails
+      }
+
+      toast({
+        title: t('booking.success.title'),
+        description: data.paymentMethod === 'online' ? t('booking.success.payment') : t('booking.success.confirmed'),
+      });
+
       // If online payment, redirect to Stripe
       if (data.paymentMethod === 'online') {
         const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {

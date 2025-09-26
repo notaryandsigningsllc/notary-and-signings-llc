@@ -100,7 +100,10 @@ const BookingMessaging = ({ bookingId, isAdmin = false }: BookingMessagingProps)
         .order('created_at', { ascending: true });
 
       if (error) throw error;
-      setMessages(data || []);
+      setMessages((data || []).map(msg => ({
+        ...msg,
+        sender_type: msg.sender_type as 'customer' | 'admin'
+      })));
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
