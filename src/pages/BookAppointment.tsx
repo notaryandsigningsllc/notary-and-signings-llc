@@ -81,11 +81,16 @@ const BookAppointment = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
+        console.log('Loading booking data...');
         const [servicesResult, hoursResult, blockedResult] = await Promise.all([
           supabase.rpc('get_public_services'),
-          supabase.from('business_hours').select('*').eq('is_available', true),
-          supabase.from('blocked_dates').select('blocked_date')
+          supabase.rpc('get_public_business_hours'),
+          supabase.rpc('get_public_blocked_dates')
         ]);
+
+        console.log('Services result:', servicesResult);
+        console.log('Hours result:', hoursResult);
+        console.log('Blocked dates result:', blockedResult);
 
         // Add hardcoded tax preparation services to the database services (exclude fingerprinting)
         const hardcodedTaxServices = [
@@ -153,10 +158,18 @@ const BookAppointment = () => {
         ) || [];
 
         const allServices = [...filteredDbServices, ...hardcodedTaxServices];
+        console.log('All services:', allServices);
         setServices(allServices);
-        if (hoursResult.data) setBusinessHours(hoursResult.data);
+        
+        if (hoursResult.data) {
+          console.log('Setting business hours:', hoursResult.data);
+          setBusinessHours(hoursResult.data);
+        }
+        
         if (blockedResult.data) {
-          setBlockedDates(blockedResult.data.map(d => parseISO(d.blocked_date)));
+          const blocked = blockedResult.data.map(d => parseISO(d.blocked_date));
+          console.log('Setting blocked dates:', blocked);
+          setBlockedDates(blocked);
         }
       } catch (error) {
         console.error('Error loading data:', error);
@@ -188,19 +201,32 @@ const BookAppointment = () => {
 
   const generateAvailableSlots = async (date: Date, service: Service) => {
     try {
+      console.log('Generating slots for date:', format(date, 'yyyy-MM-dd'), 'service:', service.name);
       const dayOfWeek = date.getDay();
+      console.log('Day of week:', dayOfWeek);
+      
       const businessHour = businessHours.find(bh => bh.day_of_week === dayOfWeek);
+      console.log('Business hour found:', businessHour);
       
       if (!businessHour) {
+        console.log('No business hours for this day');
         setAvailableSlots([]);
         return;
       }
 
       // Get existing bookings for the selected date (using secure RPC)
-      const { data: existingBookings } = await supabase
+      const { data: existingBookings, error: bookingsError } = await supabase
         .rpc('get_booked_times', {
           p_date: format(date, 'yyyy-MM-dd')
         });
+
+      if (bookingsError) {
+        console.error('Error fetching booked times:', bookingsError);
+        setAvailableSlots([]);
+        return;
+      }
+
+      console.log('Existing bookings:', existingBookings);
 
       const slots: string[] = [];
       const startTime = parseTimeString(businessHour.start_time);
@@ -208,23 +234,33 @@ const BookAppointment = () => {
       const serviceDuration = service.duration_minutes;
       const bufferMinutes = 45; // 45-minute buffer between appointments
       
+      console.log('Time range:', startTime, 'to', endTime, 'duration:', serviceDuration);
+      
       // For today, filter out past times
       const now = new Date();
       const isToday = format(date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd');
       const currentMinutes = isToday ? now.getHours() * 60 + now.getMinutes() : 0;
+      
+      console.log('Is today?', isToday, 'Current minutes:', currentMinutes);
       
       // Generate 30-minute intervals
       for (let time = startTime; time < endTime; time += 30) {
         const slotStart = time;
         const slotEnd = time + serviceDuration;
         
+        console.log('Checking slot:', formatTimeFromMinutes(slotStart), 'to', formatTimeFromMinutes(slotEnd));
+        
         // Skip past times for today (add 1 hour buffer for current time)
         if (isToday && slotStart <= currentMinutes + 60) {
+          console.log('Skipping past time');
           continue;
         }
         
         // Check if slot fits within business hours
-        if (slotEnd > endTime) break;
+        if (slotEnd > endTime) {
+          console.log('Slot extends beyond business hours');
+          break;
+        }
         
         // Check for conflicts with existing bookings (with buffer)
         const hasConflict = existingBookings?.some(booking => {
@@ -233,14 +269,21 @@ const BookAppointment = () => {
           const bufferStart = bookingStart - bufferMinutes;
           const bufferEnd = bookingEnd + bufferMinutes;
           
-          return (slotStart < bufferEnd && slotEnd > bufferStart);
+          const conflict = (slotStart < bufferEnd && slotEnd > bufferStart);
+          if (conflict) {
+            console.log('Conflict with booking:', booking.appointment_time, 'to', booking.appointment_end_time);
+          }
+          return conflict;
         });
         
         if (!hasConflict) {
-          slots.push(formatTimeFromMinutes(slotStart));
+          const timeSlot = formatTimeFromMinutes(slotStart);
+          console.log('Adding available slot:', timeSlot);
+          slots.push(timeSlot);
         }
       }
       
+      console.log('Final available slots:', slots);
       setAvailableSlots(slots);
     } catch (error) {
       console.error('Error generating slots:', error);

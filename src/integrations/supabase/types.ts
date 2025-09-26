@@ -285,6 +285,20 @@ export type Database = {
           phone: string
         }[]
       }
+      get_public_blocked_dates: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          blocked_date: string
+        }[]
+      }
+      get_public_business_hours: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          day_of_week: number
+          end_time: string
+          start_time: string
+        }[]
+      }
       get_public_services: {
         Args: Record<PropertyKey, never>
         Returns: {
