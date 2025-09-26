@@ -50,12 +50,46 @@ serve(async (req) => {
 
     console.log('Creating booking for user:', userId ? 'authenticated' : 'anonymous');
 
-    // Perform conflict check
+    // Get service duration for proper conflict checking
+    let serviceDuration = 60; // Default fallback
+    if (bookingData.serviceId.startsWith('tax-')) {
+      // Handle hardcoded tax services
+      const taxServiceDurations: Record<string, number> = {
+        'tax-individual': 60,
+        'tax-business': 60,
+        'tax-corporate': 90,
+        'tax-review': 60,
+        'tax-amendment': 45,
+        'tax-quarterly': 75,
+        'tax-prior-year': 60
+      };
+      serviceDuration = taxServiceDurations[bookingData.serviceId] || 60;
+    } else {
+      // Get duration from database for other services
+      const { data: serviceData } = await supabaseClient
+        .from('services')
+        .select('duration_minutes')
+        .eq('id', bookingData.serviceId)
+        .single();
+      
+      if (serviceData) {
+        serviceDuration = serviceData.duration_minutes;
+      }
+    }
+
+    // Validate appointment is not in the past
+    const appointmentDateTime = new Date(`${bookingData.appointmentDate}T${bookingData.appointmentTime}`);
+    const now = new Date();
+    if (appointmentDateTime <= now) {
+      throw new Error('Cannot book appointments in the past');
+    }
+
+    // Perform conflict check with correct service duration
     const { data: conflictData, error: conflictError } = await supabaseClient
       .rpc('check_booking_conflict', {
         p_appointment_date: bookingData.appointmentDate,
         p_appointment_time: bookingData.appointmentTime,
-        p_duration_minutes: 60, // Default duration, should be fetched from service
+        p_duration_minutes: serviceDuration,
         p_booking_id: null
       });
 

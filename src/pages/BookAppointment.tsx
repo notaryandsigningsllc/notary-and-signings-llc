@@ -206,21 +206,32 @@ const BookAppointment = () => {
       const startTime = parseTimeString(businessHour.start_time);
       const endTime = parseTimeString(businessHour.end_time);
       const serviceDuration = service.duration_minutes;
+      const bufferMinutes = 45; // 45-minute buffer between appointments
+      
+      // For today, filter out past times
+      const now = new Date();
+      const isToday = format(date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd');
+      const currentMinutes = isToday ? now.getHours() * 60 + now.getMinutes() : 0;
       
       // Generate 30-minute intervals
       for (let time = startTime; time < endTime; time += 30) {
         const slotStart = time;
         const slotEnd = time + serviceDuration;
         
+        // Skip past times for today (add 1 hour buffer for current time)
+        if (isToday && slotStart <= currentMinutes + 60) {
+          continue;
+        }
+        
         // Check if slot fits within business hours
         if (slotEnd > endTime) break;
         
-        // Check for conflicts with existing bookings (with 30-min buffer)
+        // Check for conflicts with existing bookings (with buffer)
         const hasConflict = existingBookings?.some(booking => {
           const bookingStart = parseTimeString(booking.appointment_time);
           const bookingEnd = parseTimeString(booking.appointment_end_time);
-          const bufferStart = bookingStart - 30;
-          const bufferEnd = bookingEnd + 30;
+          const bufferStart = bookingStart - bufferMinutes;
+          const bufferEnd = bookingEnd + bufferMinutes;
           
           return (slotStart < bufferEnd && slotEnd > bufferStart);
         });
