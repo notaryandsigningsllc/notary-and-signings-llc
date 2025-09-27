@@ -25,10 +25,9 @@ serve(async (req) => {
 
     console.log('Sending contact form email:', { name, email });
 
-    // Send email to business
     const businessEmailResponse = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
-      to: ["info@notaryservices.com"], // Replace with actual business email
+      to: ["info@notaryandsignings.com"], // Updated to match your domain
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <!DOCTYPE html>
@@ -70,9 +69,8 @@ serve(async (req) => {
       `,
     });
 
-    // Send confirmation email to customer
     const confirmationEmailResponse = await resend.emails.send({
-      from: "Notary Services <onboarding@resend.dev>",
+      from: "Notary & Signings <onboarding@resend.dev>",
       to: [email],
       subject: "We received your message!",
       html: `
@@ -105,14 +103,14 @@ serve(async (req) => {
                 <p style="font-style: italic;">"${message}"</p>
               </div>
               
-              <p>If you have any urgent questions or need immediate assistance, please don't hesitate to call us at <strong>(555) 123-4567</strong>.</p>
+              <p>If you have any urgent questions or need immediate assistance, please don't hesitate to call us.</p>
               
               <p>Best regards,<br>
-              The Notary Services Team</p>
+              The Notary & Signings Team</p>
             </div>
             
             <div class="footer">
-              <p>© 2024 Notary Services. All rights reserved.</p>
+              <p>© 2024 Notary & Signings. All rights reserved.</p>
             </div>
           </body>
         </html>
