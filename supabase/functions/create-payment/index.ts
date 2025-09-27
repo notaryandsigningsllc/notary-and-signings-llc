@@ -13,10 +13,10 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Create Supabase client using the anon key for user authentication
+  // Create Supabase client using the service role key for admin access
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
   );
 
   try {
@@ -28,7 +28,7 @@ serve(async (req) => {
 
     console.log('Processing payment for booking:', bookingId);
 
-    // Get booking details
+    // Get booking details using service role for admin access
     const { data: booking, error: bookingError } = await supabaseClient
       .from('bookings')
       .select(`
@@ -40,7 +40,7 @@ serve(async (req) => {
         )
       `)
       .eq('id', bookingId)
-      .single();
+      .maybeSingle();
 
     if (bookingError || !booking) {
       throw new Error('Booking not found');
