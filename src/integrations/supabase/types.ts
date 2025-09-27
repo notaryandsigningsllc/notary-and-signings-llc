@@ -262,6 +262,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      assign_user_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_email: string
+        }
+        Returns: undefined
+      }
       check_booking_conflict: {
         Args: {
           p_appointment_date: string
