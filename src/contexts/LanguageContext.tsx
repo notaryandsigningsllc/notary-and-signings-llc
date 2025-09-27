@@ -54,7 +54,7 @@ const translations = {
     'hero.title.end': '& Signing Services',
     'hero.description': 'Licensed, bonded, and insured notary serving Edison, Woodbridge, and surrounding areas. Same-day appointments, bilingual service, and 24/7 availability for your convenience.',
     'hero.feature1': 'NJ Licensed & $50K Insured',
-    'hero.feature2': '24/7 Mobile Service (25-mile radius)',
+    'hero.feature2': 'Mobile Service (25-mile radius)',
     'hero.feature3': 'Bilingual Service (English/Spanish)',
     'hero.feature4': 'Same-Day Appointments Available',
     'hero.cta.book': 'Book Your Appointment',
