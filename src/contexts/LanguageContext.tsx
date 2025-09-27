@@ -818,9 +818,12 @@ const translations = {
     'services.areas.same_day': 'Citas el Mismo Día',
     
     // About Section
-    'about.badge': 'Acerca de Nosotros',
-    'about.title': 'Profesional Licenciado en Quien Puedes Confiar',
-    'about.description': 'Con años de experiencia en servicios notariales y autenticación de documentos, brindamos servicios confiables y profesionales con los más altos estándares de integridad y confidencialidad.',
+    'about.badge': 'Empresa Propiedad de Mujer',
+    'about.title': 'Acerca de Notary & Signings LLC',
+    'about.description': 'Bienvenido a Notary and Signings LLC, donde el profesionalismo se encuentra con la conveniencia. Somos una empresa bilingüe propiedad de una mujer comprometida a brindar servicios notariales públicos, firmas de préstamos, notarizaciones remotas en línea (RON) y preparación de impuestos rápidos, seguros y precisos a individuos, propietarios de pequeñas empresas y profesionales inmobiliarios.',
+    'about.owner.name': 'Arlenny Abreu',
+    'about.owner.credentials': 'Notario Público Certificado, Agente de Firma de Préstamos y Preparador de Impuestos (PTIN: P03346699)',
+    'about.owner.bio': 'Fundada por Arlenny Abreu, un Notario Público certificado, Agente de Firma de Préstamos y Preparador de Impuestos registrado, Notary and Signings LLC fue construida con un objetivo en mente: hacer que los servicios críticos de documentos sean más accesibles, confiables y centrados en el cliente. Servimos con orgullo a clientes en inglés y español, asegurando comunicación clara, confianza y confidencialidad en cada paso del camino.',
     'about.certification.title': 'Certificaciones Profesionales',
     'about.certification.description': 'Licenciado, con garantía y asegurado con todas las certificaciones estatales requeridas para su tranquilidad.',
     'about.experience.title': 'Años de Experiencia',
