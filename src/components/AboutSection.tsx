@@ -11,7 +11,7 @@ export default function AboutSection() {
     icon: Award,
     title: 'NJ Licensed Notary Public',
     description: 'Commission #2456789 - Expires December 2027',
-    link: "https://www.njcourts.gov/attorneys/notaries-public",
+    link: "https://www.findanotary.com/profile/161942176",
     linkText: 'Verify NJ Notary License',
     badge: 'Licensed & Bonded'
   }, {
