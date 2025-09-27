@@ -100,7 +100,7 @@ const translations = {
     'services.loan.feature1': 'NNA certified signing agent',
     'services.loan.feature2': 'Error-free document handling',
     'services.loan.feature3': 'Fast scanback to title company',
-    'services.loan.feature4': '24/7 availability',
+    'services.loan.feature4': 'Professional service standards',
     'services.loan.price': '$100-$150',
     'services.loan.includes': 'Includes: Full loan package review, signing coordination, document return. After-hours (8PM-8AM): +$25.',
     'services.ron.title': 'Remote Online Notarization',
