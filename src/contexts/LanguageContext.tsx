@@ -229,7 +229,7 @@ const translations = {
      
      // Credentials
      'about.credentials.nj_notary.title': 'NJ Licensed Notary Public',
-     'about.credentials.nj_notary.description': 'Commission #2456789 - Expires December 2027',
+     'about.credentials.nj_notary.description': 'Commission #0050235392 - Expires 7/21/2030',
      'about.credentials.nj_notary.link_text': 'Verify NJ Notary License',
      'about.credentials.nj_notary.badge': 'Licensed & Bonded',
      
@@ -925,7 +925,7 @@ const translations = {
      
      // Credentials
      'about.credentials.nj_notary.title': 'Notario Público Licenciado en NJ',
-     'about.credentials.nj_notary.description': 'Comisión #2456789 - Expira Diciembre 2027',
+     'about.credentials.nj_notary.description': 'Comisión #0050235392 - Expira 7/21/2030',
      'about.credentials.nj_notary.link_text': 'Verificar Licencia de Notario NJ',
      'about.credentials.nj_notary.badge': 'Licenciado y con Garantía',
      
