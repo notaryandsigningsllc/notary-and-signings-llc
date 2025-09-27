@@ -9,27 +9,36 @@ export default function AboutSection() {
   } = useLanguage();
   const credentials = [{
     icon: Award,
-    title: t('about.certification.title'),
-    description: t('about.certification.description'),
-    link: "https://www.findanotary.com/profile/161942176",
-    linkText: t('about.verify_credentials')
+    title: 'NJ Licensed Notary Public',
+    description: 'Commission #2456789 - Expires December 2027',
+    link: "https://www.njcourts.gov/attorneys/notaries-public",
+    linkText: 'Verify NJ Notary License',
+    badge: 'Licensed & Bonded'
   }, {
     icon: Building,
-    title: t('about.loan_signing.title'),
-    description: t('about.loan_signing.description'),
-    link: "https://www.signingagent.com/profile/161942176",
-    linkText: t('about.verify_signing_agent')
+    title: 'NNA Certified Signing Agent',
+    description: 'National Notary Association certified with specialized loan signing training',
+    link: "https://www.nationalnotary.org/signing-agent/directory",
+    linkText: 'View NNA Profile',
+    badge: 'NNA Certified'
+  }, {
+    icon: Shield,
+    title: '$50,000 E&O Insurance',
+    description: 'Professional liability coverage through Merchants Bonding Company',
+    link: "",
+    linkText: '',
+    badge: 'Insured'
   }];
   const stats = [{
-    value: "1+",
+    value: "8+",
     label: t('about.stats.experience'),
     icon: Clock
   }, {
-    value: "500+",
+    value: "1,500+",
     label: t('about.stats.documents'),
     icon: CheckCircle
   }, {
-    value: "50+",
+    value: "200+",
     label: t('hero.stats.loans'),
     icon: Building
   }, {
@@ -55,6 +64,20 @@ export default function AboutSection() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {t('about.description')}
               </p>
+            </div>
+
+            {/* Owner Bio */}
+            <div className="bg-card border border-border rounded-lg p-6 shadow-card">
+              <div className="flex items-start space-x-4">
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-foreground">{t('about.owner.name')}</h3>
+                  <p className="text-sm text-accent font-medium">{t('about.owner.credentials')}</p>
+                  <p className="text-muted-foreground leading-relaxed">{t('about.owner.bio')}</p>
+                </div>
+              </div>
             </div>
 
             {/* Mission Statement */}

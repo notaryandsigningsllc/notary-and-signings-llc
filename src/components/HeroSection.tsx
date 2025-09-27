@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Phone, Calendar, Shield } from "lucide-react";
+import { CheckCircle, Phone, Calendar, Shield, Star } from "lucide-react";
 import heroImage from "@/assets/hero-notary.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -57,14 +57,30 @@ export default function HeroSection() {
               </Link>
             </div>
 
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center gap-4 pt-6">
+              <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
+                <Shield className="w-3 h-3 mr-1" />
+                NJ Licensed
+              </Badge>
+              <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
+                <CheckCircle className="w-3 h-3 mr-1" />
+                $50K Insured
+              </Badge>
+              <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
+                <Star className="w-3 h-3 mr-1" />
+                NNA Certified
+              </Badge>
+            </div>
+
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-border">
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">500+</div>
+                <div className="text-2xl font-bold text-primary">1,500+</div>
                 <div className="text-sm text-muted-foreground">{t('hero.stats.documents')}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">50+</div>
+                <div className="text-2xl font-bold text-primary">200+</div>
                 <div className="text-sm text-muted-foreground">{t('hero.stats.loans')}</div>
               </div>
               <div className="text-center">
