@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Shield, Users, Clock, Star, CheckCircle, BookOpen, Building, User } from "lucide-react";
+import arlenneyPhoto from "@/assets/arlenny-photo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 export default function AboutSection() {
   const {
@@ -69,8 +70,8 @@ export default function AboutSection() {
             {/* Owner Bio */}
             <div className="bg-card border border-border rounded-lg p-6 shadow-card">
               <div className="flex items-start space-x-4">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                  <User className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 shadow-md">
+                  <img src={arlenneyPhoto} alt="Arlenny Abreu, Owner" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-foreground">{t('about.owner.name')}</h3>
