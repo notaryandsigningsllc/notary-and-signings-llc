@@ -996,7 +996,7 @@ const translations = {
     'faqs.general.q2.question': '¿Qué documentos necesito traer para la notarización?',
     'faqs.general.q2.answer': 'Necesitarás:\n• Una identificación con foto válida emitida por el gobierno (licencia de conducir, pasaporte o identificación estatal)\n• El/los documento(s) sin firmar para notarizar\n• Cualquier documentación adicional especificada por los requisitos del documento',
     'faqs.general.q3.question': '¿Están licenciados y asegurados?',
-    'faqs.general.q3.answer': 'Sí, somos notarios públicos completamente licenciados en el estado de Nueva Jersey, con garantía y portamos $100,000 en seguro de responsabilidad profesional para su protección y tranquilidad.',
+    'faqs.general.q3.answer': 'Sí, somos notarios públicos completamente licenciados en el estado de Nueva Jersey, con garantía y portamos $50,000 en seguro de responsabilidad profesional para su protección y tranquilidad.',
     'faqs.general.q4.question': '¿Cuáles son sus horarios comerciales?',
     'faqs.general.q4.answer': 'Operamos de lunes a domingo, de 8AM a 8PM, solo con cita previa. Ofrecemos horarios flexibles para acomodar su agenda ocupada, incluyendo citas nocturnas y de fin de semana.',
     
