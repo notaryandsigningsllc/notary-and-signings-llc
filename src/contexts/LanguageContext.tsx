@@ -377,6 +377,8 @@ const translations = {
     'contact.hours.appointment_only': 'By Appointment Only',
     'contact.emergency.title': 'Professional Services',
     'contact.emergency.description': 'Licensed, bonded, and insured notary services with flexible scheduling to meet your needs.',
+    'contact.call_now': 'Call Now',
+    'contact.email_us': 'Email Us',
     
     // Footer
     'footer.company': 'Notary & Signings LLC',
@@ -1073,6 +1075,8 @@ const translations = {
     'contact.hours.appointment_only': 'Solo con Cita Previa',
     'contact.emergency.title': 'Servicios Profesionales',
     'contact.emergency.description': 'Servicios notariales licenciados, con garantía y asegurados con programación flexible para satisfacer sus necesidades.',
+    'contact.call_now': 'Llamar Ahora',
+    'contact.email_us': 'Enviar Correo',
     
     // Footer
     'footer.company': 'Notary & Signings LLC',
