@@ -59,7 +59,7 @@ export default function Footer() {
     label: "TikTok"
   }, {
     icon: MessageCircle,
-    href: "https://wa.me/19085148180",
+    href: "https://api.whatsapp.com/message/FUYRZAWLHOZEO1?autoload=1&app_absent=0",
     label: "WhatsApp"
   }];
   return <footer className="bg-primary text-primary-foreground">
