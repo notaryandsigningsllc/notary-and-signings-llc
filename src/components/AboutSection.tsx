@@ -10,25 +10,25 @@ export default function AboutSection() {
   } = useLanguage();
   const credentials = [{
     icon: Award,
-    title: 'NJ Licensed Notary Public',
-    description: 'Commission #2456789 - Expires December 2027',
+    title: t('about.credentials.nj_notary.title'),
+    description: t('about.credentials.nj_notary.description'),
     link: "https://www.findanotary.com/profile/161942176",
-    linkText: 'Verify NJ Notary License',
-    badge: 'Licensed & Bonded'
+    linkText: t('about.credentials.nj_notary.link_text'),
+    badge: t('about.credentials.nj_notary.badge')
   }, {
     icon: Building,
-    title: 'NNA Certified Signing Agent',
-    description: 'National Notary Association certified with specialized loan signing training',
+    title: t('about.credentials.nna.title'),
+    description: t('about.credentials.nna.description'),
     link: "https://www.signingagent.com/profile/161942176",
-    linkText: 'View NNA Profile',
-    badge: 'NNA Certified'
+    linkText: t('about.credentials.nna.link_text'),
+    badge: t('about.credentials.nna.badge')
   }, {
     icon: Shield,
-    title: '$50,000 E&O Insurance',
-    description: 'Professional liability coverage through Merchants Bonding Company',
+    title: t('about.credentials.insurance.title'),
+    description: t('about.credentials.insurance.description'),
     link: "",
     linkText: '',
-    badge: 'Insured'
+    badge: t('about.credentials.insurance.badge')
   }];
   const stats = [{
     value: "1+",

@@ -192,6 +192,21 @@ const translations = {
      'about.ron.description': 'Remote notarization certified through approved platforms',
      'about.loan_signing.title': 'Loan Signing Agent',
      'about.loan_signing.description': 'NNA certified loan signing agent with extensive real estate experience',
+     
+     // Credentials
+     'about.credentials.nj_notary.title': 'NJ Licensed Notary Public',
+     'about.credentials.nj_notary.description': 'Commission #2456789 - Expires December 2027',
+     'about.credentials.nj_notary.link_text': 'Verify NJ Notary License',
+     'about.credentials.nj_notary.badge': 'Licensed & Bonded',
+     
+     'about.credentials.nna.title': 'NNA Certified Signing Agent',
+     'about.credentials.nna.description': 'National Notary Association certified with specialized loan signing training',
+     'about.credentials.nna.link_text': 'View NNA Profile',
+     'about.credentials.nna.badge': 'NNA Certified',
+     
+     'about.credentials.insurance.title': '$50,000 E&O Insurance',
+     'about.credentials.insurance.description': 'Professional liability coverage through Merchants Bonding Company',
+     'about.credentials.insurance.badge': 'Insured',
     
     // Testimonials Section
     'testimonials.badge': 'Client Testimonials',
@@ -838,6 +853,21 @@ const translations = {
      'about.ron.description': 'Certificado en notarización remota a través de plataformas aprobadas',
      'about.loan_signing.title': 'Agente de Firma de Préstamos',
      'about.loan_signing.description': 'Agente de firma de préstamos certificado por NNA con amplia experiencia en bienes raíces',
+     
+     // Credentials
+     'about.credentials.nj_notary.title': 'Notario Público Licenciado en NJ',
+     'about.credentials.nj_notary.description': 'Comisión #2456789 - Expira Diciembre 2027',
+     'about.credentials.nj_notary.link_text': 'Verificar Licencia de Notario NJ',
+     'about.credentials.nj_notary.badge': 'Licenciado y con Garantía',
+     
+     'about.credentials.nna.title': 'Agente de Firma Certificado NNA',
+     'about.credentials.nna.description': 'Certificado por la Asociación Nacional de Notarios con entrenamiento especializado en firmas de préstamos',
+     'about.credentials.nna.link_text': 'Ver Perfil NNA',
+     'about.credentials.nna.badge': 'Certificado NNA',
+     
+     'about.credentials.insurance.title': 'Seguro E&O $50,000',
+     'about.credentials.insurance.description': 'Cobertura de responsabilidad profesional a través de Merchants Bonding Company',
+     'about.credentials.insurance.badge': 'Asegurado',
     
     // Testimonials Section
     'testimonials.badge': 'Testimonios de Clientes',
