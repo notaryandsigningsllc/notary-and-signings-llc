@@ -152,7 +152,7 @@ const BookAppointment = () => {
           }
         ];
 
-        // Filter out fingerprinting services from database results
+        // Filter out fingerprinting services from database results (not available yet)
         const filteredDbServices = servicesResult.data?.filter(service => 
           !service.name.toLowerCase().includes('fingerprint')
         ) || [];

@@ -28,7 +28,7 @@ export default function ServicesSection() {
     title: t('services.ron.title'),
     description: t('services.ron.description'),
     features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
-    price: "$35",
+    price: "$50",
     duration: "30 min",
     popular: false
   }, {
@@ -44,10 +44,10 @@ export default function ServicesSection() {
     title: t('services.fingerprint.title'),
     description: t('services.fingerprint.description'),
     features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-    price: "$20",
-    duration: "30 min",
+    price: "TBD",
+    duration: t('services.coming_soon'),
     popular: false,
-    comingSoon: false
+    comingSoon: true
   }, {
     icon: DollarSign,
     title: t('services.tax.individual.title'),
