@@ -28,12 +28,12 @@ serve(async (req) => {
 
     console.log('Processing payment for booking:', bookingId);
 
-    // Get booking details using service role for admin access
+    // Get booking details and service stripe info using admin access
     const { data: booking, error: bookingError } = await supabaseClient
       .from('bookings')
       .select(`
         *,
-        services (
+        services!inner (
           name,
           price_cents,
           stripe_price_id

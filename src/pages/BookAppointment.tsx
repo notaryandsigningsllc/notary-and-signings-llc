@@ -83,7 +83,7 @@ const BookAppointment = () => {
       try {
         console.log('Loading booking data...');
         const [servicesResult, hoursResult, blockedResult] = await Promise.all([
-          supabase.rpc('get_public_services'),
+          supabase.rpc('get_booking_services'),
           supabase.rpc('get_public_business_hours'),
           supabase.rpc('get_public_blocked_dates')
         ]);
@@ -152,10 +152,9 @@ const BookAppointment = () => {
           }
         ];
 
-        // Filter out fingerprinting services from database results (not available yet)
-        const filteredDbServices = servicesResult.data?.filter(service => 
-          !service.name.toLowerCase().includes('fingerprint')
-        ) || [];
+        // The new get_booking_services() function already filters out inactive services
+        // including fingerprinting which is now marked as inactive
+        const filteredDbServices = servicesResult.data || [];
 
         const allServices = [...filteredDbServices, ...hardcodedTaxServices];
         console.log('All services:', allServices);

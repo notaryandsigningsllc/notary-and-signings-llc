@@ -250,6 +250,21 @@ export type Database = {
         }
         Returns: boolean
       }
+      get_admin_services: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          description: string
+          duration_minutes: number
+          id: string
+          is_active: boolean
+          name: string
+          price_cents: number
+          stripe_price_id: string
+          stripe_product_id: string
+          updated_at: string
+        }[]
+      }
       get_booked_times: {
         Args: { p_date: string }
         Returns: {
@@ -283,6 +298,16 @@ export type Database = {
           full_name: string
           notes: string
           phone: string
+        }[]
+      }
+      get_booking_services: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          description: string
+          duration_minutes: number
+          id: string
+          name: string
+          price_cents: number
         }[]
       }
       get_public_blocked_dates: {
