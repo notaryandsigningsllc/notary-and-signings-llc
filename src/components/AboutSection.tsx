@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Shield, Users, Clock, Star, CheckCircle, BookOpen, Building, User } from "lucide-react";
-import arlenneyPhoto from "@/assets/arlenny-photo.png";
+import arlenneyPhoto from "@/assets/arlenny-profile.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 export default function AboutSection() {
   const {
