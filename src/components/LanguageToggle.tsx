@@ -9,7 +9,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function LanguageToggle() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <DropdownMenu>
@@ -26,13 +26,13 @@ export default function LanguageToggle() {
           onClick={() => setLanguage('en')}
           className={language === 'en' ? 'bg-accent text-accent-foreground' : ''}
         >
-          <span className="font-medium">English</span>
+          <span className="font-medium">{t('common.english')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => setLanguage('es')}
           className={language === 'es' ? 'bg-accent text-accent-foreground' : ''}
         >
-          <span className="font-medium">Español</span>
+          <span className="font-medium">{t('common.spanish')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

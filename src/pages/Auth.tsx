@@ -72,27 +72,27 @@ const Auth = () => {
       if (error) {
         if (error.message.includes("already registered")) {
           toast({
-            title: "Account exists",
-            description: "This email is already registered. Please sign in instead.",
+            title: t('auth.account_exists'),
+            description: t('auth.account_exists_desc'),
             variant: "destructive",
           });
         } else {
           toast({
-            title: "Sign up failed",
+            title: t('auth.signup_failed'),
             description: error.message,
             variant: "destructive",
           });
         }
       } else {
         toast({
-          title: "Check your email",
-          description: "We sent you a confirmation link to complete your registration.",
+          title: t('auth.check_email'),
+          description: t('auth.check_email_desc'),
         });
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again.",
+        title: t('common.error'),
+        description: t('auth.unexpected_error'),
         variant: "destructive",
       });
     } finally {
@@ -115,21 +115,21 @@ const Auth = () => {
 
       if (error) {
         toast({
-          title: "Sign in failed",
+          title: t('auth.signin_failed'),
           description: error.message,
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Welcome back!",
-          description: "You have successfully signed in.",
+          title: t('auth.welcome_back'),
+          description: t('auth.welcome_back_desc'),
         });
         navigate("/");
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again.",
+        title: t('common.error'),
+        description: t('auth.unexpected_error'),
         variant: "destructive",
       });
     } finally {

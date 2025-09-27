@@ -46,6 +46,7 @@ const translations = {
     'nav.faqs': 'FAQs',
     'nav.contact': 'Contact',
     'nav.book': 'Book Appointment',
+    'nav.book_appointment': 'Book Appointment',
     
     // Hero Section
     'hero.badge': 'Trusted Professional Services',
@@ -72,8 +73,36 @@ const translations = {
      'hero.trust.nj_licensed': 'NJ Licensed',
      'hero.trust.insured': '$50K Insured',
      'hero.trust.nna_certified': 'NNA Certified',
-    
-    // About Section - Mission and Why Choose Us
+     
+     // Common UI elements
+     'common.loading': 'Loading...',
+     'common.english': 'English',
+     'common.spanish': 'Español',
+     'common.email': 'Email',
+     'common.password': 'Password',
+     'common.name': 'Name',
+     'common.phone': 'Phone',
+     'common.address': 'Address',
+     'common.message': 'Message',
+     'common.submit': 'Submit',
+     'common.cancel': 'Cancel',
+     'common.save': 'Save',
+     'common.delete': 'Delete',
+     'common.edit': 'Edit',
+     'common.view': 'View',
+     'common.back': 'Back',
+     'common.next': 'Next',
+     'common.previous': 'Previous',
+     'common.close': 'Close',
+     'common.open': 'Open',
+     'common.required': 'Required',
+     'common.optional': 'Optional',
+     'common.error': 'Error',
+     'common.success': 'Success',
+     'common.warning': 'Warning',
+     'common.info': 'Information',
+     
+     // About Section - Mission and Why Choose Us
     'about.mission.title': 'Our Mission',
     'about.mission.description': 'To provide reliable, professional, and convenient notary services while maintaining the highest standards of integrity and confidentiality. We strive to make document notarization accessible and stress-free for every client.',
     'about.cta': 'View Our Credentials',
@@ -424,6 +453,7 @@ const translations = {
     'booking.service_placeholder': 'Choose a service',
     'booking.contact_info': 'Contact Information',
     'booking.full_name': 'Full Name',
+    
     'booking.full_name_placeholder': 'Enter your full name',
     'booking.email': 'Email Address',
     'booking.email_placeholder': 'Enter your email address',
@@ -719,6 +749,7 @@ const translations = {
     'nav.faqs': 'Preguntas Frecuentes',
     'nav.contact': 'Contacto',
     'nav.book': 'Reservar Cita',
+    'nav.book_appointment': 'Reservar Cita',
     
     // Hero Section
     'hero.badge': 'Servicios Profesionales de Confianza',
@@ -745,8 +776,36 @@ const translations = {
      'hero.trust.nj_licensed': 'Licenciado NJ',
      'hero.trust.insured': 'Asegurado $50K',
      'hero.trust.nna_certified': 'Certificado NNA',
-    
-    // About Section - Mission and Why Choose Us
+     
+     // Common UI elements
+     'common.loading': 'Cargando...',
+     'common.english': 'Inglés',
+     'common.spanish': 'Español',
+     'common.email': 'Correo electrónico',
+     'common.password': 'Contraseña',
+     'common.name': 'Nombre',
+     'common.phone': 'Teléfono',
+     'common.address': 'Dirección',
+     'common.message': 'Mensaje',
+     'common.submit': 'Enviar',
+     'common.cancel': 'Cancelar',
+     'common.save': 'Guardar',
+     'common.delete': 'Eliminar',
+     'common.edit': 'Editar',
+     'common.view': 'Ver',
+     'common.back': 'Atrás',
+     'common.next': 'Siguiente',
+     'common.previous': 'Anterior',
+     'common.close': 'Cerrar',
+     'common.open': 'Abrir',
+     'common.required': 'Obligatorio',
+     'common.optional': 'Opcional',
+     'common.error': 'Error',
+     'common.success': 'Éxito',
+     'common.warning': 'Advertencia',
+     'common.info': 'Información',
+     
+     // About Section - Mission and Why Choose Us
     'about.mission.title': 'Nuestra Misión',
     'about.mission.description': 'Proporcionar servicios notariales confiables, profesionales y convenientes mientras mantenemos los más altos estándares de integridad y confidencialidad. Nos esforzamos por hacer que la notarización de documentos sea accesible y libre de estrés para cada cliente.',
     'about.cta': 'Ver Nuestras Credenciales',
@@ -1090,6 +1149,7 @@ const translations = {
     'booking.service_placeholder': 'Elija un servicio',
     'booking.contact_info': 'Información de Contacto',
     'booking.full_name': 'Nombre Completo',
+    
     'booking.full_name_placeholder': 'Ingrese su nombre completo',
     'booking.email': 'Correo Electrónico',
     'booking.email_placeholder': 'Ingrese su correo electrónico',
