@@ -18,7 +18,7 @@ export default function AboutSection() {
     icon: Building,
     title: 'NNA Certified Signing Agent',
     description: 'National Notary Association certified with specialized loan signing training',
-    link: "https://www.nationalnotary.org/signing-agent/directory",
+    link: "https://www.signingagent.com/profile/161942176",
     linkText: 'View NNA Profile',
     badge: 'NNA Certified'
   }, {
