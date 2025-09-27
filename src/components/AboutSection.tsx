@@ -30,7 +30,7 @@ export default function AboutSection() {
     badge: 'Insured'
   }];
   const stats = [{
-    value: "8+",
+    value: "1+",
     label: t('about.stats.experience'),
     icon: Clock
   }, {
