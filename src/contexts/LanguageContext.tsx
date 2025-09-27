@@ -172,12 +172,12 @@ const translations = {
     'services.areas.same_day': 'Same-Day Appointments',
     
     // About Section
-    'about.badge': 'About Us',
+    'about.badge': 'Woman-Owned Business',
     'about.title': 'About Notary & Signings LLC',
-    'about.description': 'Founded by a New Jersey licensed notary with extensive experience in real estate, business, and legal document authentication. We specialize in mobile notary services, loan signings, and remote online notarization, serving the greater Edison area with bilingual support.',
-    'about.owner.name': 'Maria Santos, Licensed Notary Public',
-    'about.owner.credentials': 'NJ Commission #2456789 • NNA Certified • E&O Insured',
-    'about.owner.bio': 'With over 8 years of experience in notary services and a background in real estate, Maria founded Notary & Signings LLC to provide reliable, professional notary services to New Jersey residents and businesses. Fluent in English and Spanish, she ensures all clients receive personalized, professional service.',
+    'about.description': 'Welcome to Notary and Signings LLC, where professionalism meets convenience. We are a bilingual, woman-owned business committed to delivering fast, secure, and accurate notary public services, loan signings, remote online notarizations (RON), and tax preparation to individuals, small business owners, and real estate professionals.',
+    'about.owner.name': 'Arlenny Abreu',
+    'about.owner.credentials': 'Certified Notary Public, Loan Signing Agent & Tax Preparer (PTIN: P03346699)',
+    'about.owner.bio': 'Founded by Arlenny Abreu, a certified Notary Public, Loan Signing Agent, and registered Tax Preparer, Notary and Signings LLC was built with one goal in mind: to make critical document services more accessible, reliable, and client-focused. We proudly serve clients in both English and Spanish, ensuring clear communication, trust, and confidentiality every step of the way.',
     'about.certification.title': 'Professional Certifications',
     'about.certification.description': 'Licensed, bonded, and insured with all required state certifications for your peace of mind.',
     'about.experience.title': 'Years of Experience',
