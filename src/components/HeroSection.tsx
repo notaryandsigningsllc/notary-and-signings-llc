@@ -61,15 +61,15 @@ export default function HeroSection() {
             <div className="flex flex-wrap items-center gap-4 pt-6">
               <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                 <Shield className="w-3 h-3 mr-1" />
-                NJ Licensed
+                {t('hero.trust.nj_licensed')}
               </Badge>
               <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                 <CheckCircle className="w-3 h-3 mr-1" />
-                $50K Insured
+                {t('hero.trust.insured')}
               </Badge>
               <Badge variant="outline" className="bg-accent-muted text-accent-foreground border-accent">
                 <Star className="w-3 h-3 mr-1" />
-                NNA Certified
+                {t('hero.trust.nna_certified')}
               </Badge>
             </div>
 

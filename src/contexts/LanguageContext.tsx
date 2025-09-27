@@ -63,10 +63,15 @@ const translations = {
     'hero.stats.loans': 'Loan Signings',
     'hero.stats.satisfaction': 'Client Satisfaction',
     'hero.image_alt': 'Professional notary services - official documents and seals',
-    'hero.badge.licensed': 'Licensed & Bonded',
-    'hero.badge.licensed_desc': 'Professional Service',
-    'hero.badge.ron': 'RON Certified',
-    'hero.badge.ron_desc': 'Remote Notarization',
+     'hero.badge.licensed': 'Licensed & Bonded',
+     'hero.badge.licensed_desc': 'Professional Service',
+     'hero.badge.ron': 'RON Certified',
+     'hero.badge.ron_desc': 'Remote Notarization',
+     
+     // Trust badges
+     'hero.trust.nj_licensed': 'NJ Licensed',
+     'hero.trust.insured': '$50K Insured',
+     'hero.trust.nna_certified': 'NNA Certified',
     
     // About Section - Mission and Why Choose Us
     'about.mission.title': 'Our Mission',
@@ -731,10 +736,15 @@ const translations = {
     'hero.stats.loans': 'Firmas de Préstamos',
     'hero.stats.satisfaction': 'Satisfacción del Cliente',
     'hero.image_alt': 'Servicios notariales profesionales - documentos oficiales y sellos',
-    'hero.badge.licensed': 'Licenciado y con Garantía',
-    'hero.badge.licensed_desc': 'Servicio Profesional',
-    'hero.badge.ron': 'Certificado RON',
-    'hero.badge.ron_desc': 'Notarización Remota',
+     'hero.badge.licensed': 'Licenciado y con Garantía',
+     'hero.badge.licensed_desc': 'Servicio Profesional',
+     'hero.badge.ron': 'Certificado RON',
+     'hero.badge.ron_desc': 'Notarización Remota',
+     
+     // Trust badges
+     'hero.trust.nj_licensed': 'Licenciado NJ',
+     'hero.trust.insured': 'Asegurado $50K',
+     'hero.trust.nna_certified': 'Certificado NNA',
     
     // About Section - Mission and Why Choose Us
     'about.mission.title': 'Nuestra Misión',
