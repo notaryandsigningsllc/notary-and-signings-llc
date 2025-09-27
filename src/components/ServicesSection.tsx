@@ -21,33 +21,33 @@ export default function ServicesSection() {
     description: t('services.loan.description'),
     features: [t('services.loan.feature1'), t('services.loan.feature2'), t('services.loan.feature3'), t('services.loan.feature4')],
     price: "$100",
-    duration: "1 hr",
+    duration: "1.5 hr",
     popular: true
   }, {
     icon: Laptop,
     title: t('services.ron.title'),
     description: t('services.ron.description'),
     features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
-    price: "$50",
-    duration: "1 hr",
+    price: "$35",
+    duration: "30 min",
     popular: false
   }, {
     icon: Globe,
     title: t('services.apostille.title'),
     description: t('services.apostille.description'),
     features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
-    price: t('services.apostille.price'),
-    duration: "Varies",
+    price: "$50",
+    duration: "45 min",
     popular: false
   }, {
     icon: Fingerprint,
     title: t('services.fingerprint.title'),
     description: t('services.fingerprint.description'),
     features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-    price: "TBD",
-    duration: t('services.coming_soon'),
+    price: "$20",
+    duration: "30 min",
     popular: false,
-    comingSoon: true
+    comingSoon: false
   }, {
     icon: DollarSign,
     title: t('services.tax.individual.title'),
