@@ -71,7 +71,15 @@ export default function AboutSection() {
             <div className="bg-card border border-border rounded-lg p-6 shadow-card">
               <div className="flex items-start space-x-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 shadow-md">
-                  <img src={arlenneyPhoto} alt="Arlenny Abreu, Owner" className="w-full h-full object-cover" />
+                  <img 
+                    src={arlenneyPhoto} 
+                    alt="Arlenny Abreu, Owner" 
+                    loading="lazy"
+                    width="64"
+                    height="64"
+                    className="w-full h-full object-cover" 
+                    decoding="async"
+                  />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-foreground">{t('about.owner.name')}</h3>

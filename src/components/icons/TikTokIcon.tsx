@@ -9,7 +9,11 @@ const TikTokIcon = ({ className = "w-4 h-4" }: TikTokIconProps) => {
     <img
       src={tiktokLogo}
       alt="TikTok"
+      loading="lazy"
+      width="16"
+      height="16"
       className={className}
+      decoding="async"
     />
   );
 };

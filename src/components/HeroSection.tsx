@@ -90,10 +90,18 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Hero Image */}
+          {/* Hero Image with Lazy Loading */}
           <div className="relative animate-fade-in">
             <div className="relative rounded-2xl overflow-hidden shadow-elegant">
-              <img src={heroImage} alt={t('hero.image_alt') || "Professional notary services - official documents and seals"} className="w-full h-[600px] object-cover" />
+              <img 
+                src={heroImage} 
+                alt={t('hero.image_alt') || "Professional notary services - official documents and seals"} 
+                loading="lazy"
+                width="600"
+                height="800"
+                className="w-full h-[600px] object-cover" 
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
             </div>
             
