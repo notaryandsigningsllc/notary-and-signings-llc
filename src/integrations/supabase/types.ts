@@ -197,6 +197,74 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          notes: string | null
+          phone: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      follow_up_emails: {
+        Row: {
+          booking_id: string | null
+          email_type: string
+          id: string
+          recipient_email: string
+          sent_at: string
+          status: string
+        }
+        Insert: {
+          booking_id?: string | null
+          email_type: string
+          id?: string
+          recipient_email: string
+          sent_at?: string
+          status?: string
+        }
+        Update: {
+          booking_id?: string | null
+          email_type?: string
+          id?: string
+          recipient_email?: string
+          sent_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follow_up_emails_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       news_feed: {
         Row: {
           author_id: string | null
@@ -221,6 +289,39 @@ export type Database = {
           id?: string
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscriptions: {
+        Row: {
+          confirmation_token: string | null
+          double_opt_in_confirmed: boolean
+          email: string
+          id: string
+          is_active: boolean
+          name: string | null
+          source: string | null
+          subscribed_at: string
+        }
+        Insert: {
+          confirmation_token?: string | null
+          double_opt_in_confirmed?: boolean
+          email: string
+          id?: string
+          is_active?: boolean
+          name?: string | null
+          source?: string | null
+          subscribed_at?: string
+        }
+        Update: {
+          confirmation_token?: string | null
+          double_opt_in_confirmed?: boolean
+          email?: string
+          id?: string
+          is_active?: boolean
+          name?: string | null
+          source?: string | null
+          subscribed_at?: string
         }
         Relationships: []
       }

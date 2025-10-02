@@ -35,8 +35,23 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      // Send contact form via email
-      const { error } = await supabase.functions.invoke('send-contact-email', {
+      // 1. Save to database first
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          message: formData.message,
+          status: 'new'
+        });
+
+      if (dbError) {
+        throw new Error(`Database error: ${dbError.message}`);
+      }
+
+      // 2. Send email notification
+      const { error: emailError } = await supabase.functions.invoke('send-contact-email', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -45,8 +60,9 @@ const Contact = () => {
         }
       });
 
-      if (error) {
-        throw new Error(error.message);
+      // Don't fail if email fails, but log it
+      if (emailError) {
+        console.error('Email notification failed:', emailError);
       }
 
       toast({

@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Clock, Facebook, Instagram, MessageCircle, FileTex
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TikTokIcon from "@/components/icons/TikTokIcon";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 export default function Footer() {
   const {
     t
@@ -141,8 +142,14 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Professional Info & CTA */}
+          {/* Newsletter & Professional Info */}
           <div className="space-y-6">
+            {/* Newsletter Signup */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Stay Updated</h4>
+              <NewsletterSignup />
+            </div>
+
             <h4 className="text-lg font-semibold">{t('footer.credentials')}</h4>
             
             <div className="space-y-4">
