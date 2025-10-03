@@ -18,13 +18,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Optimize bundle size
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild',
     // Code splitting
     rollupOptions: {
       output: {
