@@ -28,7 +28,7 @@ export default function ServicesSection() {
     title: t('services.ron.title'),
     description: t('services.ron.description'),
     features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
-    price: "$50",
+    price: "$25",
     duration: "30 min",
     popular: false
   }, {
