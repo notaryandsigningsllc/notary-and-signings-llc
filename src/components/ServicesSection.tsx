@@ -37,7 +37,7 @@ export default function ServicesSection() {
     description: t('services.apostille.description'),
     features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
     price: "$25",
-    duration: "45 min",
+    duration: "30 min",
     popular: false
   }, {
     icon: Fingerprint,
