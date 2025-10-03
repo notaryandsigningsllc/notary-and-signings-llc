@@ -36,7 +36,7 @@ export default function ServicesSection() {
     title: t('services.apostille.title'),
     description: t('services.apostille.description'),
     features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
-    price: "$50",
+    price: "$25",
     duration: "45 min",
     popular: false
   }, {
