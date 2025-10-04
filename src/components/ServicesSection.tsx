@@ -3,10 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { FileText, Home, Laptop, DollarSign, Fingerprint, Globe, Clock, Shield, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
+
 export default function ServicesSection() {
   const {
     t
   } = useLanguage();
+  const navigate = useNavigate();
   const services = [{
     icon: FileText,
     title: t('services.mobile.title'),
@@ -131,7 +134,12 @@ export default function ServicesSection() {
                     <span className="text-lg font-semibold text-primary">{service.price}</span>
                     <span className="text-sm text-muted-foreground">{service.duration}</span>
                   </div>
-                  <Button variant={service.popular ? "accent" : "outline"} size="sm" disabled={service.comingSoon}>
+                  <Button 
+                    variant={service.popular ? "accent" : "outline"} 
+                    size="sm" 
+                    disabled={service.comingSoon}
+                    onClick={() => !service.comingSoon && navigate('/book-appointment')}
+                  >
                     {service.comingSoon ? t('services.coming_soon') : t('services.book_now')}
                   </Button>
                 </div>
@@ -170,7 +178,7 @@ export default function ServicesSection() {
                       <span className="text-lg font-semibold text-primary">{service.price}</span>
                       <span className="text-sm text-muted-foreground">{service.duration}</span>
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => navigate('/book-appointment')}>
                       {t('services.book_now')}
                     </Button>
                   </div>
