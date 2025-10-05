@@ -4,13 +4,46 @@ import { Badge } from "@/components/ui/badge";
 import { FileText, Home, Laptop, DollarSign, Fingerprint, Globe, Clock, Shield, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 export default function ServicesSection() {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [loadingService, setLoadingService] = useState<string | null>(null);
+
+  const handleDirectCheckout = async (serviceId: string, serviceName: string) => {
+    setLoadingService(serviceId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const { data, error } = await supabase.functions.invoke('create-product-checkout', {
+        body: { serviceId },
+        headers: session?.access_token ? {
+          Authorization: `Bearer ${session.access_token}`
+        } : {}
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error: any) {
+      console.error('Error creating checkout:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to create checkout session",
+        variant: "destructive"
+      });
+    } finally {
+      setLoadingService(null);
+    }
+  };
   const services = [{
+    serviceName: 'Mobile Notary',
     icon: FileText,
     title: t('services.mobile.title'),
     description: t('services.mobile.description'),
@@ -19,6 +52,7 @@ export default function ServicesSection() {
     duration: "1 hr",
     popular: false
   }, {
+    serviceName: 'Loan Signing',
     icon: Home,
     title: t('services.loan.title'),
     description: t('services.loan.description'),
@@ -27,58 +61,43 @@ export default function ServicesSection() {
     duration: "1.5 hr",
     popular: true
   }, {
+    serviceName: 'Remote Online Notarization',
     icon: Laptop,
     title: t('services.ron.title'),
     description: t('services.ron.description'),
     features: [t('services.ron.feature1'), t('services.ron.feature2'), t('services.ron.feature3'), t('services.ron.feature4')],
-    price: "$25",
+    price: "$35",
     duration: "30 min",
     popular: false
   }, {
+    serviceName: 'Apostille Services',
     icon: Globe,
     title: t('services.apostille.title'),
     description: t('services.apostille.description'),
     features: [t('services.apostille.feature1'), t('services.apostille.feature2'), t('services.apostille.feature3'), t('services.apostille.feature4')],
-    price: "$25",
-    duration: "30 min",
+    price: "$50",
+    duration: "45 min",
     popular: false
   }, {
+    serviceName: 'Fingerprinting Services',
     icon: Fingerprint,
     title: t('services.fingerprint.title'),
     description: t('services.fingerprint.description'),
     features: [t('services.fingerprint.feature1'), t('services.fingerprint.feature2'), t('services.fingerprint.feature3'), t('services.fingerprint.feature4')],
-    price: "TBD",
-    duration: t('services.coming_soon'),
+    price: "$20",
+    duration: "30 min",
     popular: false,
-    comingSoon: true
-  }, {
-    icon: DollarSign,
-    title: t('services.tax.individual.title'),
-    description: t('services.tax.individual.description'),
-    features: [t('services.tax.individual.feature1'), t('services.tax.individual.feature2'), t('services.tax.individual.feature3'), t('services.tax.individual.feature4')],
-    price: "$75",
-    duration: "1 hr",
-    popular: false
+    comingSoon: false
   }];
-  const additionalTaxServices = [{
-    icon: DollarSign,
-    title: t('services.tax.business.title'),
-    description: t('services.tax.business.description'),
-    price: "$100",
-    duration: "1 hr"
-  }, {
-    icon: DollarSign,
-    title: t('services.tax.corporate.title'),
-    description: t('services.tax.corporate.description'),
-    price: "$150",
-    duration: "1 hr 30 min"
-  }, {
-    icon: DollarSign,
-    title: t('services.tax.review.title'),
-    description: t('services.tax.review.description'),
-    price: "$75",
-    duration: "1 hr"
-  }];
+  const [dbServices, setDbServices] = useState<any[]>([]);
+
+  useState(() => {
+    const fetchServices = async () => {
+      const { data } = await supabase.rpc('get_booking_services');
+      if (data) setDbServices(data);
+    };
+    fetchServices();
+  });
   return <section id="services" className="bg-background py-[40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -137,55 +156,23 @@ export default function ServicesSection() {
                   <Button 
                     variant={service.popular ? "accent" : "outline"} 
                     size="sm" 
-                    disabled={service.comingSoon}
-                    onClick={() => !service.comingSoon && navigate('/book-appointment')}
+                    disabled={service.comingSoon || loadingService === service.serviceName}
+                    onClick={() => {
+                      if (service.comingSoon) return;
+                      const dbService = dbServices.find(s => s.name === service.serviceName);
+                      if (dbService) {
+                        handleDirectCheckout(dbService.id, service.title);
+                      }
+                    }}
                   >
-                    {service.comingSoon ? t('services.coming_soon') : t('services.book_now')}
+                    {loadingService === service.serviceName ? t('services.loading') || 'Loading...' : 
+                     service.comingSoon ? t('services.coming_soon') : t('services.buy_now') || 'Buy Now'}
                   </Button>
                 </div>
               </CardContent>
             </Card>)}
         </div>
 
-        {/* Additional Tax Services */}
-        <div className="mt-16">
-          <div className="text-center space-y-4 mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-              {t('services.tax.additional.title')}
-            </h3>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              {t('services.tax.additional.subtitle')}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {additionalTaxServices.map((service, index) => <Card key={index} className="transition-all duration-300 hover:shadow-elegant hover:-translate-y-1">
-                <CardHeader className="space-y-4">
-                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
-                    <service.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
-                    <CardDescription className="text-muted-foreground mt-2">
-                      {service.description}
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between pt-4 border-t border-border">
-                    <div className="flex flex-col">
-                      <span className="text-lg font-semibold text-primary">{service.price}</span>
-                      <span className="text-sm text-muted-foreground">{service.duration}</span>
-                    </div>
-                    <Button variant="outline" size="sm" onClick={() => navigate('/book-appointment')}>
-                      {t('services.book_now')}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>)}
-          </div>
-        </div>
 
         {/* iPEN Add-on Service */}
         <div className="mt-16 bg-card border border-border rounded-lg p-6 shadow-card">
