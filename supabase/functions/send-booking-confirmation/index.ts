@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { isValidUUID, isValidEmail, isValidDate, isValidTime, sanitizeString } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -56,16 +57,35 @@ serve(async (req) => {
   );
 
   try {
-    const {
-      bookingId,
-      customerEmail,
-      customerName,
-      serviceName,
-      appointmentDate,
-      appointmentTime,
-      servicePrice,
-      paymentMethod
-    }: BookingConfirmationRequest = await req.json();
+    const requestData: BookingConfirmationRequest = await req.json();
+    
+    // Validate inputs
+    const errors: string[] = [];
+    if (!requestData.bookingId || !isValidUUID(requestData.bookingId)) errors.push('Invalid booking ID');
+    if (!requestData.customerEmail || !isValidEmail(requestData.customerEmail)) errors.push('Invalid email');
+    if (!requestData.customerName || requestData.customerName.trim().length < 2) errors.push('Invalid name');
+    if (!requestData.serviceName || requestData.serviceName.trim().length < 2) errors.push('Invalid service name');
+    if (!requestData.appointmentDate || !isValidDate(requestData.appointmentDate)) errors.push('Invalid date');
+    if (!requestData.appointmentTime || !isValidTime(requestData.appointmentTime)) errors.push('Invalid time');
+    if (typeof requestData.servicePrice !== 'number' || requestData.servicePrice < 0) errors.push('Invalid price');
+    if (!['online', 'at_appointment'].includes(requestData.paymentMethod)) errors.push('Invalid payment method');
+    
+    if (errors.length > 0) {
+      return new Response(JSON.stringify({ error: 'Validation failed', details: errors }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
+    // Sanitize inputs
+    const bookingId = requestData.bookingId;
+    const customerEmail = sanitizeString(requestData.customerEmail.toLowerCase(), 255);
+    const customerName = sanitizeString(requestData.customerName, 100);
+    const serviceName = sanitizeString(requestData.serviceName, 200);
+    const appointmentDate = requestData.appointmentDate;
+    const appointmentTime = requestData.appointmentTime;
+    const servicePrice = requestData.servicePrice;
+    const paymentMethod = requestData.paymentMethod;
 
     console.log('Sending booking confirmation email to:', customerEmail);
 

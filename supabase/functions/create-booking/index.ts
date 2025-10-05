@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { validateBookingData, sanitizeString, ValidationException } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,11 +26,24 @@ serve(async (req) => {
   try {
     const bookingData: BookingData = await req.json();
     
-    // Validate required fields
-    if (!bookingData.serviceId || !bookingData.appointmentDate || 
-        !bookingData.appointmentTime || !bookingData.fullName || 
-        !bookingData.email || !bookingData.phone) {
-      throw new Error("Missing required booking information");
+    // Validate and sanitize all input data
+    const validationErrors = validateBookingData(bookingData);
+    if (validationErrors.length > 0) {
+      return new Response(JSON.stringify({ 
+        error: 'Validation failed',
+        details: validationErrors
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+    
+    // Sanitize string inputs
+    bookingData.fullName = sanitizeString(bookingData.fullName, 100);
+    bookingData.email = sanitizeString(bookingData.email.toLowerCase(), 255);
+    bookingData.phone = sanitizeString(bookingData.phone, 20);
+    if (bookingData.notes) {
+      bookingData.notes = sanitizeString(bookingData.notes, 1000);
     }
 
     // Create Supabase client with service role for secure operations

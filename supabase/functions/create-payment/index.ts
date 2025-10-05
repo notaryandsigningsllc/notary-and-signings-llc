@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { isValidUUID } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,8 +23,11 @@ serve(async (req) => {
   try {
     const { bookingId } = await req.json();
     
-    if (!bookingId) {
-      throw new Error("Booking ID is required");
+    if (!bookingId || !isValidUUID(bookingId)) {
+      return new Response(JSON.stringify({ error: "Valid booking ID is required" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
     }
 
     console.log('Processing payment for booking:', bookingId);

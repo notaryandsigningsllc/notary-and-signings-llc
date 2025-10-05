@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { isValidUUID } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,14 +15,17 @@ serve(async (req) => {
 
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
   );
 
   try {
     const { sessionId, bookingId } = await req.json();
     
-    if (!sessionId || !bookingId) {
-      throw new Error("Session ID and booking ID are required");
+    if (!sessionId || !bookingId || !isValidUUID(bookingId)) {
+      return new Response(JSON.stringify({ error: "Valid session ID and booking ID are required" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
     }
 
     console.log('Verifying payment for session:', sessionId, 'booking:', bookingId);

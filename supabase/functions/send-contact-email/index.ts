@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
+import { validateContactData, sanitizeString } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -21,7 +22,25 @@ serve(async (req) => {
   const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
   try {
-    const { name, email, phone, message }: ContactEmailRequest = await req.json();
+    const contactData: ContactEmailRequest = await req.json();
+    
+    // Validate input data
+    const validationErrors = validateContactData(contactData);
+    if (validationErrors.length > 0) {
+      return new Response(JSON.stringify({ 
+        error: 'Validation failed',
+        details: validationErrors
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
+    // Sanitize inputs
+    const name = sanitizeString(contactData.name, 100);
+    const email = sanitizeString(contactData.email.toLowerCase(), 255);
+    const phone = contactData.phone ? sanitizeString(contactData.phone, 20) : undefined;
+    const message = sanitizeString(contactData.message, 2000);
 
     console.log('Sending contact form email:', { name, email });
 
