@@ -13,38 +13,38 @@ export default function Footer() {
     href: "/"
   }, {
     name: t('nav.about'),
-    href: "/#about"
+    href: "/about"
   }, {
     name: t('nav.services'),
-    href: "/#services"
+    href: "/services"
   }, {
     name: t('nav.testimonials'),
-    href: "/#testimonials"
+    href: "/testimonials"
   }, {
     name: t('nav.faqs'),
     href: "/faqs"
   }, {
     name: t('nav.contact'),
-    href: "/#contact"
+    href: "/contact"
   }];
   const services = [{
     name: t('services.mobile.title'),
-    href: "#services"
+    href: "/services"
   }, {
     name: t('services.loan.title'),
-    href: "#services"
+    href: "/services"
   }, {
     name: t('services.ron.title'),
-    href: "#services"
+    href: "/services"
   }, {
     name: t('services.apostille.title'),
-    href: "#services"
+    href: "/services"
   }, {
     name: t('footer.services.fingerprinting'),
-    href: "#services"
+    href: "/services"
   }, {
     name: t('footer.services.tax_preparation'),
-    href: "#services"
+    href: "/services"
   }];
   const socialLinks = [{
     icon: Facebook,
@@ -126,9 +126,9 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">{t('footer.quick_links')}</h4>
             <nav className="space-y-3">
-              {quickLinks.map((link, index) => <a key={index} href={link.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+              {quickLinks.map((link, index) => <Link key={index} to={link.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
                   {link.name}
-                </a>)}
+                </Link>)}
             </nav>
           </div>
 
@@ -136,9 +136,9 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">{t('footer.services')}</h4>
             <nav className="space-y-3">
-              {services.map((service, index) => <a key={index} href={service.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+              {services.map((service, index) => <Link key={index} to={service.href} className="block text-sm text-primary-foreground/80 hover:text-accent transition-colors">
                   {service.name}
-                </a>)}
+                </Link>)}
             </nav>
           </div>
 
