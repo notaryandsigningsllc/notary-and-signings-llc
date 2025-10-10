@@ -17,19 +17,19 @@ export type Database = {
       blocked_dates: {
         Row: {
           blocked_date: string
-          created_at: string
+          created_at: string | null
           id: string
           reason: string | null
         }
         Insert: {
           blocked_date: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           reason?: string | null
         }
         Update: {
           blocked_date?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           reason?: string | null
         }
@@ -38,33 +38,33 @@ export type Database = {
       booking_messages: {
         Row: {
           booking_id: string
-          created_at: string
+          created_at: string | null
           id: string
           is_read: boolean
           message: string
           sender_id: string
           sender_type: string
-          updated_at: string
+          updated_at: string | null
         }
         Insert: {
           booking_id: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           is_read?: boolean
           message: string
           sender_id: string
           sender_type: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Update: {
           booking_id?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           is_read?: boolean
           message?: string
           sender_id?: string
           sender_type?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -82,7 +82,7 @@ export type Database = {
           appointment_end_time: string
           appointment_time: string
           booking_token: string
-          created_at: string
+          created_at: string | null
           id: string
           payment_method: string
           payment_status: string
@@ -90,7 +90,7 @@ export type Database = {
           status: string
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
-          updated_at: string
+          updated_at: string | null
           user_id: string | null
         }
         Insert: {
@@ -98,7 +98,7 @@ export type Database = {
           appointment_end_time: string
           appointment_time: string
           booking_token?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           payment_method: string
           payment_status?: string
@@ -106,7 +106,7 @@ export type Database = {
           status?: string
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
-          updated_at?: string
+          updated_at?: string | null
           user_id?: string | null
         }
         Update: {
@@ -114,7 +114,7 @@ export type Database = {
           appointment_end_time?: string
           appointment_time?: string
           booking_token?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           payment_method?: string
           payment_status?: string
@@ -122,7 +122,7 @@ export type Database = {
           status?: string
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
-          updated_at?: string
+          updated_at?: string | null
           user_id?: string | null
         }
         Relationships: [
@@ -138,7 +138,7 @@ export type Database = {
       bookings_pii: {
         Row: {
           booking_id: string
-          created_at: string
+          created_at: string | null
           email: string
           full_name: string
           notes: string | null
@@ -146,7 +146,7 @@ export type Database = {
         }
         Insert: {
           booking_id: string
-          created_at?: string
+          created_at?: string | null
           email: string
           full_name: string
           notes?: string | null
@@ -154,7 +154,7 @@ export type Database = {
         }
         Update: {
           booking_id?: string
-          created_at?: string
+          created_at?: string | null
           email?: string
           full_name?: string
           notes?: string | null
@@ -172,7 +172,7 @@ export type Database = {
       }
       business_hours: {
         Row: {
-          created_at: string
+          created_at: string | null
           day_of_week: number
           end_time: string
           id: string
@@ -180,7 +180,7 @@ export type Database = {
           start_time: string
         }
         Insert: {
-          created_at?: string
+          created_at?: string | null
           day_of_week: number
           end_time: string
           id?: string
@@ -188,7 +188,7 @@ export type Database = {
           start_time: string
         }
         Update: {
-          created_at?: string
+          created_at?: string | null
           day_of_week?: number
           end_time?: string
           id?: string
@@ -199,7 +199,7 @@ export type Database = {
       }
       contact_submissions: {
         Row: {
-          created_at: string
+          created_at: string | null
           email: string
           id: string
           message: string
@@ -209,7 +209,7 @@ export type Database = {
           status: string
         }
         Insert: {
-          created_at?: string
+          created_at?: string | null
           email: string
           id?: string
           message: string
@@ -219,7 +219,7 @@ export type Database = {
           status?: string
         }
         Update: {
-          created_at?: string
+          created_at?: string | null
           email?: string
           id?: string
           message?: string
@@ -236,7 +236,7 @@ export type Database = {
           email_type: string
           id: string
           recipient_email: string
-          sent_at: string
+          sent_at: string | null
           status: string
         }
         Insert: {
@@ -244,7 +244,7 @@ export type Database = {
           email_type: string
           id?: string
           recipient_email: string
-          sent_at?: string
+          sent_at?: string | null
           status?: string
         }
         Update: {
@@ -252,7 +252,7 @@ export type Database = {
           email_type?: string
           id?: string
           recipient_email?: string
-          sent_at?: string
+          sent_at?: string | null
           status?: string
         }
         Relationships: [
@@ -269,26 +269,26 @@ export type Database = {
         Row: {
           author_id: string | null
           content: string
-          created_at: string
+          created_at: string | null
           id: string
           title: string
-          updated_at: string
+          updated_at: string | null
         }
         Insert: {
           author_id?: string | null
           content: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           title: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Update: {
           author_id?: string | null
           content?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
           title?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -301,7 +301,7 @@ export type Database = {
           is_active: boolean
           name: string | null
           source: string | null
-          subscribed_at: string
+          subscribed_at: string | null
         }
         Insert: {
           confirmation_token?: string | null
@@ -311,7 +311,7 @@ export type Database = {
           is_active?: boolean
           name?: string | null
           source?: string | null
-          subscribed_at?: string
+          subscribed_at?: string | null
         }
         Update: {
           confirmation_token?: string | null
@@ -321,46 +321,46 @@ export type Database = {
           is_active?: boolean
           name?: string | null
           source?: string | null
-          subscribed_at?: string
+          subscribed_at?: string | null
         }
         Relationships: []
       }
       services: {
         Row: {
-          created_at: string
-          description: string | null
+          created_at: string | null
+          description: string
           duration_minutes: number
           id: string
           is_active: boolean
           name: string
           price_cents: number
-          stripe_price_id: string
-          stripe_product_id: string
-          updated_at: string
+          stripe_price_id: string | null
+          stripe_product_id: string | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
-          description?: string | null
-          duration_minutes?: number
+          created_at?: string | null
+          description: string
+          duration_minutes: number
           id?: string
           is_active?: boolean
           name: string
           price_cents: number
-          stripe_price_id: string
-          stripe_product_id: string
-          updated_at?: string
+          stripe_price_id?: string | null
+          stripe_product_id?: string | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
-          description?: string | null
+          created_at?: string | null
+          description?: string
           duration_minutes?: number
           id?: string
           is_active?: boolean
           name?: string
           price_cents?: number
-          stripe_price_id?: string
-          stripe_product_id?: string
-          updated_at?: string
+          stripe_price_id?: string | null
+          stripe_product_id?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -435,7 +435,7 @@ export type Database = {
           appointment_end_time: string
           appointment_time: string
           booking_token: string
-          created_at: string
+          created_at: string | null
           id: string
           payment_method: string
           payment_status: string
@@ -443,7 +443,7 @@ export type Database = {
           status: string
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
-          updated_at: string
+          updated_at: string | null
           user_id: string | null
         }[]
       }
@@ -478,19 +478,6 @@ export type Database = {
           day_of_week: number
           end_time: string
           start_time: string
-        }[]
-      }
-      get_public_services: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          created_at: string
-          description: string
-          duration_minutes: number
-          id: string
-          is_active: boolean
-          name: string
-          price_cents: number
-          updated_at: string
         }[]
       }
       has_role: {

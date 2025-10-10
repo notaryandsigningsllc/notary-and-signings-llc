@@ -61,7 +61,7 @@ const BookingSuccess = () => {
           if (data && data.length > 0) {
             // Get service details for the booking using the secure function
             const { data: allServices, error: serviceError } = await supabase
-              .rpc('get_public_services');
+              .rpc('get_booking_services');
             
             const serviceData = allServices?.find(service => service.id === data[0].service_id);
             
