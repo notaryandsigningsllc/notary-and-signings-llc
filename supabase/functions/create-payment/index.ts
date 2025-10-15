@@ -50,15 +50,17 @@ serve(async (req) => {
       throw new Error('Booking not found');
     }
 
-    // Get PII data separately using security definer function
+    // Get PII data directly using service role key
     const { data: piiData, error: piiError } = await supabaseClient
-      .rpc('get_booking_pii', { p_booking_id: bookingId });
+      .from('bookings_pii')
+      .select('email, full_name, phone')
+      .eq('booking_id', bookingId)
+      .maybeSingle();
 
-    if (piiError || !piiData || piiData.length === 0) {
+    if (piiError || !piiData) {
       throw new Error('Booking information not found');
     }
 
-    const pii = piiData[0];
     console.log('Found booking and PII data');
 
     // Initialize Stripe
@@ -68,7 +70,7 @@ serve(async (req) => {
 
     // Check if a Stripe customer record exists for this email
     const customers = await stripe.customers.list({ 
-      email: pii.email, 
+      email: piiData.email, 
       limit: 1 
     });
     
@@ -79,9 +81,9 @@ serve(async (req) => {
     } else {
       // Create new customer
       const customer = await stripe.customers.create({
-        email: pii.email,
-        name: pii.full_name,
-        phone: pii.phone,
+        email: piiData.email,
+        name: piiData.full_name,
+        phone: piiData.phone,
       });
       customerId = customer.id;
       console.log('Created new customer:', customerId);
