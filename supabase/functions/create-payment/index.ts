@@ -63,6 +63,11 @@ serve(async (req) => {
 
     console.log('Found booking and PII data');
 
+    // Check if service has a Stripe price ID
+    if (!booking.services.stripe_price_id) {
+      throw new Error(`Service "${booking.services.name}" does not have a Stripe price configured. Please contact support.`);
+    }
+
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2025-08-27.basil",
