@@ -194,9 +194,11 @@ export default function Footer() {
               <p className="text-xs text-primary-foreground/80">
                 {t('footer.professional_desc')}
               </p>
-              <Button variant="accent" size="sm" className="w-full">
-                {t('footer.schedule')}
-              </Button>
+              <Link to="/book-appointment" className="block">
+                <Button variant="accent" size="sm" className="w-full">
+                  {t('footer.schedule')}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
