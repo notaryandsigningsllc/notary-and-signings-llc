@@ -40,7 +40,8 @@ serve(async (req) => {
         services!inner (
           name,
           price_cents,
-          stripe_price_id
+          stripe_price_id,
+          stripe_product_id
         )
       `)
       .eq('id', bookingId)
@@ -63,15 +64,52 @@ serve(async (req) => {
 
     console.log('Found booking and PII data');
 
-    // Check if service has a Stripe price ID
-    if (!booking.services.stripe_price_id) {
-      throw new Error(`Service "${booking.services.name}" does not have a Stripe price configured. Please contact support.`);
-    }
-
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2025-08-27.basil",
     });
+
+    // Ensure Stripe product/price exists for the service
+    let priceId = booking.services.stripe_price_id as string | null;
+    let productId = booking.services.stripe_product_id as string | null;
+
+    if (!priceId) {
+      console.log('No stripe_price_id found for service, creating product and price in Stripe');
+      if (!productId) {
+        const product = await stripe.products.create({
+          name: booking.services.name,
+          active: true,
+        });
+        productId = product.id;
+        console.log('Created Stripe product:', productId);
+
+        // Save product ID to service
+        const { error: updateProductErr } = await supabaseClient
+          .from('services')
+          .update({ stripe_product_id: productId })
+          .eq('id', booking.service_id);
+        if (updateProductErr) {
+          console.warn('Failed to persist stripe_product_id:', updateProductErr);
+        }
+      }
+
+      const price = await stripe.prices.create({
+        currency: 'usd',
+        unit_amount: booking.services.price_cents,
+        product: productId!,
+      });
+      priceId = price.id;
+      console.log('Created Stripe price:', priceId);
+
+      // Save price ID to service
+      const { error: updatePriceErr } = await supabaseClient
+        .from('services')
+        .update({ stripe_price_id: priceId })
+        .eq('id', booking.service_id);
+      if (updatePriceErr) {
+        console.warn('Failed to persist stripe_price_id:', updatePriceErr);
+      }
+    }
 
     // Check if a Stripe customer record exists for this email
     const customers = await stripe.customers.list({ 
@@ -99,7 +137,7 @@ serve(async (req) => {
       customer: customerId,
       line_items: [
         {
-          price: booking.services.stripe_price_id,
+          price: priceId!,
           quantity: 1,
         },
       ],
