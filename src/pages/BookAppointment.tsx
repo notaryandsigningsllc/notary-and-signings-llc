@@ -301,10 +301,17 @@ const BookAppointment = () => {
           body: { bookingId }
         });
 
-        if (paymentError || !paymentData?.url) {
-          throw new Error(t('booking.error.payment'));
+        console.log('Payment response:', { paymentData, paymentError });
+
+        if (paymentError) {
+          throw new Error(paymentError.message || t('booking.error.payment'));
         }
 
+        if (!paymentData?.url) {
+          throw new Error('No payment URL received');
+        }
+
+        console.log('Redirecting to:', paymentData.url);
         // Redirect to Stripe checkout
         window.location.href = paymentData.url;
       } else {
