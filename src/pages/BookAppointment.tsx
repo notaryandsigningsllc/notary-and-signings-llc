@@ -312,8 +312,12 @@ const BookAppointment = () => {
         }
 
         console.log('Redirecting to:', paymentData.url);
-        // Redirect to Stripe checkout
-        window.location.href = paymentData.url;
+        // Open Stripe Checkout in a new tab to avoid iframe restrictions
+        const newWindow = window.open(paymentData.url, '_blank', 'noopener,noreferrer');
+        if (!newWindow) {
+          // Fallback: navigate current window
+          window.location.href = paymentData.url;
+        }
       } else {
         // Redirect to success page for "pay at appointment" using secure token
         navigate(`/booking-success?token=${bookingToken}`);
