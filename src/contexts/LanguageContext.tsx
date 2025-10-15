@@ -430,6 +430,15 @@ const translations = {
     'auth.creating_account': 'Creating account...',
     'auth.dashboard': 'Dashboard',
     'auth.sign_out': 'Sign Out',
+    'auth.check_email': 'Check your email',
+    'auth.check_email_desc': 'We sent you a confirmation link. Please check your email to complete registration.',
+    'auth.account_exists': 'Account already exists',
+    'auth.account_exists_desc': 'This email is already registered. Please sign in instead.',
+    'auth.signup_failed': 'Sign up failed',
+    'auth.signin_failed': 'Sign in failed',
+    'auth.welcome_back': 'Welcome back!',
+    'auth.welcome_back_desc': 'You have successfully signed in.',
+    'auth.unexpected_error': 'An unexpected error occurred. Please try again.',
     
     // Dashboard
     'dashboard.welcome': 'Welcome to Your Dashboard',
@@ -1128,6 +1137,15 @@ const translations = {
     'auth.creating_account': 'Creando cuenta...',
     'auth.dashboard': 'Panel de Control',
     'auth.sign_out': 'Cerrar Sesión',
+    'auth.check_email': 'Revisa tu correo electrónico',
+    'auth.check_email_desc': 'Te enviamos un enlace de confirmación. Por favor revisa tu correo para completar el registro.',
+    'auth.account_exists': 'La cuenta ya existe',
+    'auth.account_exists_desc': 'Este correo electrónico ya está registrado. Por favor inicia sesión.',
+    'auth.signup_failed': 'Registro fallido',
+    'auth.signin_failed': 'Inicio de sesión fallido',
+    'auth.welcome_back': '¡Bienvenido de nuevo!',
+    'auth.welcome_back_desc': 'Has iniciado sesión exitosamente.',
+    'auth.unexpected_error': 'Ocurrió un error inesperado. Por favor intenta de nuevo.',
     
     // Dashboard
     'dashboard.welcome': 'Bienvenido a tu Panel de Control',
