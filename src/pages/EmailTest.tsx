@@ -3,13 +3,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { CheckCircle2, Mail } from 'lucide-react';
 
 const EmailTest = () => {
   const [loading, setLoading] = useState<string | null>(null);
+  const [testBookingId] = useState('11111111-1111-1111-1111-111111111111'); // Mock UUID
 
   // Contact Email Test
   const [contactEmail, setContactEmail] = useState('test@example.com');
@@ -50,19 +54,21 @@ const EmailTest = () => {
     try {
       const { error } = await supabase.functions.invoke('send-booking-confirmation', {
         body: {
+          bookingId: testBookingId,
           customerEmail: bookingEmail,
           customerName: bookingName,
           serviceName: bookingService,
           appointmentDate: bookingDate,
           appointmentTime: bookingTime,
-          price: 5000,
+          servicePrice: 5000,
+          paymentMethod: 'at_appointment',
         },
       });
 
       if (error) throw error;
-      toast.success('Booking confirmation sent successfully!');
+      toast.success('Booking confirmation sent! Check your email inbox.');
     } catch (error: any) {
-      toast.error('Failed to send booking confirmation: ' + error.message);
+      toast.error('Failed: ' + error.message);
     } finally {
       setLoading(null);
     }
@@ -73,6 +79,7 @@ const EmailTest = () => {
     try {
       const { error } = await supabase.functions.invoke('send-booking-reminder', {
         body: {
+          bookingId: testBookingId,
           customerEmail: bookingEmail,
           customerName: bookingName,
           serviceName: bookingService,
@@ -82,9 +89,9 @@ const EmailTest = () => {
       });
 
       if (error) throw error;
-      toast.success('Booking reminder sent successfully!');
+      toast.success('Booking reminder sent! Check your email inbox.');
     } catch (error: any) {
-      toast.error('Failed to send booking reminder: ' + error.message);
+      toast.error('Failed: ' + error.message);
     } finally {
       setLoading(null);
     }
@@ -95,16 +102,18 @@ const EmailTest = () => {
     try {
       const { error } = await supabase.functions.invoke('send-follow-up', {
         body: {
-          customerEmail: bookingEmail,
-          customerName: bookingName,
+          bookingId: testBookingId,
           emailType: 'review_request',
+          recipientEmail: bookingEmail,
+          recipientName: bookingName,
+          serviceName: bookingService,
         },
       });
 
       if (error) throw error;
-      toast.success('Follow-up email sent successfully!');
+      toast.success('Follow-up email sent! Check your email inbox.');
     } catch (error: any) {
-      toast.error('Failed to send follow-up email: ' + error.message);
+      toast.error('Failed: ' + error.message);
     } finally {
       setLoading(null);
     }
@@ -114,7 +123,19 @@ const EmailTest = () => {
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <main className="flex-1 container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Resend Email Testing</h1>
+        <h1 className="text-3xl font-bold mb-4">Resend Email Testing</h1>
+        
+        <Alert className="mb-6">
+          <Mail className="h-4 w-4" />
+          <AlertTitle>How to Verify Emails</AlertTitle>
+          <AlertDescription className="space-y-2 mt-2">
+            <p>✅ Check your email inbox after clicking each test button</p>
+            <p>✅ Look for emails from "Notary Services &lt;onboarding@resend.dev&gt;"</p>
+            <p>✅ Success toasts mean the function executed - check email for actual delivery</p>
+            <p>⚠️ Emails may take 1-2 minutes to arrive</p>
+            <p>📧 Make sure to use a real email address you can access</p>
+          </AlertDescription>
+        </Alert>
         
         <div className="grid gap-6 md:grid-cols-2">
           {/* Contact Email Test */}
