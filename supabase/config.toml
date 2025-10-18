@@ -1,1 +1,4 @@
 project_id = "kugupvjbudtasjzshcly"
+
+[functions.sync-to-wix]
+verify_jwt = false
