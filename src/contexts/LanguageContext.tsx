@@ -439,6 +439,7 @@ const translations = {
     'auth.welcome_back': 'Welcome back!',
     'auth.welcome_back_desc': 'You have successfully signed in.',
     'auth.unexpected_error': 'An unexpected error occurred. Please try again.',
+    'auth.signup_to_book': 'Sign up to use our services',
     
     // Dashboard
     'dashboard.welcome': 'Welcome to Your Dashboard',
@@ -1146,6 +1147,7 @@ const translations = {
     'auth.welcome_back': '¡Bienvenido de nuevo!',
     'auth.welcome_back_desc': 'Has iniciado sesión exitosamente.',
     'auth.unexpected_error': 'Ocurrió un error inesperado. Por favor intenta de nuevo.',
+    'auth.signup_to_book': 'Regístrate para usar nuestros servicios',
     
     // Dashboard
     'dashboard.welcome': 'Bienvenido a tu Panel de Control',
