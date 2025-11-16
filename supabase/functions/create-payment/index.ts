@@ -120,21 +120,21 @@ serve(async (req) => {
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
-      console.log('Found existing customer:', customerId);
+      console.log('Found existing Stripe customer:', customerId);
     } else {
-      // Create new customer
       const customer = await stripe.customers.create({
         email: piiData.email,
         name: piiData.full_name,
         phone: piiData.phone,
       });
       customerId = customer.id;
-      console.log('Created new customer:', customerId);
+      console.log('Created new Stripe customer:', customerId);
     }
 
-    // Create a one-time payment session
+    // Create a one-time payment session with comprehensive metadata
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
+      customer_email: customerId ? undefined : piiData.email,
       line_items: [
         {
           price: priceId!,
@@ -142,12 +142,16 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&token=${booking.booking_token}`,
-      cancel_url: `${req.headers.get("origin")}/book-appointment?booking_id=${bookingId}`,
+      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
+      cancel_url: `${req.headers.get("origin")}/book-appointment`,
       metadata: {
         booking_id: bookingId,
-        service_name: booking.services.name
-      }
+        customer_name: piiData.full_name,
+        customer_email: piiData.email,
+        service_name: booking.services.name,
+        appointment_date: booking.appointment_date,
+        appointment_time: booking.appointment_time,
+      },
     });
 
     console.log('Created checkout session:', session.id);
@@ -165,11 +169,15 @@ serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
+
   } catch (error: any) {
-    console.error('Error creating payment:', error);
-    return new Response(JSON.stringify({ error: error?.message || 'Unknown error' }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    console.error('Error in create-payment function:', error);
+    return new Response(
+      JSON.stringify({ error: error.message || 'An unexpected error occurred' }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });

@@ -428,6 +428,25 @@ export type Database = {
           appointment_time: string
         }[]
       }
+      get_booking_by_id_and_email: {
+        Args: { p_booking_id: string; p_email: string }
+        Returns: {
+          appointment_date: string
+          appointment_end_time: string
+          appointment_time: string
+          booking_id: string
+          created_at: string
+          email: string
+          full_name: string
+          notes: string
+          payment_method: string
+          payment_status: string
+          phone: string
+          service_description: string
+          service_name: string
+          status: string
+        }[]
+      }
       get_booking_by_token: {
         Args: { p_token: string }
         Returns: {

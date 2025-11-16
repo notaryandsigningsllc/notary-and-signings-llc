@@ -28,6 +28,7 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
 const BookAppointment = lazy(() => import("./pages/BookAppointment"));
 const BookingSuccess = lazy(() => import("./pages/BookingSuccess"));
+const BookingStatus = lazy(() => import("./pages/BookingStatus"));
 const EmailTest = lazy(() => import("./pages/EmailTest"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/book-appointment" element={<BookAppointment />} />
               <Route path="/booking-success" element={<BookingSuccess />} />
+              <Route path="/booking-status" element={<BookingStatus />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/testimonials" element={<Testimonials />} />
