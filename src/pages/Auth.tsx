@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,12 +25,14 @@ const Auth = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
+  const location = useLocation();
+  const from = (location.state as { from?: string })?.from || '/';
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate(from);
     }
-  }, [user, navigate]);
+  }, [user, navigate, from]);
 
   const validateForm = () => {
     try {
@@ -59,7 +61,7 @@ const Auth = () => {
     setIsLoading(true);
     
     try {
-      const redirectUrl = `${window.location.origin}/`;
+      const redirectUrl = `${window.location.origin}${from}`;
       
       const { error } = await supabase.auth.signUp({
         email: email.trim(),
@@ -124,7 +126,7 @@ const Auth = () => {
           title: t('auth.welcome_back'),
           description: t('auth.welcome_back_desc'),
         });
-        navigate("/");
+        navigate(from);
       }
     } catch (error) {
       toast({
@@ -168,6 +170,11 @@ const Auth = () => {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">{t('auth.title')}</CardTitle>
           <CardDescription>{t('auth.subtitle')}</CardDescription>
+          {from === '/book-appointment' && (
+            <div className="mt-4 p-3 bg-primary/10 border border-primary/20 rounded-md">
+              <p className="text-sm font-medium text-primary">{t('auth.signup_to_book')}</p>
+            </div>
+          )}
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">

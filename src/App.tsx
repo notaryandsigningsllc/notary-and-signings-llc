@@ -44,7 +44,11 @@ const App = () => (
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/book-appointment" element={<BookAppointment />} />
+              <Route path="/book-appointment" element={
+                <ProtectedRoute>
+                  <BookAppointment />
+                </ProtectedRoute>
+              } />
               <Route path="/booking-success" element={<BookingSuccess />} />
               <Route path="/booking-status" element={<BookingStatus />} />
               <Route path="/about" element={<About />} />
