@@ -456,6 +456,10 @@ const translations = {
     'dashboard.documents_description': 'Manage your documents',
     'dashboard.documents_text': 'Upload and track documents',
     'dashboard.view_documents': 'View Documents',
+    'dashboard.booking_status': 'Booking Status',
+    'dashboard.booking_status_description': 'Check your booking details',
+    'dashboard.booking_status_text': 'View and track the status of your appointments using your booking confirmation number.',
+    'dashboard.check_booking_status': 'Check Booking Status',
 
     // Booking Pages
     'booking.title': 'Book Your Appointment',
@@ -1164,6 +1168,10 @@ const translations = {
     'dashboard.documents_description': 'Gestiona tus documentos',
     'dashboard.documents_text': 'Sube y rastrea documentos',
     'dashboard.view_documents': 'Ver Documentos',
+    'dashboard.booking_status': 'Estado de Reserva',
+    'dashboard.booking_status_description': 'Consulta los detalles de tu reserva',
+    'dashboard.booking_status_text': 'Visualiza y rastrea el estado de tus citas usando tu número de confirmación de reserva.',
+    'dashboard.check_booking_status': 'Consultar Estado de Reserva',
 
     // Booking Pages
     'booking.title': 'Reserve Su Cita',
