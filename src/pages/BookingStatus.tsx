@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -64,6 +65,7 @@ const StatusBadge = ({ status, paymentStatus }: { status: string; paymentStatus:
 };
 
 export default function BookingStatus() {
+  const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -72,9 +74,27 @@ export default function BookingStatus() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
+
+  useEffect(() => {
+    const bookingId = searchParams.get("bookingId");
+    const email = searchParams.get("email");
+
+    if (bookingId) {
+      setValue("bookingId", bookingId);
+    }
+    if (email) {
+      setValue("email", email);
+    }
+
+    // Auto-submit if both params are present
+    if (bookingId && email) {
+      handleSubmit(onSubmit)();
+    }
+  }, [searchParams, setValue]);
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
