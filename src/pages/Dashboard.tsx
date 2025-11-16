@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
@@ -61,6 +63,25 @@ const Dashboard = () => {
                 </p>
                 <Button variant="outline" className="w-full">
                   {t('dashboard.view_documents')}
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('dashboard.booking_status') || 'Booking Status'}</CardTitle>
+                <CardDescription>{t('dashboard.booking_status_description') || 'Check your booking details'}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {t('dashboard.booking_status_text') || 'View and track the status of your appointments using your booking confirmation number.'}
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigate(`/booking-status?email=${encodeURIComponent(user?.email || '')}`)}
+                >
+                  {t('dashboard.check_booking_status') || 'Check Booking Status'}
                 </Button>
               </CardContent>
             </Card>
