@@ -200,7 +200,35 @@ serve(async (req) => {
       console.error('Failed to send business notification:', notificationError.message);
     }
 
-    return new Response(JSON.stringify({ 
+    // Send customer confirmation email (non-blocking)
+    try {
+      const { data: serviceDetails } = await supabaseClient
+        .from('services')
+        .select('name')
+        .eq('id', bookingData.serviceId)
+        .single();
+
+      await supabaseClient.functions.invoke('send-booking-confirmation', {
+        body: {
+          bookingId: booking.id,
+          customerName: bookingData.fullName,
+          customerEmail: bookingData.email,
+          serviceName: serviceDetails?.name || 'Notary Service',
+          appointmentDate: booking.appointment_date,
+          appointmentTime: booking.appointment_time,
+          servicePrice: booking.service_price,
+          paymentMethod: booking.payment_method,
+          ipenAddon: booking.addon_ipen,
+          addonPrice: booking.addon_ipen_price,
+          totalAmount: booking.total_amount
+        }
+      });
+      console.log('Customer confirmation email sent for booking:', booking.id);
+    } catch (confirmationError: any) {
+      console.error('Failed to send customer confirmation:', confirmationError.message);
+    }
+
+    return new Response(JSON.stringify({
       success: true,
       bookingId: booking.id,
       bookingToken: booking.booking_token
