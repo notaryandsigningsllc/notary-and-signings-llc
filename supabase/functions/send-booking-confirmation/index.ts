@@ -17,8 +17,11 @@ interface BookingConfirmationRequest {
   serviceName: string;
   appointmentDate: string;
   appointmentTime: string;
-  servicePrice?: number;
-  paymentMethod?: string;
+  servicePrice: number;
+  paymentMethod: string;
+  ipenAddon?: boolean;
+  addonPrice?: number;
+  totalAmount?: number;
 }
 
 const formatPrice = (cents: number): string => {
@@ -74,21 +77,16 @@ serve(async (req) => {
       });
     }
 
-    // Sanitize data
-    const sanitizedData = {
-      bookingId: body.bookingId,
-      customerName: (body.customerName || '').substring(0, 100),
-      customerEmail: body.customerEmail.toLowerCase().trim(),
-      serviceName: (body.serviceName || '').substring(0, 200),
-      appointmentDate: body.appointmentDate,
-      appointmentTime: body.appointmentTime,
+    const sanitizeData = (str: string, maxLength: number = 200): string => {
+      return str.replace(/[<>]/g, '').substring(0, maxLength);
     };
 
-    const formattedDate = formatDate(sanitizedData.appointmentDate);
-    const formattedTime = formatTime(sanitizedData.appointmentTime);
+    const isPaid = body.paymentMethod === 'online';
+    const serviceAmount = (body.servicePrice / 100).toFixed(2);
+    const addonAmount = body.ipenAddon ? ((body.addonPrice || 4000) / 100).toFixed(2) : '0.00';
+    const total = ((body.totalAmount || body.servicePrice) / 100).toFixed(2);
 
-    // Construct HTML email with brand colors and booking status link
-    const htmlContent = `
+    const emailHtml = `
       <!DOCTYPE html>
       <html>
         <head>

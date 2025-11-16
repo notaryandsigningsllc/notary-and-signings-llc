@@ -15,7 +15,8 @@ interface BookingData {
   fullName: string;
   email: string;
   phone: string;
-  notes?: string;
+  notes?: string | null;
+  ipenAddon?: boolean;
 }
 
 serve(async (req) => {
@@ -64,32 +65,18 @@ serve(async (req) => {
 
     console.log('Creating booking for user:', userId ? 'authenticated' : 'anonymous');
 
-    // Get service duration for proper conflict checking
-    let serviceDuration = 60; // Default fallback
-    if (bookingData.serviceId.startsWith('tax-')) {
-      // Handle hardcoded tax services
-      const taxServiceDurations: Record<string, number> = {
-        'tax-individual': 60,
-        'tax-business': 60,
-        'tax-corporate': 90,
-        'tax-review': 60,
-        'tax-amendment': 45,
-        'tax-quarterly': 75,
-        'tax-prior-year': 60
-      };
-      serviceDuration = taxServiceDurations[bookingData.serviceId] || 60;
-    } else {
-      // Get duration from database for other services
-      const { data: serviceData } = await supabaseClient
-        .from('services')
-        .select('duration_minutes')
-        .eq('id', bookingData.serviceId)
-        .single();
-      
-      if (serviceData) {
-        serviceDuration = serviceData.duration_minutes;
-      }
+    // Get the service to determine duration and pricing
+    const { data: service, error: serviceError } = await supabaseClient
+      .from('services')
+      .select('duration_minutes, price_cents, category')
+      .eq('id', bookingData.serviceId)
+      .maybeSingle();
+
+    if (serviceError || !service) {
+      throw new Error('Service not found');
     }
+
+    const serviceDuration = service.duration_minutes;
 
     // Validate appointment is not in the past (with 5 minute grace period for timezone differences)
     const appointmentDateTime = new Date(`${bookingData.appointmentDate}T${bookingData.appointmentTime}`);
