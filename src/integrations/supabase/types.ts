@@ -407,7 +407,7 @@ export type Database = {
         Returns: boolean
       }
       get_admin_services: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           created_at: string
           description: string
@@ -446,6 +446,12 @@ export type Database = {
           updated_at: string | null
           user_id: string | null
         }[]
+        SetofOptions: {
+          from: "*"
+          to: "bookings"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
       get_booking_pii: {
         Args: { p_booking_id: string; p_token?: string }
@@ -457,7 +463,7 @@ export type Database = {
         }[]
       }
       get_booking_services: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           description: string
           duration_minutes: number
@@ -467,13 +473,13 @@ export type Database = {
         }[]
       }
       get_public_blocked_dates: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           blocked_date: string
         }[]
       }
       get_public_business_hours: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           day_of_week: number
           end_time: string
