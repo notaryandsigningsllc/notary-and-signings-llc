@@ -108,6 +108,17 @@ serve(async (req) => {
 
       console.log("Booking updated successfully:", bookingUpdate);
 
+      // Fetch complete booking details for confirmation email
+      const { data: bookingDetails, error: bookingDetailsError } = await supabaseAdmin
+        .from('bookings')
+        .select('service_price, payment_method, addon_ipen, addon_ipen_price, total_amount')
+        .eq('id', bookingId)
+        .single();
+
+      if (bookingDetailsError) {
+        console.error("Error fetching booking details:", bookingDetailsError);
+      }
+
       // Trigger confirmation email
       try {
         console.log("Attempting to send confirmation email to:", customerEmail);
@@ -122,6 +133,11 @@ serve(async (req) => {
               serviceName: serviceName,
               appointmentDate: appointmentDate,
               appointmentTime: appointmentTime,
+              servicePrice: bookingDetails?.service_price || 0,
+              paymentMethod: bookingDetails?.payment_method || 'online',
+              ipenAddon: bookingDetails?.addon_ipen || false,
+              addonPrice: bookingDetails?.addon_ipen_price || 0,
+              totalAmount: bookingDetails?.total_amount || 0
             },
           }
         );
