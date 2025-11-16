@@ -163,7 +163,7 @@ serve(async (req) => {
                 <strong>Email:</strong> <a href="mailto:info@notaryandsignings.com" style="color: #D7C29E; text-decoration: none;">info@notaryandsignings.com</a>
               </p>
               <p style="margin: 5px 0; color: #1A2A3A;">
-                <strong>Phone:</strong> <a href="tel:+1234567890" style="color: #D7C29E; text-decoration: none;">(123) 456-7890</a>
+                <strong>Phone:</strong> <a href="tel:+19085148180" style="color: #D7C29E; text-decoration: none;">(908) 514-8180</a>
               </p>
             </div>
             
