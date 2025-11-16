@@ -77,6 +77,25 @@ serve(async (req) => {
     }
 
     const serviceDuration = service.duration_minutes;
+    const servicePrice = service.price_cents;
+
+    // Get IPEN addon price if applicable
+    let ipenAddonPrice = 0;
+    if (bookingData.ipenAddon) {
+      const { data: ipenService } = await supabaseClient
+        .from('services')
+        .select('price_cents')
+        .eq('category', 'addon')
+        .eq('name', 'iPEN Add-on')
+        .maybeSingle();
+      
+      if (ipenService) {
+        ipenAddonPrice = ipenService.price_cents;
+      }
+    }
+
+    // Calculate total amount
+    const totalAmount = servicePrice + ipenAddonPrice;
 
     // Validate appointment is not in the past (with 5 minute grace period for timezone differences)
     const appointmentDateTime = new Date(`${bookingData.appointmentDate}T${bookingData.appointmentTime}`);
@@ -113,7 +132,11 @@ serve(async (req) => {
         appointment_time: bookingData.appointmentTime,
         payment_method: bookingData.paymentMethod,
         status: 'confirmed',
-        payment_status: 'pending'
+        payment_status: 'pending',
+        addon_ipen: bookingData.ipenAddon || false,
+        service_price: servicePrice,
+        addon_ipen_price: ipenAddonPrice,
+        total_amount: totalAmount
       })
       .select()
       .single();

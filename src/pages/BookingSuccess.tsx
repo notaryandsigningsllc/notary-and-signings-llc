@@ -23,10 +23,10 @@ interface Booking {
 }
 
 interface BookingPII {
-  full_name: string;
-  email: string;
-  phone: string;
-  notes: string;
+  pii_full_name: string;
+  pii_email: string;
+  pii_phone: string;
+  pii_notes: string;
 }
 
 const BookingSuccess = () => {
@@ -253,15 +253,15 @@ const BookingSuccess = () => {
                 <div className="grid gap-2 text-sm">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4 text-muted-foreground" />
-                    <span>{bookingPII?.full_name || 'N/A'}</span>
+                    <span>{bookingPII?.pii_full_name || 'N/A'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-muted-foreground" />
-                    <span>{bookingPII?.email || 'N/A'}</span>
+                    <span>{bookingPII?.pii_email || 'N/A'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="h-4 w-4 text-muted-foreground" />
-                    <span>{bookingPII?.phone || 'N/A'}</span>
+                    <span>{bookingPII?.pii_phone || 'N/A'}</span>
                   </div>
                 </div>
               </CardContent>
@@ -296,13 +296,13 @@ const BookingSuccess = () => {
           </Card>
 
           {/* Notes */}
-          {bookingPII?.notes && (
+          {bookingPII?.pii_notes && (
             <Card>
               <CardHeader>
                 <CardTitle>{t('success.notes')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm">{bookingPII.notes}</p>
+                <p className="text-sm">{bookingPII.pii_notes}</p>
               </CardContent>
             </Card>
           )}
