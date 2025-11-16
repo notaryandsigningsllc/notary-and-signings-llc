@@ -173,7 +173,8 @@ serve(async (req) => {
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #6B7280; font-size: 13px;">
               <p style="margin: 5px 0;">Notary and Signings</p>
               <p style="margin: 5px 0;">
-                <a href="mailto:info@notaryandsignings.com" style="color: #D7C29E; text-decoration: none;">info@notaryandsignings.com</a>
+                <a href="mailto:info@notaryandsignings.com" style="color: #D7C29E; text-decoration: none;">info@notaryandsignings.com</a> | 
+                <a href="tel:+19085148180" style="color: #D7C29E; text-decoration: none;">(908) 514-8180</a>
               </p>
               <p style="margin: 5px 0;">This is an automated notification from your booking system.</p>
             </div>
