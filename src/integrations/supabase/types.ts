@@ -78,6 +78,8 @@ export type Database = {
       }
       bookings: {
         Row: {
+          addon_ipen: boolean | null
+          addon_ipen_price: number | null
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
@@ -87,13 +89,17 @@ export type Database = {
           payment_method: string
           payment_status: string
           service_id: string
+          service_price: number
           status: string
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
+          total_amount: number
           updated_at: string | null
           user_id: string | null
         }
         Insert: {
+          addon_ipen?: boolean | null
+          addon_ipen_price?: number | null
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
@@ -103,13 +109,17 @@ export type Database = {
           payment_method: string
           payment_status?: string
           service_id: string
+          service_price?: number
           status?: string
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
+          total_amount?: number
           updated_at?: string | null
           user_id?: string | null
         }
         Update: {
+          addon_ipen?: boolean | null
+          addon_ipen_price?: number | null
           appointment_date?: string
           appointment_end_time?: string
           appointment_time?: string
@@ -119,9 +129,11 @@ export type Database = {
           payment_method?: string
           payment_status?: string
           service_id?: string
+          service_price?: number
           status?: string
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
+          total_amount?: number
           updated_at?: string | null
           user_id?: string | null
         }
@@ -327,6 +339,7 @@ export type Database = {
       }
       services: {
         Row: {
+          category: string | null
           created_at: string | null
           description: string
           duration_minutes: number
@@ -339,6 +352,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          category?: string | null
           created_at?: string | null
           description: string
           duration_minutes: number
@@ -351,6 +365,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          category?: string | null
           created_at?: string | null
           description?: string
           duration_minutes?: number
@@ -431,6 +446,8 @@ export type Database = {
       get_booking_by_id_and_email: {
         Args: { p_booking_id: string; p_email: string }
         Returns: {
+          addon_ipen: boolean
+          addon_ipen_price: number
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
@@ -444,12 +461,16 @@ export type Database = {
           phone: string
           service_description: string
           service_name: string
+          service_price: number
           status: string
+          total_amount: number
         }[]
       }
       get_booking_by_token: {
         Args: { p_token: string }
         Returns: {
+          addon_ipen: boolean | null
+          addon_ipen_price: number | null
           appointment_date: string
           appointment_end_time: string
           appointment_time: string
@@ -459,9 +480,11 @@ export type Database = {
           payment_method: string
           payment_status: string
           service_id: string
+          service_price: number
           status: string
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
+          total_amount: number
           updated_at: string | null
           user_id: string | null
         }[]
