@@ -99,13 +99,17 @@ const BookAppointment = () => {
         console.log('All services:', allServices);
         
         // Fetch iPEN add-on pricing
-        const { data: ipenData } = await supabase
+        const { data: ipenData, error: ipenError } = await supabase
           .from('services')
           .select('price_cents')
-          .eq('id', '084096af-d3be-4dff-acfb-463187922340')
-          .single();
+          .eq('category', 'addon')
+          .ilike('name', '%ipen%')
+          .eq('is_active', true)
+          .maybeSingle();
         
-        if (ipenData) {
+        if (ipenError) {
+          console.error('Failed to load iPEN pricing:', ipenError);
+        } else if (ipenData) {
           setIpenPrice(ipenData.price_cents);
           console.log('iPEN price loaded:', ipenData.price_cents);
         }
