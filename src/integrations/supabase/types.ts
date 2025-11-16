@@ -498,10 +498,10 @@ export type Database = {
       get_booking_pii: {
         Args: { p_booking_id: string; p_token?: string }
         Returns: {
-          email: string
-          full_name: string
-          notes: string
-          phone: string
+          pii_email: string
+          pii_full_name: string
+          pii_notes: string
+          pii_phone: string
         }[]
       }
       get_booking_services: {
