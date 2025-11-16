@@ -136,7 +136,7 @@ serve(async (req) => {
               <p style="color: #4b5563; margin: 0 0 20px 0; font-size: 14px;">
                 You can view your booking details and status at any time using your confirmation number.
               </p>
-              <a href="${FRONTEND_URL}/booking-status" 
+              <a href="${FRONTEND_URL}/booking-status?email=${encodeURIComponent(body.customerEmail)}" 
                  style="display: inline-block; padding: 14px 32px; background: #D7C29E; color: #1A2A3A; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">
                 View Booking Status
               </a>
