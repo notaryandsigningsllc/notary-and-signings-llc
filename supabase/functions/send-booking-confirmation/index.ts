@@ -85,6 +85,9 @@ serve(async (req) => {
     const serviceAmount = (body.servicePrice / 100).toFixed(2);
     const addonAmount = body.ipenAddon ? ((body.addonPrice || 4000) / 100).toFixed(2) : '0.00';
     const total = ((body.totalAmount || body.servicePrice) / 100).toFixed(2);
+    
+    const formattedDate = formatDate(body.appointmentDate);
+    const formattedTime = formatTime(body.appointmentTime);
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -101,7 +104,7 @@ serve(async (req) => {
           </div>
           
           <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-            <p style="font-size: 16px; margin-bottom: 20px;">Dear ${sanitizedData.customerName},</p>
+            <p style="font-size: 16px; margin-bottom: 20px;">Dear ${sanitizeData(body.customerName)},</p>
             
             <p style="font-size: 16px; margin-bottom: 25px;">Thank you for choosing our notary services! Your appointment has been successfully confirmed and payment received.</p>
             
@@ -110,11 +113,11 @@ serve(async (req) => {
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Confirmation Number:</td>
-                  <td style="padding: 8px 0; color: #1A2A3A; font-weight: 700; font-family: monospace;">${sanitizedData.bookingId}</td>
+                  <td style="padding: 8px 0; color: #1A2A3A; font-weight: 700; font-family: monospace;">${sanitizeData(body.bookingId)}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Service:</td>
-                  <td style="padding: 8px 0; color: #1A2A3A;">${sanitizedData.serviceName}</td>
+                  <td style="padding: 8px 0; color: #1A2A3A;">${sanitizeData(body.serviceName)}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Date:</td>
@@ -137,7 +140,7 @@ serve(async (req) => {
                 View Booking Status
               </a>
               <p style="color: #6b7280; font-size: 13px; margin: 15px 0 0 0;">
-                Your confirmation number: <strong style="color: #1A2A3A; font-family: monospace;">${sanitizedData.bookingId}</strong>
+                Your confirmation number: <strong style="color: #1A2A3A; font-family: monospace;">${sanitizeData(body.bookingId)}</strong>
               </p>
             </div>
 
@@ -178,13 +181,13 @@ serve(async (req) => {
       </html>
     `;
 
-    console.log("Attempting to send email to:", sanitizedData.customerEmail);
+    console.log("Attempting to send email to:", sanitizeData(body.customerEmail));
 
     const emailResponse = await resend.emails.send({
       from: "Notary and Signings <info@notaryandsignings.com>",
-      to: [sanitizedData.customerEmail],
-      subject: `Booking Confirmation - ${sanitizedData.serviceName}`,
-      html: htmlContent,
+      to: [sanitizeData(body.customerEmail)],
+      subject: `Booking Confirmation - ${sanitizeData(body.serviceName)}`,
+      html: emailHtml,
     });
 
     console.log("Email sent successfully:", emailResponse);
