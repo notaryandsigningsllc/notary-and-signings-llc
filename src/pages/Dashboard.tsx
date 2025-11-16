@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { toast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
@@ -46,7 +47,11 @@ const Dashboard = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {t('dashboard.appointments_text')}
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigate('/book-appointment')}
+                >
                   {t('dashboard.book_appointment')}
                 </Button>
               </CardContent>
@@ -61,7 +66,14 @@ const Dashboard = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {t('dashboard.documents_text')}
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => toast({
+                    title: t('dashboard.coming_soon') || "Coming Soon",
+                    description: t('dashboard.documents_coming_soon') || "Document management feature will be available soon."
+                  })}
+                >
                   {t('dashboard.view_documents')}
                 </Button>
               </CardContent>
