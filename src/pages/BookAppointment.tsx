@@ -62,6 +62,8 @@ const BookAppointment = () => {
   const [blockedDates, setBlockedDates] = useState<Date[]>([]);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [ipenAddon, setIpenAddon] = useState(false);
+  const [ipenPrice, setIpenPrice] = useState(0);
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(createBookingSchema(t)),
@@ -95,6 +97,19 @@ const BookAppointment = () => {
         // All services now come from the database through get_booking_services()
         const allServices = servicesResult.data || [];
         console.log('All services:', allServices);
+        
+        // Fetch iPEN add-on pricing
+        const { data: ipenData } = await supabase
+          .from('services')
+          .select('price_cents')
+          .eq('id', '084096af-d3be-4dff-acfb-463187922340')
+          .single();
+        
+        if (ipenData) {
+          setIpenPrice(ipenData.price_cents);
+          console.log('iPEN price loaded:', ipenData.price_cents);
+        }
+        
         setServices(allServices);
         
         if (hoursResult.data) {
@@ -256,7 +271,8 @@ const BookAppointment = () => {
             fullName: data.fullName,
             email: data.email,
             phone: data.phone,
-            notes: data.notes || null
+            notes: data.notes || null,
+            ipenAddon: ipenAddon
           }
         });
 
@@ -283,7 +299,10 @@ const BookAppointment = () => {
               appointmentDate: format(data.appointmentDate, 'yyyy-MM-dd'),
               appointmentTime: convertTo24Hour(data.appointmentTime),
               servicePrice: selectedService.price_cents,
-              paymentMethod: data.paymentMethod
+              paymentMethod: data.paymentMethod,
+              ipenAddon: ipenAddon,
+              ipenPrice: ipenAddon ? ipenPrice : 0,
+              totalAmount: selectedService.price_cents + (ipenAddon ? ipenPrice : 0)
             }
           });
           console.log('Confirmation email sent successfully for at-appointment booking');
@@ -433,6 +452,58 @@ const BookAppointment = () => {
                     )}
                   </CardContent>
                 </Card>
+
+                {/* iPEN Add-on */}
+                {selectedService && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Add-ons</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-start space-x-3">
+                        <input
+                          type="checkbox"
+                          id="ipen-addon"
+                          checked={ipenAddon}
+                          onChange={(e) => setIpenAddon(e.target.checked)}
+                          className="mt-1 h-4 w-4 rounded border-border"
+                        />
+                        <div className="flex-1">
+                          <Label htmlFor="ipen-addon" className="font-semibold cursor-pointer">
+                            Add iPEN Add-on (+${(ipenPrice / 100).toFixed(2)})
+                          </Label>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            In-Person Electronic Notarization with electronic signature capture
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Total Price Calculator */}
+                {selectedService && (
+                  <Card className="bg-muted/50">
+                    <CardContent className="pt-6">
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>{selectedService.name}</span>
+                          <span>${(selectedService.price_cents / 100).toFixed(2)}</span>
+                        </div>
+                        {ipenAddon && (
+                          <div className="flex justify-between text-sm">
+                            <span>iPEN Add-on</span>
+                            <span>+${(ipenPrice / 100).toFixed(2)}</span>
+                          </div>
+                        )}
+                        <div className="border-t border-border pt-2 flex justify-between font-semibold">
+                          <span>Total</span>
+                          <span>${((selectedService.price_cents + (ipenAddon ? ipenPrice : 0)) / 100).toFixed(2)}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* Contact Information */}
                 <Card>
