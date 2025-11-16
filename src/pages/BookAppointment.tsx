@@ -270,24 +270,29 @@ const BookAppointment = () => {
 
       const { bookingId, bookingToken } = bookingResult;
 
-      // Send confirmation email
-      try {
-        await supabase.functions.invoke('send-booking-confirmation', {
-          body: {
-            bookingId,
-            customerEmail: data.email,
-            customerName: data.fullName,
-            serviceName: selectedService.name,
-            appointmentDate: format(data.appointmentDate, 'yyyy-MM-dd'),
-            appointmentTime: convertTo24Hour(data.appointmentTime),
-            servicePrice: selectedService.price_cents,
-            paymentMethod: data.paymentMethod
-          }
-        });
-        console.log('Confirmation email sent successfully');
-      } catch (emailError) {
-        console.error('Email sending failed:', emailError);
-        // Don't fail the booking if email fails
+      // For "at_appointment" payment method, send confirmation email immediately
+      // For online payments, email will be sent by webhook after payment confirmation
+      if (data.paymentMethod === 'at_appointment') {
+        try {
+          await supabase.functions.invoke('send-booking-confirmation', {
+            body: {
+              bookingId,
+              customerEmail: data.email,
+              customerName: data.fullName,
+              serviceName: selectedService.name,
+              appointmentDate: format(data.appointmentDate, 'yyyy-MM-dd'),
+              appointmentTime: convertTo24Hour(data.appointmentTime),
+              servicePrice: selectedService.price_cents,
+              paymentMethod: data.paymentMethod
+            }
+          });
+          console.log('Confirmation email sent successfully for at-appointment booking');
+        } catch (emailError) {
+          console.error('Email sending failed:', emailError);
+          // Don't fail the booking if email fails
+        }
+      } else {
+        console.log('Skipping email for online payment - will be sent by webhook after payment');
       }
 
       toast({
