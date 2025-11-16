@@ -166,6 +166,40 @@ serve(async (req) => {
 
     console.log('PII data stored for booking:', booking.id);
 
+    // Send business notification email (non-blocking)
+    try {
+      const { data: serviceDetails } = await supabaseClient
+        .from('services')
+        .select('name')
+        .eq('id', bookingData.serviceId)
+        .single();
+
+      await supabaseClient.functions.invoke('send-booking-notification', {
+        body: {
+          bookingId: booking.id,
+          bookingToken: booking.booking_token,
+          customerName: bookingData.fullName,
+          customerEmail: bookingData.email,
+          customerPhone: bookingData.phone,
+          serviceName: serviceDetails?.name || 'Notary Service',
+          appointmentDate: booking.appointment_date,
+          appointmentTime: booking.appointment_time,
+          appointmentEndTime: booking.appointment_end_time,
+          servicePrice: booking.service_price,
+          paymentMethod: booking.payment_method,
+          paymentStatus: booking.payment_status,
+          ipenAddon: booking.addon_ipen,
+          addonPrice: booking.addon_ipen_price,
+          totalAmount: booking.total_amount,
+          notes: bookingData.notes || ''
+        }
+      });
+      console.log('Business notification sent for booking:', booking.id);
+    } catch (notificationError: any) {
+      // Log but don't fail the booking if notification fails
+      console.error('Failed to send business notification:', notificationError.message);
+    }
+
     return new Response(JSON.stringify({ 
       success: true,
       bookingId: booking.id,
