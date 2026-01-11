@@ -1,47 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Home, Laptop, DollarSign, Fingerprint, Globe, Clock, Shield, CheckCircle } from "lucide-react";
+import { FileText, Home, Laptop, DollarSign, Fingerprint, Globe, Clock, Shield } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
 
 export default function ServicesSection() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const [loadingService, setLoadingService] = useState<string | null>(null);
-
-  const handleDirectCheckout = async (serviceId: string, serviceName: string) => {
-    setLoadingService(serviceId);
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      const { data, error } = await supabase.functions.invoke('create-product-checkout', {
-        body: { serviceId },
-        headers: session?.access_token ? {
-          Authorization: `Bearer ${session.access_token}`
-        } : {}
-      });
-
-      if (error) throw error;
-
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
-    } catch (error: any) {
-      console.error('Error creating checkout:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Failed to create checkout session",
-        variant: "destructive"
-      });
-    } finally {
-      setLoadingService(null);
-    }
-  };
   const [dbServices, setDbServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -134,10 +102,9 @@ export default function ServicesSection() {
                       <Button 
                         variant={isPopular ? "accent" : "outline"} 
                         size="sm" 
-                        disabled={loadingService === service.id}
-                        onClick={() => handleDirectCheckout(service.id, service.name)}
+                        onClick={() => navigate(`/book-appointment?service=${service.id}`)}
                       >
-                        {loadingService === service.id ? (t('services.loading') || 'Loading...') : (t('services.buy_now') || 'Buy Now')}
+                        {t('services.buy_now') || 'Book Now'}
                       </Button>
                     </div>
                   </CardContent>
