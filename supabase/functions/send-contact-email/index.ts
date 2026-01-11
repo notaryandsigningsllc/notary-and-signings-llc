@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
-import { validateContactData, sanitizeString } from "../_shared/validation.ts";
+import { validateContactData, sanitizeString, checkRateLimit, getClientIP } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,9 +14,36 @@ interface ContactEmailRequest {
   message: string;
 }
 
+// Rate limit configuration: 5 contact emails per IP per hour
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Rate limiting check - prevent abuse
+  const clientIP = getClientIP(req);
+  const rateLimit = checkRateLimit(
+    `contact-email:${clientIP}`,
+    RATE_LIMIT_MAX_REQUESTS,
+    RATE_LIMIT_WINDOW_MS
+  );
+
+  if (rateLimit.isLimited) {
+    console.warn(`Rate limit exceeded for IP: ${clientIP}`);
+    return new Response(JSON.stringify({ 
+      error: 'Too many requests. Please try again later.',
+      retryAfter: Math.ceil(rateLimit.resetIn / 1000)
+    }), {
+      headers: { 
+        ...corsHeaders, 
+        "Content-Type": "application/json",
+        "Retry-After": String(Math.ceil(rateLimit.resetIn / 1000))
+      },
+      status: 429,
+    });
   }
 
   const resend = new Resend(Deno.env.get("RESEND_API_KEY"));

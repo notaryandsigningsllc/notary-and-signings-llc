@@ -183,3 +183,144 @@ export const validateFollowUpData = (data: any): ValidationError[] => {
 
   return errors;
 };
+
+// ============================================================
+// Rate Limiting Utilities
+// ============================================================
+
+// In-memory rate limit store (resets on function cold start)
+// For production, consider using Redis or Supabase for persistent rate limiting
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+/**
+ * Check if a request should be rate limited
+ * @param identifier - IP address or user ID to track
+ * @param maxRequests - Maximum requests allowed in the window
+ * @param windowMs - Time window in milliseconds
+ * @returns Object with isLimited boolean and remaining requests
+ */
+export const checkRateLimit = (
+  identifier: string,
+  maxRequests: number = 5,
+  windowMs: number = 3600000 // 1 hour default
+): { isLimited: boolean; remaining: number; resetIn: number } => {
+  const now = Date.now();
+  const key = identifier;
+  
+  const existing = rateLimitStore.get(key);
+  
+  if (!existing || now > existing.resetTime) {
+    // New window
+    rateLimitStore.set(key, { count: 1, resetTime: now + windowMs });
+    return { isLimited: false, remaining: maxRequests - 1, resetIn: windowMs };
+  }
+  
+  if (existing.count >= maxRequests) {
+    return { 
+      isLimited: true, 
+      remaining: 0, 
+      resetIn: existing.resetTime - now 
+    };
+  }
+  
+  existing.count++;
+  rateLimitStore.set(key, existing);
+  
+  return { 
+    isLimited: false, 
+    remaining: maxRequests - existing.count, 
+    resetIn: existing.resetTime - now 
+  };
+};
+
+/**
+ * Get client IP from request headers
+ * Handles common proxy headers
+ */
+export const getClientIP = (req: Request): string => {
+  // Check common proxy headers
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    // Take the first IP (original client)
+    return forwardedFor.split(',')[0].trim();
+  }
+  
+  const realIP = req.headers.get('x-real-ip');
+  if (realIP) {
+    return realIP.trim();
+  }
+  
+  const cfConnectingIP = req.headers.get('cf-connecting-ip');
+  if (cfConnectingIP) {
+    return cfConnectingIP.trim();
+  }
+  
+  // Fallback - unknown
+  return 'unknown';
+};
+
+// ============================================================
+// Stripe Webhook IP Validation
+// ============================================================
+
+// Stripe's documented webhook IP ranges
+// Source: https://docs.stripe.com/ips
+const STRIPE_WEBHOOK_IPS = [
+  '3.18.12.63',
+  '3.130.192.231',
+  '13.235.14.237',
+  '13.235.122.149',
+  '18.211.135.69',
+  '35.154.171.200',
+  '52.15.183.38',
+  '54.88.130.119',
+  '54.88.130.237',
+  '54.187.174.169',
+  '54.187.205.235',
+  '54.187.216.72',
+];
+
+// Stripe's IP CIDR ranges for webhooks
+const STRIPE_WEBHOOK_CIDRS = [
+  '3.18.12.63/32',
+  '3.130.192.231/32',
+  '13.235.14.237/32',
+  '13.235.122.149/32',
+  '18.211.135.69/32',
+  '35.154.171.200/32',
+  '52.15.183.38/32',
+  '54.88.130.119/32',
+  '54.88.130.237/32',
+  '54.187.174.169/32',
+  '54.187.205.235/32',
+  '54.187.216.72/32',
+];
+
+/**
+ * Check if IP is from Stripe's webhook servers
+ * Note: In production, also verify webhook signature (already done in stripe-webhook)
+ */
+export const isStripeWebhookIP = (ip: string): boolean => {
+  // Direct IP match
+  if (STRIPE_WEBHOOK_IPS.includes(ip)) {
+    return true;
+  }
+  
+  // For development/testing, allow if signature verification passes
+  // The signature verification is the primary security measure
+  // IP allowlisting is defense-in-depth
+  return false;
+};
+
+/**
+ * Validate webhook source with logging for monitoring
+ */
+export const validateWebhookSource = (
+  req: Request
+): { ip: string; isStripeIP: boolean; hasSignature: boolean } => {
+  const ip = getClientIP(req);
+  const isStripeIP = isStripeWebhookIP(ip);
+  const hasSignature = !!req.headers.get('stripe-signature');
+  
+  return { ip, isStripeIP, hasSignature };
+};
