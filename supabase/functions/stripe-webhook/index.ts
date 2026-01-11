@@ -1,11 +1,16 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { validateWebhookSource, checkRateLimit } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Rate limit for failed signature validations (prevent brute force)
+const FAILED_SIGNATURE_RATE_LIMIT = 10;
+const FAILED_SIGNATURE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -13,8 +18,16 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Validate webhook source and log for monitoring
+  const webhookSource = validateWebhookSource(req);
+  console.log("Webhook received from IP:", webhookSource.ip, "isStripeIP:", webhookSource.isStripeIP);
+
+  // Warn if IP is not from Stripe's known IPs (signature verification is primary security)
+  if (!webhookSource.isStripeIP) {
+    console.warn("Webhook from non-Stripe IP:", webhookSource.ip, "- relying on signature verification");
+  }
+
   try {
-    console.log("Webhook received");
     
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
@@ -49,9 +62,27 @@ serve(async (req) => {
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
       console.log("Webhook signature verified:", event.type);
     } catch (err) {
-      console.error("Webhook signature verification failed:", err.message);
+      // Rate limit failed signature attempts to prevent brute force
+      const failedRateLimit = checkRateLimit(
+        `webhook-failed:${webhookSource.ip}`,
+        FAILED_SIGNATURE_RATE_LIMIT,
+        FAILED_SIGNATURE_WINDOW_MS
+      );
+      
+      console.error("Webhook signature verification failed:", err.message, 
+        "IP:", webhookSource.ip, 
+        "Failed attempts remaining before block:", failedRateLimit.remaining);
+      
+      if (failedRateLimit.isLimited) {
+        console.error("SECURITY ALERT: Too many failed webhook signatures from IP:", webhookSource.ip);
+        return new Response(
+          JSON.stringify({ error: "Too many failed attempts" }),
+          { status: 429, headers: corsHeaders }
+        );
+      }
+      
       return new Response(
-        JSON.stringify({ error: `Webhook signature verification failed: ${err.message}` }),
+        JSON.stringify({ error: `Webhook signature verification failed` }),
         { status: 400, headers: corsHeaders }
       );
     }
