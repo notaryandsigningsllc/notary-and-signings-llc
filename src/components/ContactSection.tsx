@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -5,10 +6,102 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Phone, Mail, MapPin, Clock, Calendar, Send, MessageSquare } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
 export default function ContactSection() {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    service: '',
+    preferredDate: '',
+    timing: '',
+    message: ''
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.firstName || !formData.email || !formData.message) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields (Name, Email, Message).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+      const fullMessage = `Service: ${formData.service || 'Not specified'}
+Preferred Date: ${formData.preferredDate || 'Not specified'}
+Timing: ${formData.timing || 'Not specified'}
+
+Message:
+${formData.message}`;
+
+      // 1. Save to database
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: fullName,
+          email: formData.email,
+          phone: formData.phone || null,
+          message: fullMessage,
+          status: 'new'
+        });
+
+      if (dbError) {
+        throw new Error(`Database error: ${dbError.message}`);
+      }
+
+      // 2. Send email notification (non-blocking)
+      supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: fullName,
+          email: formData.email,
+          phone: formData.phone,
+          message: fullMessage
+        }
+      }).catch(err => console.error('Email notification failed:', err));
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        service: '',
+        preferredDate: '',
+        timing: '',
+        message: ''
+      });
+    } catch (error: any) {
+      console.error('Contact form error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   const contactInfo = [{
     icon: Phone,
     title: t('contact.info.phone'),
@@ -66,73 +159,113 @@ export default function ContactSection() {
                   {t('contact.form.title')}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.first_name')}</label>
-                    <Input placeholder={t('contact.form.first_name')} />
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.first_name')} *</label>
+                      <Input 
+                        placeholder={t('contact.form.first_name')} 
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.last_name')}</label>
+                      <Input 
+                        placeholder={t('contact.form.last_name')} 
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.last_name')}</label>
-                    <Input placeholder={t('contact.form.last_name')} />
-                  </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.email')}</label>
-                    <Input type="email" placeholder={t('contact.form.email')} />
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.email')} *</label>
+                      <Input 
+                        type="email" 
+                        placeholder={t('contact.form.email')} 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.phone')}</label>
+                      <Input 
+                        type="tel" 
+                        placeholder={t('contact.form.phone')} 
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.phone')}</label>
-                    <Input type="tel" placeholder={t('contact.form.phone')} />
-                  </div>
-                </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">{t('contact.form.service')}</label>
-                  <select className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm">
-                    <option value="">{t('contact.form.service')}</option>
-                    <option value="mobile-notary">{t('contact.form.service.mobile')}</option>
-                    <option value="loan-signing">{t('contact.form.service.loan')}</option>
-                    <option value="ron">{t('contact.form.service.ron')}</option>
-                    <option value="apostille">{t('contact.form.service.apostille')}</option>
-                    <option value="fingerprinting">{t('services.fingerprint.title')}</option>
-                    <option value="tax-prep">{t('services.tax.individual.title')}</option>
-                    <option value="other">{t('contact.form.service.other')}</option>
-                  </select>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.preferred_date')}</label>
-                    <Input type="date" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{t('contact.form.timing')}</label>
-                    <select className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm">
-                      <option value="">{t('contact.form.timing')}</option>
-                      <option value="morning">{t('contact.form.timing.morning')}</option>
-                      <option value="afternoon">{t('contact.form.timing.afternoon')}</option>
-                      <option value="evening">{t('contact.form.timing.evening')}</option>
-                      <option value="flexible">{t('contact.form.timing.flexible')}</option>
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.service')}</label>
+                    <select 
+                      className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm"
+                      value={formData.service}
+                      onChange={(e) => handleInputChange('service', e.target.value)}
+                    >
+                      <option value="">{t('contact.form.service')}</option>
+                      <option value="mobile-notary">{t('contact.form.service.mobile')}</option>
+                      <option value="loan-signing">{t('contact.form.service.loan')}</option>
+                      <option value="ron">{t('contact.form.service.ron')}</option>
+                      <option value="apostille">{t('contact.form.service.apostille')}</option>
+                      <option value="fingerprinting">{t('services.fingerprint.title')}</option>
+                      <option value="tax-prep">{t('services.tax.individual.title')}</option>
+                      <option value="other">{t('contact.form.service.other')}</option>
                     </select>
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">{t('contact.form.message')}</label>
-                  <Textarea placeholder={t('contact.form.message_placeholder')} rows={4} />
-                </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.preferred_date')}</label>
+                      <Input 
+                        type="date" 
+                        value={formData.preferredDate}
+                        onChange={(e) => handleInputChange('preferredDate', e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">{t('contact.form.timing')}</label>
+                      <select 
+                        className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm"
+                        value={formData.timing}
+                        onChange={(e) => handleInputChange('timing', e.target.value)}
+                      >
+                        <option value="">{t('contact.form.timing')}</option>
+                        <option value="morning">{t('contact.form.timing.morning')}</option>
+                        <option value="afternoon">{t('contact.form.timing.afternoon')}</option>
+                        <option value="evening">{t('contact.form.timing.evening')}</option>
+                        <option value="flexible">{t('contact.form.timing.flexible')}</option>
+                      </select>
+                    </div>
+                  </div>
 
-                <Button variant="hero" size="lg" className="w-full">
-                  <Send className="w-5 h-5 mr-2" />
-                  {t('contact.form.submit')}
-                </Button>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground">{t('contact.form.message')} *</label>
+                    <Textarea 
+                      placeholder={t('contact.form.message_placeholder')} 
+                      rows={4} 
+                      value={formData.message}
+                      onChange={(e) => handleInputChange('message', e.target.value)}
+                      required
+                    />
+                  </div>
 
-                <p className="text-sm text-muted-foreground text-center">
-                  {t('contact.form.response')}
-                </p>
+                  <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
+                    <Send className="w-5 h-5 mr-2" />
+                    {loading ? 'Sending...' : t('contact.form.submit')}
+                  </Button>
+
+                  <p className="text-sm text-muted-foreground text-center">
+                    {t('contact.form.response')}
+                  </p>
+                </form>
               </CardContent>
             </Card>
           </div>
