@@ -1,30 +1,76 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { format, parseISO, isBefore, startOfDay } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MapPin, Clock, Calendar, Send, MessageSquare } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Calendar, Send, MessageSquare, CalendarIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+
+interface BusinessHours {
+  day_of_week: number;
+}
 
 export default function ContactSection() {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [blockedDates, setBlockedDates] = useState<Date[]>([]);
+  const [businessHours, setBusinessHours] = useState<BusinessHours[]>([]);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     service: '',
-    preferredDate: '',
+    preferredDate: undefined as Date | undefined,
     timing: '',
     message: ''
   });
 
-  const handleInputChange = (field: string, value: string) => {
+  // Load blocked dates and business hours
+  useEffect(() => {
+    const loadAvailability = async () => {
+      try {
+        const [blockedResult, hoursResult] = await Promise.all([
+          supabase.rpc('get_public_blocked_dates'),
+          supabase.rpc('get_public_business_hours')
+        ]);
+
+        if (blockedResult.data) {
+          const blocked = blockedResult.data.map((d: { blocked_date: string }) => parseISO(d.blocked_date));
+          setBlockedDates(blocked);
+        }
+
+        if (hoursResult.data) {
+          setBusinessHours(hoursResult.data);
+        }
+      } catch (error) {
+        console.error('Error loading availability:', error);
+      }
+    };
+
+    loadAvailability();
+  }, []);
+
+  const isDateDisabled = (date: Date) => {
+    const today = startOfDay(new Date());
+    const isBlocked = blockedDates.some(blocked => 
+      format(blocked, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd')
+    );
+    const dayOfWeek = date.getDay();
+    const hasBusinessHours = businessHours.some(bh => bh.day_of_week === dayOfWeek);
+    
+    return isBefore(date, today) || isBlocked || !hasBusinessHours;
+  };
+
+  const handleInputChange = (field: string, value: string | Date | undefined) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -43,8 +89,9 @@ export default function ContactSection() {
     setLoading(true);
     try {
       const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+      const preferredDateStr = formData.preferredDate ? format(formData.preferredDate, 'PPP') : 'Not specified';
       const fullMessage = `Service: ${formData.service || 'Not specified'}
-Preferred Date: ${formData.preferredDate || 'Not specified'}
+Preferred Date: ${preferredDateStr}
 Timing: ${formData.timing || 'Not specified'}
 
 Message:
@@ -87,7 +134,7 @@ ${formData.message}`;
         email: '',
         phone: '',
         service: '',
-        preferredDate: '',
+        preferredDate: undefined,
         timing: '',
         message: ''
       });
@@ -123,7 +170,7 @@ ${formData.message}`;
     content: t('contact.info.hours.schedule'),
     description: t('contact.info.hours.description')
   }];
-  const businessHours = [{
+  const businessHoursDisplay = [{
     day: t('contact.hours.monday'),
     hours: t('contact.hours.appointment')
   }, {
@@ -224,11 +271,30 @@ ${formData.message}`;
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">{t('contact.form.preferred_date')}</label>
-                      <Input 
-                        type="date" 
-                        value={formData.preferredDate}
-                        onChange={(e) => handleInputChange('preferredDate', e.target.value)}
-                      />
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-full justify-start text-left font-normal",
+                              !formData.preferredDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {formData.preferredDate ? format(formData.preferredDate, "PPP") : <span>Pick a date</span>}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <CalendarComponent
+                            mode="single"
+                            selected={formData.preferredDate}
+                            onSelect={(date) => handleInputChange('preferredDate', date)}
+                            disabled={isDateDisabled}
+                            initialFocus
+                            className={cn("p-3 pointer-events-auto")}
+                          />
+                        </PopoverContent>
+                      </Popover>
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">{t('contact.form.timing')}</label>
@@ -297,7 +363,7 @@ ${formData.message}`;
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {businessHours.map((schedule, index) => <div key={index} className="flex justify-between items-center py-2 border-b border-border last:border-0">
+                {businessHoursDisplay.map((schedule, index) => <div key={index} className="flex justify-between items-center py-2 border-b border-border last:border-0">
                     <span className="text-sm font-medium text-foreground">{schedule.day}</span>
                     <span className="text-sm text-muted-foreground">{schedule.hours}</span>
                   </div>)}
