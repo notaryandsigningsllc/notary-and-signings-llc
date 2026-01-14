@@ -372,13 +372,17 @@ ${formData.message}`;
 
             {/* Quick Actions */}
             <div className="space-y-4">
-              <Button variant="outline" size="lg" className="w-full">
-                <Phone className="w-5 h-5 mr-2" />
-                {t('contact.call_now')}: (908) 514-8180
+              <Button variant="outline" size="lg" className="w-full" asChild>
+                <a href="tel:+19085148180">
+                  <Phone className="w-5 h-5 mr-2" />
+                  {t('contact.call_now')}: (908) 514-8180
+                </a>
               </Button>
-              <Button variant="accent" size="lg" className="w-full">
-                <Mail className="w-5 h-5 mr-2" />
-                {t('contact.email_us')}
+              <Button variant="accent" size="lg" className="w-full" asChild>
+                <a href="mailto:info@notaryandsignings.com">
+                  <Mail className="w-5 h-5 mr-2" />
+                  {t('contact.email_us')}
+                </a>
               </Button>
             </div>
 
