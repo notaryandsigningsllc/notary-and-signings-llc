@@ -148,17 +148,25 @@ export default function FAQs() {
 
             {/* Quick Contact */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" asChild>
-                <a href="tel:+16892024956">
-                  <Phone className="w-5 h-5 mr-2" />
-                  {t('hero.cta.phone')}
-                </a>
+              <Button
+                variant="hero"
+                size="lg"
+                onClick={() => {
+                  window.location.href = "tel:+19085148180";
+                }}
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                {t('hero.cta.phone')}
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <a href="mailto:info@notaryandsignings.com">
-                  <Mail className="w-5 h-5 mr-2" />
-                  {t('contact.info.email')}
-                </a>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  window.location.href = "mailto:info@notaryandsignings.com";
+                }}
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                {t('contact.info.email')}
               </Button>
             </div>
           </div>
