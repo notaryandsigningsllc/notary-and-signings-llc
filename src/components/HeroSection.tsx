@@ -49,12 +49,12 @@ export default function HeroSection() {
                   {t('hero.cta.book')}
                 </Button>
               </Link>
-              <Link to="tel:+19085148180">
+              <a href="tel:+19085148180">
                 <Button variant="outline" size="xl">
                   <Phone className="w-5 h-5 mr-2" />
                   {t('hero.cta.phone')}
                 </Button>
-              </Link>
+              </a>
             </div>
 
             {/* Trust Badges */}
