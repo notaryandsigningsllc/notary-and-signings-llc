@@ -124,7 +124,7 @@ serve(async (req) => {
     const emailContent = getEmailContent(emailType, recipientName, serviceName);
 
     const emailResponse = await resend.emails.send({
-      from: "Notary and Signings <onboarding@resend.dev>",
+      from: "Notary & Signings <info@notaryandsignings.com>",
       to: [recipientEmail],
       subject: emailContent.subject,
       html: emailContent.html,

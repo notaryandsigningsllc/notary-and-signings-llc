@@ -139,7 +139,7 @@ serve(async (req) => {
     `;
 
     const emailResponse = await resend.emails.send({
-      from: "Notary Services <onboarding@resend.dev>",
+      from: "Notary & Signings <info@notaryandsignings.com>",
       to: [customerEmail],
       subject: `Reminder: ${serviceName} appointment tomorrow at ${formatTime(appointmentTime)}`,
       html: emailHtml,

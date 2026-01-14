@@ -72,8 +72,8 @@ serve(async (req) => {
     console.log('Sending contact form email:', { name, email });
 
     const businessEmailResponse = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: ["info@notaryandsignings.com"], // Updated to match your domain
+      from: "Notary & Signings <info@notaryandsignings.com>",
+      to: ["info@notaryandsignings.com"],
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <!DOCTYPE html>
@@ -116,7 +116,7 @@ serve(async (req) => {
     });
 
     const confirmationEmailResponse = await resend.emails.send({
-      from: "Notary & Signings <onboarding@resend.dev>",
+      from: "Notary & Signings <info@notaryandsignings.com>",
       to: [email],
       subject: "We received your message!",
       html: `
