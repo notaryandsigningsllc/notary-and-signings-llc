@@ -184,7 +184,7 @@ serve(async (req) => {
     `;
 
     const { data, error } = await resend.emails.send({
-      from: "Notary Bookings <onboarding@resend.dev>",
+      from: "Notary & Signings <info@notaryandsignings.com>",
       to: ["info@notaryandsignings.com"],
       subject: `New Booking: ${body.serviceName} - ${formattedDate}`,
       html: emailHtml,
