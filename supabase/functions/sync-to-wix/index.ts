@@ -4,10 +4,11 @@ import { isValidEmail, sanitizeString } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-internal-auth",
 };
 
 const WIX_API_URL = "https://www.wixapis.com/contacts/v4/contacts";
+const INTERNAL_FUNCTION_SECRET = Deno.env.get("INTERNAL_FUNCTION_SECRET");
 
 interface WixSyncRequest {
   email: string;
@@ -20,12 +21,49 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const supabaseClient = createClient(
-    Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-  );
-
   try {
+    // Verify internal function call or authenticated user
+    const internalAuth = req.headers.get("x-internal-auth");
+    const authHeader = req.headers.get("Authorization");
+    
+    let isAuthorized = false;
+    
+    // Check internal function secret
+    if (INTERNAL_FUNCTION_SECRET && internalAuth === INTERNAL_FUNCTION_SECRET) {
+      isAuthorized = true;
+      console.log("Authorized via internal function secret");
+    }
+    
+    // Check authenticated user via JWT
+    if (!isAuthorized && authHeader) {
+      const supabaseAuthClient = createClient(
+        Deno.env.get("SUPABASE_URL") ?? "",
+        Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+        { global: { headers: { Authorization: authHeader } } }
+      );
+      
+      const token = authHeader.replace("Bearer ", "");
+      const { data: claims, error: claimsError } = await supabaseAuthClient.auth.getClaims(token);
+      
+      if (!claimsError && claims?.claims?.sub) {
+        isAuthorized = true;
+        console.log("Authorized via JWT for user:", claims.claims.sub);
+      }
+    }
+    
+    if (!isAuthorized) {
+      console.error("Unauthorized request to sync-to-wix");
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    const supabaseClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
     const requestData: WixSyncRequest = await req.json();
 
     // Validate inputs

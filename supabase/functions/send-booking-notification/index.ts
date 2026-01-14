@@ -1,13 +1,15 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 import { Resend } from "npm:resend@2.0.0";
 import { sanitizeString } from "../_shared/validation.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const FRONTEND_URL = Deno.env.get("FRONTEND_URL") || "https://notaryandsignings.com";
+const INTERNAL_FUNCTION_SECRET = Deno.env.get("INTERNAL_FUNCTION_SECRET");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-internal-auth",
 };
 
 interface BookingNotificationRequest {
@@ -60,6 +62,41 @@ serve(async (req) => {
   }
 
   try {
+    // Verify internal function call or service role authentication
+    const internalAuth = req.headers.get("x-internal-auth");
+    const authHeader = req.headers.get("Authorization");
+    
+    let isAuthorized = false;
+    
+    // Check internal function secret
+    if (INTERNAL_FUNCTION_SECRET && internalAuth === INTERNAL_FUNCTION_SECRET) {
+      isAuthorized = true;
+      console.log("Authorized via internal function secret");
+    }
+    
+    // Check service role key
+    if (!isAuthorized && authHeader) {
+      const supabaseClient = createClient(
+        Deno.env.get("SUPABASE_URL") ?? "",
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      );
+      
+      // Verify the token is a service role key by checking if it matches
+      const token = authHeader.replace("Bearer ", "");
+      if (token === Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")) {
+        isAuthorized = true;
+        console.log("Authorized via service role key");
+      }
+    }
+    
+    if (!isAuthorized) {
+      console.error("Unauthorized request to send-booking-notification");
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
     const body: BookingNotificationRequest = await req.json();
 
     console.log('Sending business notification for booking:', body.bookingId);

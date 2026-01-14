@@ -535,6 +535,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      insert_booking_message: {
+        Args: { p_booking_id: string; p_message: string }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "admin" | "user"
