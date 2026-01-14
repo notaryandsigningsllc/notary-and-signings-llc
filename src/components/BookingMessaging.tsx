@@ -114,14 +114,11 @@ const BookingMessaging = ({ bookingId, isAdmin = false }: BookingMessagingProps)
 
     setLoading(true);
     try {
-      const { error } = await supabase
-        .from('booking_messages')
-        .insert({
-          booking_id: bookingId,
-          sender_type: isAdmin ? 'admin' : 'customer',
-          message: newMessage.trim(),
-          sender_id: user.id
-        });
+      // Use server-side function for secure sender_type determination
+      const { error } = await supabase.rpc('insert_booking_message', {
+        p_booking_id: bookingId,
+        p_message: newMessage.trim()
+      });
 
       if (error) throw error;
 

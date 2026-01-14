@@ -5,3 +5,30 @@ verify_jwt = false
 
 [functions.send-booking-notification]
 verify_jwt = false
+
+[functions.create-booking]
+verify_jwt = false
+
+[functions.create-payment]
+verify_jwt = false
+
+[functions.create-product-checkout]
+verify_jwt = false
+
+[functions.send-booking-confirmation]
+verify_jwt = false
+
+[functions.send-booking-reminder]
+verify_jwt = false
+
+[functions.send-contact-email]
+verify_jwt = false
+
+[functions.send-follow-up]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.verify-payment]
+verify_jwt = false
