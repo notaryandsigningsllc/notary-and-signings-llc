@@ -78,18 +78,29 @@ export default function Footer() {
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center space-x-3">
+              <a 
+                href="tel:+19085148180" 
+                className="flex items-center space-x-3 hover:text-accent transition-colors"
+              >
                 <Phone className="w-4 h-4 text-accent" />
                 <span className="text-sm">{t('footer.phone')}</span>
-              </div>
-              <div className="flex items-center space-x-3">
+              </a>
+              <a 
+                href="mailto:info@notaryandsignings.com" 
+                className="flex items-center space-x-3 hover:text-accent transition-colors"
+              >
                 <Mail className="w-4 h-4 text-accent" />
                 <span className="text-sm">{t('footer.email')}</span>
-              </div>
-              <div className="flex items-center space-x-3">
+              </a>
+              <a 
+                href="https://maps.google.com/?q=180+Talmadge+Road+Unit+1380+Edison+NJ+08817" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 hover:text-accent transition-colors"
+              >
                 <MapPin className="w-4 h-4 text-accent" />
                 <span className="text-sm">{t('footer.address1')}</span>
-              </div>
+              </a>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-4 h-4 text-accent" />
                 <span className="text-sm">{t('footer.address2')}</span>

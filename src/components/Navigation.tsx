@@ -64,10 +64,13 @@ export default function Navigation() {
 
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <a 
+              href="tel:+19085148180" 
+              className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
               <Phone className="h-4 w-4" />
               <span>(908) 514-8180</span>
-            </div>
+            </a>
             <LanguageToggle />
             {user ? (
               <div className="flex items-center space-x-2">
@@ -115,10 +118,13 @@ export default function Navigation() {
               </Link>
             ))}
             <div className="pt-4 border-t border-border mt-4">
-              <div className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground">
+              <a 
+                href="tel:+19085148180" 
+                className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Phone className="h-4 w-4" />
                 <span>(908) 514-8180</span>
-              </div>
+              </a>
               <div className="px-3 py-2 space-y-2">
                 <LanguageToggle />
                 {user ? (
