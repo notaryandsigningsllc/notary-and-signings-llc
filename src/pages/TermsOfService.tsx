@@ -36,7 +36,7 @@ const TermsOfService = () => {
               <p>Notary and Signings LLC provides the following services in compliance with New Jersey law:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Traditional notarial acts (acknowledgments, jurats, verifications, etc.)</li>
-                <li>General notary services within our service area</li>
+                <li>In-office notary services at our Perth Amboy location</li>
                 <li>Remote Online Notarization (RON) as authorized by New Jersey law</li>
                 <li>Loan signing services for real estate transactions</li>
                 <li>Document authentication and apostille assistance</li>
