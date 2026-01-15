@@ -262,7 +262,7 @@ const translations = {
     
     'testimonials.client2.name': 'Michael Chen',
     'testimonials.client2.role': 'Small Business Owner',
-    'testimonials.client2.content': 'The general notary service saved me so much time. They came to my office within 2 hours and handled all my business documents professionally. Highly recommend!',
+    'testimonials.client2.content': 'The in-office notary service was quick and convenient. I was in and out in 15 minutes with all my business documents professionally notarized. Highly recommend!',
     'testimonials.client2.service': 'General Notary',
     
     'testimonials.client3.name': 'Lisa Rodriguez',
@@ -975,7 +975,7 @@ const translations = {
     
     'testimonials.client2.name': 'Michael Chen',
     'testimonials.client2.role': 'Propietario de Pequeña Empresa',
-    'testimonials.client2.content': 'El servicio de notario general me ahorró mucho tiempo. Vinieron a mi oficina en 2 horas y manejaron todos mis documentos comerciales profesionalmente. ¡Muy recomendado!',
+    'testimonials.client2.content': 'El servicio de notario en oficina fue rápido y conveniente. Entré y salí en 15 minutos con todos mis documentos comerciales notarizados profesionalmente. ¡Muy recomendado!',
     'testimonials.client2.service': 'Notario General',
     
     'testimonials.client3.name': 'Lisa Rodriguez',
