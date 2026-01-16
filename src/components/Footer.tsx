@@ -93,7 +93,7 @@ export default function Footer() {
                 <span className="text-sm">{t('footer.email')}</span>
               </a>
               <a 
-                href="https://maps.google.com/?q=180+Talmadge+Road+Unit+1380+Edison+NJ+08817" 
+                href="https://maps.google.com/?q=289+Smith+St+Perth+Amboy+NJ+08861" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 hover:text-accent transition-colors"
