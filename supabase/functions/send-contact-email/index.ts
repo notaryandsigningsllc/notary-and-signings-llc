@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
-import { validateContactData, sanitizeString, checkRateLimit, getClientIP } from "../_shared/validation.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { validateContactData, sanitizeString, getClientIP } from "../_shared/validation.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,34 +17,53 @@ interface ContactEmailRequest {
 
 // Rate limit configuration: 5 contact emails per IP per hour
 const RATE_LIMIT_MAX_REQUESTS = 5;
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_WINDOW_SECONDS = 3600; // 1 hour
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Rate limiting check - prevent abuse
-  const clientIP = getClientIP(req);
-  const rateLimit = checkRateLimit(
-    `contact-email:${clientIP}`,
-    RATE_LIMIT_MAX_REQUESTS,
-    RATE_LIMIT_WINDOW_MS
-  );
+  // Initialize Supabase client for rate limiting
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-  if (rateLimit.isLimited) {
-    console.warn(`Rate limit exceeded for IP: ${clientIP}`);
-    return new Response(JSON.stringify({ 
-      error: 'Too many requests. Please try again later.',
-      retryAfter: Math.ceil(rateLimit.resetIn / 1000)
-    }), {
-      headers: { 
-        ...corsHeaders, 
-        "Content-Type": "application/json",
-        "Retry-After": String(Math.ceil(rateLimit.resetIn / 1000))
-      },
-      status: 429,
-    });
+  // Persistent rate limiting check using database
+  const clientIP = getClientIP(req);
+  const rateLimitKey = `contact-email:${clientIP}`;
+  
+  try {
+    const { data: rateLimitResult, error: rateLimitError } = await supabase.rpc(
+      "check_rate_limit",
+      {
+        p_key: rateLimitKey,
+        p_max_requests: RATE_LIMIT_MAX_REQUESTS,
+        p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+      }
+    );
+
+    if (rateLimitError) {
+      console.error("Rate limit check failed:", rateLimitError);
+      // Continue without rate limiting if the check fails - fail open for availability
+    } else if (rateLimitResult && rateLimitResult[0]?.is_limited) {
+      const resetInSeconds = rateLimitResult[0].reset_in_seconds || 3600;
+      console.warn(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(JSON.stringify({ 
+        error: 'Too many requests. Please try again later.',
+        retryAfter: resetInSeconds
+      }), {
+        headers: { 
+          ...corsHeaders, 
+          "Content-Type": "application/json",
+          "Retry-After": String(resetInSeconds)
+        },
+        status: 429,
+      });
+    }
+  } catch (rateLimitErr) {
+    console.error("Rate limit exception:", rateLimitErr);
+    // Continue without rate limiting if an exception occurs
   }
 
   const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
