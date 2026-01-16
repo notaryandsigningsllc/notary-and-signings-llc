@@ -305,7 +305,7 @@ const translations = {
     
     'faqs.mobile.title': 'In-Office & Remote Services',
     'faqs.mobile.q1.question': 'Where is your office located?',
-    'faqs.mobile.q1.answer': 'Our office is located at 289 Smith St., Perth Amboy, NJ 08861. We offer convenient parking and are accessible by public transit.',
+    'faqs.mobile.q1.answer': 'Our office is located at 289 Smith St., Perth Amboy, NJ 08861. On-street parking is available and we are accessible by public transit.',
     'faqs.mobile.q2.question': 'How much does in-office notary service cost?',
     'faqs.mobile.q2.answer': 'In-office notary service starts at $25 per notarization. Additional documents are $15 each. We also offer Remote Online Notarization (RON) for $25 per document.',
     'faqs.mobile.q3.question': 'Can I get same-day service?',
@@ -1018,7 +1018,7 @@ const translations = {
     
     'faqs.mobile.title': 'Servicios en Oficina y Remotos',
     'faqs.mobile.q1.question': '¿Dónde está ubicada su oficina?',
-    'faqs.mobile.q1.answer': 'Nuestra oficina está ubicada en 289 Smith St., Perth Amboy, NJ 08861. Ofrecemos estacionamiento conveniente y somos accesibles por transporte público.',
+    'faqs.mobile.q1.answer': 'Nuestra oficina está ubicada en 289 Smith St., Perth Amboy, NJ 08861. Hay estacionamiento disponible en la calle y somos accesibles por transporte público.',
     'faqs.mobile.q2.question': '¿Cuánto cuesta el servicio de notario en oficina?',
     'faqs.mobile.q2.answer': 'El servicio de notario en oficina comienza en $25 por notarización. Los documentos adicionales son $15 cada uno. También ofrecemos Notarización Remota en Línea (RON) por $25 por documento.',
     'faqs.mobile.q3.question': '¿Puedo obtener servicio el mismo día?',
