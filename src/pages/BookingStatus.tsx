@@ -101,6 +101,9 @@ export default function BookingStatus() {
     setError(null);
     setBookingData(null);
 
+    // Consistent error message to prevent email enumeration
+    const genericNotFoundError = "We couldn't find a booking with the provided details. Please check your confirmation number and email address and try again.";
+
     try {
       const { data: result, error: rpcError } = await supabase.rpc(
         "get_booking_by_id_and_email",
@@ -111,22 +114,25 @@ export default function BookingStatus() {
       );
 
       if (rpcError) {
+        // Log the actual error for debugging, but show generic message to user
         console.error("Error fetching booking:", rpcError);
-        setError("An error occurred while fetching your booking. Please try again.");
+        // Use same error message regardless of error type to prevent information leakage
+        setError(genericNotFoundError);
         return;
       }
 
       if (!result || result.length === 0) {
-        setError(
-          "We couldn't find a booking with that confirmation number and email. Please check your details and try again."
-        );
+        // Same error message whether booking doesn't exist or email doesn't match
+        setError(genericNotFoundError);
         return;
       }
 
       setBookingData(result[0]);
     } catch (err) {
+      // Log the actual error for debugging
       console.error("Exception fetching booking:", err);
-      setError("An unexpected error occurred. Please try again later.");
+      // Use consistent error message to prevent timing attacks
+      setError(genericNotFoundError);
     } finally {
       setIsLoading(false);
     }

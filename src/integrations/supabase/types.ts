@@ -337,6 +337,27 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          count: number
+          key: string
+          updated_at: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          key: string
+          updated_at?: string
+          window_start?: string
+        }
+        Update: {
+          count?: number
+          key?: string
+          updated_at?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       services: {
         Row: {
           category: string | null
@@ -421,6 +442,19 @@ export type Database = {
         }
         Returns: boolean
       }
+      check_rate_limit: {
+        Args: {
+          p_key: string
+          p_max_requests?: number
+          p_window_seconds?: number
+        }
+        Returns: {
+          is_limited: boolean
+          remaining: number
+          reset_in_seconds: number
+        }[]
+      }
+      cleanup_old_rate_limits: { Args: never; Returns: number }
       get_admin_services: {
         Args: never
         Returns: {
