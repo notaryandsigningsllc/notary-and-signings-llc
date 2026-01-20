@@ -19,7 +19,7 @@ serve(async (req) => {
   );
 
   try {
-    const { sessionId, bookingId } = await req.json();
+    const { sessionId, bookingId, bookingToken } = await req.json();
     
     if (!sessionId || !bookingId || !isValidUUID(bookingId)) {
       return new Response(JSON.stringify({ error: "Valid session ID and booking ID are required" }), {
@@ -28,7 +28,31 @@ serve(async (req) => {
       });
     }
 
+    // Require booking token for verification (security measure)
+    if (!bookingToken || !isValidUUID(bookingToken)) {
+      return new Response(JSON.stringify({ error: "Valid booking token is required" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
     console.log('Verifying payment for session:', sessionId, 'booking:', bookingId);
+
+    // First verify the booking token matches
+    const { data: booking, error: bookingCheckError } = await supabaseClient
+      .from('bookings')
+      .select('id, booking_token')
+      .eq('id', bookingId)
+      .eq('booking_token', bookingToken)
+      .maybeSingle();
+
+    if (bookingCheckError || !booking) {
+      console.error('Booking not found or token mismatch for:', bookingId);
+      return new Response(JSON.stringify({ error: "Booking not found or unauthorized" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 404,
+      });
+    }
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2025-08-27.basil",
