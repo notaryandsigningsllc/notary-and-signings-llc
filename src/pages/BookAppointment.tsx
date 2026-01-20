@@ -326,7 +326,7 @@ const BookAppointment = () => {
       // If online payment, redirect to Stripe
       if (data.paymentMethod === 'online') {
         const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
-          body: { bookingId }
+          body: { bookingId, bookingToken }
         });
 
         console.log('Payment response:', { paymentData, paymentError });

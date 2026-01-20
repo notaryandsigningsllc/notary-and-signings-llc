@@ -21,7 +21,7 @@ serve(async (req) => {
   );
 
   try {
-    const { bookingId } = await req.json();
+    const { bookingId, bookingToken } = await req.json();
     
     if (!bookingId || !isValidUUID(bookingId)) {
       return new Response(JSON.stringify({ error: "Valid booking ID is required" }), {
@@ -30,9 +30,17 @@ serve(async (req) => {
       });
     }
 
+    // Require booking token for anonymous requests (security measure)
+    if (!bookingToken || !isValidUUID(bookingToken)) {
+      return new Response(JSON.stringify({ error: "Valid booking token is required" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
     console.log('Processing payment for booking:', bookingId);
 
-    // Get booking details with pricing information
+    // Get booking details with pricing information AND verify token ownership
     const { data: booking, error: bookingError } = await supabaseClient
       .from('bookings')
       .select(`
@@ -47,10 +55,15 @@ serve(async (req) => {
         )
       `)
       .eq('id', bookingId)
+      .eq('booking_token', bookingToken)
       .maybeSingle();
 
     if (bookingError || !booking) {
-      throw new Error('Booking not found');
+      console.error('Booking not found or token mismatch for:', bookingId);
+      return new Response(JSON.stringify({ error: "Booking not found or unauthorized" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 404,
+      });
     }
 
     // Get PII data directly using service role key
@@ -144,7 +157,7 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
+      success_url: `${req.headers.get("origin")}/booking-success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}&token=${booking.booking_token}`,
       cancel_url: `${req.headers.get("origin")}/book-appointment`,
       metadata: {
         booking_id: bookingId,

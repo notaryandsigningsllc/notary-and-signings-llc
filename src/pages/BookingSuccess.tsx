@@ -129,8 +129,11 @@ const BookingSuccess = () => {
         if (sessionId && !verificationComplete) {
           console.log('Verifying payment for session:', sessionId);
           
+          // Use the token from URL or from booking data for secure verification
+          const verificationToken = token || bookingData.booking_token;
+          
           const { data: verificationData, error: verificationError } = await supabase.functions.invoke('verify-payment', {
-            body: { sessionId, bookingId: bookingData.id }
+            body: { sessionId, bookingId: bookingData.id, bookingToken: verificationToken }
           });
 
           if (verificationError) {
