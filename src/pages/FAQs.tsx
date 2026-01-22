@@ -19,6 +19,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
+import StickyAdSidebar from "@/components/StickyAdSidebar";
 
 export default function FAQs() {
   const { t } = useLanguage();
@@ -130,7 +131,8 @@ export default function FAQs() {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <main>
+      <div className="flex">
+        <main className="flex-1 min-w-0">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-subtle">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -273,7 +275,11 @@ export default function FAQs() {
             </div>
           </div>
         </section>
-      </main>
+        </main>
+        
+        {/* Sticky Sidebar Ad - Only visible on xl screens */}
+        <StickyAdSidebar adSlot="YOUR_AD_SLOT_FAQ_SIDEBAR" className="mr-4" />
+      </div>
 
       <Footer />
     </div>
