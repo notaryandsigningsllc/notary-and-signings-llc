@@ -18,6 +18,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import AdSense from "@/components/AdSense";
 
 export default function FAQs() {
   const { t } = useLanguage();
@@ -172,6 +173,15 @@ export default function FAQs() {
           </div>
         </section>
 
+        {/* Ad Unit - Above FAQ Categories */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <AdSense 
+            adSlot="YOUR_AD_SLOT_FAQ_TOP" 
+            adFormat="horizontal" 
+            className="my-4"
+          />
+        </div>
+
         {/* FAQ Categories */}
         <section className="py-20 bg-background">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -224,6 +234,15 @@ export default function FAQs() {
             ))}
           </div>
         </section>
+
+        {/* Ad Unit - Below FAQ Categories */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <AdSense 
+            adSlot="YOUR_AD_SLOT_FAQ_BOTTOM" 
+            adFormat="auto" 
+            className="my-4"
+          />
+        </div>
 
         {/* Contact CTA */}
         <section className="py-16 bg-gradient-subtle">
